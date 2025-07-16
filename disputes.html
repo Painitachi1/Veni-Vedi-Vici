@@ -1,0 +1,573 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dispute Center | Premium Resolution Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .dispute-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .priority-badge {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+        .progress-bar {
+            transition: width 0.6s ease;
+        }
+        .dispute-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 17px;
+            height: 100%;
+            width: 2px;
+            background: #e5e7eb;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-balance-scale text-2xl text-red-600"></i>
+                    <span class="text-xl font-bold">Dispute Center</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="Workonit.html" class="text-gray-600 hover:text-red-600 font-medium">My Disputes</a>
+                    <a href="Workonit.html" class="text-gray-600 hover:text-red-600 font-medium">New Dispute</a>
+                    <div class="flex items-center space-x-1 bg-red-50 px-3 py-1 rounded-full">
+                        <div class="h-6 w-6 rounded-full bg-red-100 flex items-center justify-center">
+                            <i class="fas fa-crown text-red-600 text-xs"></i>
+                        </div>
+                        <span class="text-sm font-medium text-red-700">Premium</span>
+                    </div>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-red-600 to-red-800 text-white">
+        <div class="container mx-auto px-4 py-12 md:py-16">
+            <div class="max-w-3xl">
+                <div class="flex items-center mb-4">
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium">PREMIUM SERVICE</span>
+                    <span class="ml-3 text-sm">Priority Resolution â€¢ Dedicated Support</span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">Dispute Resolution Center</h1>
+                <p class="text-lg mb-6">As a premium member, your disputes receive expedited processing and dedicated support specialists.</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#new-dispute" class="bg-white text-red-600 hover:bg-gray-100 font-medium px-6 py-3 rounded-lg transition">
+                        File New Dispute <i class="fas fa-plus ml-2"></i>
+                    </a>
+                    <a href="#active-disputes" class="bg-red-800 hover:bg-red-700 font-medium px-6 py-3 rounded-lg transition">
+                        View Active Disputes <i class="fas fa-chevron-down ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Premium Benefits -->
+    <div class="bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div class="flex items-start">
+                    <div class="bg-red-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-clock text-red-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">24-Hour Response</h3>
+                        <p class="text-sm text-gray-600">Guaranteed response from our team within one business day</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="bg-red-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-user-shield text-red-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Dedicated Specialist</h3>
+                        <p class="text-sm text-gray-600">Your own dispute resolution expert assigned to your case</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="bg-red-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-gavel text-red-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Priority Mediation</h3>
+                        <p class="text-sm text-gray-600">Higher priority in our mediation queue for faster resolution</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Active Disputes -->
+            <div class="lg:col-span-2">
+                <div class="flex justify-between items-center mb-6" id="active-disputes">
+                    <h2 class="text-2xl font-bold">Your Active Disputes</h2>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-500">Sort by:</span>
+                        <select class="text-sm border border-gray-300 rounded px-3 py-1 bg-white">
+                            <option>Most Recent</option>
+                            <option>Status</option>
+                            <option>Transaction Date</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Dispute Cards -->
+                <div class="space-y-4">
+                    <!-- Dispute 1 (In Progress) -->
+                    <div class="dispute-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden transition duration-300">
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <div class="flex items-center mb-1">
+                                        <h3 class="font-semibold">Order #45892 - Item Not Received</h3>
+                                        <span class="ml-3 bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5 rounded">In Progress</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500">Transaction Date: May 15, 2023</p>
+                                </div>
+                                <span class="priority-badge bg-red-600 text-white text-xs px-2 py-1 rounded-full">Priority</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">You reported not receiving the purchased item. Seller claims it was shipped. Our team is reviewing tracking information.</p>
+                            
+                            <div class="mb-3">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>Progress</span>
+                                    <span>60%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="progress-bar bg-yellow-500 h-2 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-3">
+                                <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded flex items-center">
+                                    <i class="fas fa-comment-dots text-gray-600 mr-2"></i> Add Comment
+                                </button>
+                                <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded flex items-center">
+                                    <i class="fas fa-paperclip text-gray-600 mr-2"></i> Add Evidence
+                                </button>
+                                <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded flex items-center">
+                                    <i class="fas fa-user-shield text-gray-600 mr-2"></i> Contact Specialist
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dispute 2 (Awaiting Response) -->
+                    <div class="dispute-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden transition duration-300">
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <div class="flex items-center mb-1">
+                                        <h3 class="font-semibold">Order #42317 - Item Not as Described</h3>
+                                        <span class="ml-3 bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded">Awaiting Response</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500">Transaction Date: April 28, 2023</p>
+                                </div>
+                                <span class="priority-badge bg-red-600 text-white text-xs px-2 py-1 rounded-full">Priority</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">You reported the received item differs significantly from the description. Waiting for seller's response to our inquiry.</p>
+                            
+                            <div class="mb-3">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>Progress</span>
+                                    <span>30%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="progress-bar bg-blue-500 h-2 rounded-full" style="width: 30%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-3">
+                                <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded flex items-center">
+                                    <i class="fas fa-comment-dots text-gray-600 mr-2"></i> Add Comment
+                                </button>
+                                <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded flex items-center">
+                                    <i class="fas fa-paperclip text-gray-600 mr-2"></i> Add Evidence
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dispute 3 (Resolved) -->
+                    <div class="dispute-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden transition duration-300">
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <div class="flex items-center mb-1">
+                                        <h3 class="font-semibold">Order #39845 - Unauthorized Charge</h3>
+                                        <span class="ml-3 bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded">Resolved</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500">Transaction Date: March 12, 2023</p>
+                                </div>
+                                <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Completed</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Dispute resolved in your favor. Full refund of $89.99 processed on June 2, 2023.</p>
+                            
+                            <div class="mb-3">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>Progress</span>
+                                    <span>100%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="progress-bar bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-3">
+                                <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded flex items-center">
+                                    <i class="fas fa-file-invoice text-gray-600 mr-2"></i> View Resolution
+                                </button>
+                                <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded flex items-center">
+                                    <i class="fas fa-redo text-gray-600 mr-2"></i> Reopen Case
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="mt-10">
+                    <h3 class="text-xl font-semibold mb-6">Recent Activity</h3>
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                        <div class="p-5">
+                            <div class="relative dispute-timeline pl-10 space-y-6">
+                                <!-- Timeline Item 1 -->
+                                <div class="relative">
+                                    <div class="absolute left-0 h-6 w-6 rounded-full bg-red-100 border-2 border-red-500 flex items-center justify-center">
+                                        <i class="fas fa-check text-red-500 text-xs"></i>
+                                    </div>
+                                    <div class="pl-6">
+                                        <div class="flex justify-between items-start">
+                                            <h4 class="font-medium">Dispute resolved</h4>
+                                            <span class="text-sm text-gray-500">Jun 2, 2023</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Your dispute #DP-39845 was resolved in your favor. Refund processed.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Timeline Item 2 -->
+                                <div class="relative">
+                                    <div class="absolute left-0 h-6 w-6 rounded-full bg-blue-100 border-2 border-blue-500 flex items-center justify-center">
+                                        <i class="fas fa-comment text-blue-500 text-xs"></i>
+                                    </div>
+                                    <div class="pl-6">
+                                        <div class="flex justify-between items-start">
+                                            <h4 class="font-medium">Specialist comment</h4>
+                                            <span class="text-sm text-gray-500">May 30, 2023</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Sarah K. (Dispute Specialist): "We've reviewed your evidence and contacted the seller for their response."</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Timeline Item 3 -->
+                                <div class="relative">
+                                    <div class="absolute left-0 h-6 w-6 rounded-full bg-green-100 border-2 border-green-500 flex items-center justify-center">
+                                        <i class="fas fa-file-upload text-green-500 text-xs"></i>
+                                    </div>
+                                    <div class="pl-6">
+                                        <div class="flex justify-between items-start">
+                                            <h4 class="font-medium">Evidence submitted</h4>
+                                            <span class="text-sm text-gray-500">May 25, 2023</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">You uploaded 3 files as evidence for your dispute.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Timeline Item 4 -->
+                                <div class="relative">
+                                    <div class="absolute left-0 h-6 w-6 rounded-full bg-purple-100 border-2 border-purple-500 flex items-center justify-center">
+                                        <i class="fas fa-plus text-purple-500 text-xs"></i>
+                                    </div>
+                                    <div class="pl-6">
+                                        <div class="flex justify-between items-start">
+                                            <h4 class="font-medium">Dispute filed</h4>
+                                            <span class="text-sm text-gray-500">May 20, 2023</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">You initiated dispute #DP-39845 for Order #39845.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div>
+                <!-- New Dispute -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6" id="new-dispute">
+                    <div class="bg-red-50 px-5 py-4 border-b border-gray-200">
+                        <h3 class="font-semibold flex items-center">
+                            <i class="fas fa-plus-circle text-red-600 mr-2"></i> File New Dispute
+                        </h3>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-sm text-gray-600 mb-4">Can't find a resolution with the seller? Open a formal dispute and our team will investigate.</p>
+                        <button class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fas fa-exclamation-triangle mr-2"></i> Start New Dispute
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dispute Stats -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+                    <div class="bg-gray-50 px-5 py-4 border-b border-gray-200">
+                        <h3 class="font-semibold flex items-center">
+                            <i class="fas fa-chart-pie text-gray-600 mr-2"></i> Your Dispute Stats
+                        </h3>
+                    </div>
+                    <div class="p-5">
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium">Total Disputes</span>
+                                    <span>8</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="progress-bar bg-gray-600 h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium">Resolved in Your Favor</span>
+                                    <span>6 (75%)</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="progress-bar bg-green-500 h-2 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium">Average Resolution Time</span>
+                                    <span>7.2 days</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="progress-bar bg-blue-500 h-2 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support Card -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="bg-red-600 px-5 py-4">
+                        <h3 class="font-semibold text-white flex items-center">
+                            <i class="fas fa-headset mr-2"></i> Premium Support
+                        </h3>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-red-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-user-shield text-red-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-1">Your Dispute Specialist</h4>
+                                <p class="text-sm text-gray-600">Sarah K.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <a href="#" class="flex items-center text-sm bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded transition">
+                                <i class="fas fa-comment-dots text-gray-600 mr-2"></i> Message Specialist
+                            </a>
+                            <a href="#" class="flex items-center text-sm bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded transition">
+                                <i class="fas fa-phone-alt text-gray-600 mr-2"></i> Request Callback
+                            </a>
+                            <a href="#" class="flex items-center text-sm bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded transition">
+                                <i class="fas fa-video text-gray-600 mr-2"></i> Schedule Video Meeting
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="bg-gray-50 border-t border-gray-200 py-12">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-2xl font-bold text-center mb-8">Dispute Center FAQs</h2>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                    <button class="w-full px-5 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition" onclick="toggleFAQ(this)">
+                        <span class="font-medium">How long does dispute resolution take for premium members?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div class="px-5 pb-4 hidden">
+                        <p class="text-gray-600">Premium members benefit from expedited processing with an average resolution time of 3-7 business days compared to 7-14 days for standard members. We guarantee initial response within 24 hours for premium disputes.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                    <button class="w-full px-5 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition" onclick="toggleFAQ(this)">
+                        <span class="font-medium">What evidence should I provide for my dispute?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div class="px-5 pb-4 hidden">
+                        <p class="text-gray-600">Effective evidence includes:
+                        <br>- Screenshots of the original listing/description
+                        <br>- Photos of the received item (if applicable)
+                        <br>- Tracking information
+                        <br>- Correspondence with the seller
+                        <br>- Receipts or payment confirmations
+                        <br><br>Your dedicated specialist can advise on specific evidence needed for your case.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                    <button class="w-full px-5 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition" onclick="toggleFAQ(this)">
+                        <span class="font-medium">Can I escalate a dispute if I'm not satisfied with the resolution?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div class="px-5 pb-4 hidden">
+                        <p class="text-gray-600">Yes, as a premium member you can request escalation to a senior dispute resolution manager within 7 days of the initial decision. Your specialist will guide you through this process if needed.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                    <button class="w-full px-5 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition" onclick="toggleFAQ(this)">
+                        <span class="font-medium">How does premium status affect chargeback requests?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div class="px-5 pb-4 hidden">
+                        <p class="text-gray-600">Premium members receive priority handling for chargeback requests with faster processing times. We also provide dedicated documentation support to strengthen your chargeback case when appropriate.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    
+
+    <script>
+        // Toggle FAQ items
+        function toggleFAQ(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            content.classList.toggle('hidden');
+            icon.classList.toggle('transform');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Animate elements on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.dispute-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
+

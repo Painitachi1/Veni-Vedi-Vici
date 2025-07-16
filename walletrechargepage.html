@@ -1,0 +1,1029 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVV - Wallet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            transition: all 0.3s ease;
+        }
+        
+        .dark body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #3b82f6, #ef4444);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .payment-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .payment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .payment-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .tab-button.active {
+            border-bottom: 3px solid #3b82f6;
+            color: #3b82f6;
+            font-weight: 500;
+        }
+        
+        .dark .tab-button.active {
+            color: #60a5fa;
+            border-bottom-color: #60a5fa;
+        }
+        
+        .success-message {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+        
+        .success-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .wallet-balance {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        
+        .dark .wallet-balance {
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+        }
+    </style>
+</head>
+<body class="dark:bg-gray-900 dark:text-gray-100">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-2xl font-bold gradient-text">VVV</a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="stores.html" class="nav-link">Stores</a>
+                    <a href='Dashboard.html'>Dashboard</a>
+                    <a href="hubs.html" class="nav-link">Hubs</a>
+                    <a href="conquerors-club.html" class="nav-link">Conqueror's Club</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="relative inline-block w-12 mr-2 align-middle select-none">
+                        <input type="checkbox" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-2 appearance-none cursor-pointer"/>
+                        <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                    </div>
+                    <span class="text-sm font-medium hidden sm:inline">Dark Mode</span>
+                    
+                    <div class="flex items-center space-x-2">
+                        <span class="hidden md:inline font-medium">Welcome, User</span>
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-red-500 flex items-center justify-center text-white font-bold">
+                            U
+                        </div>
+                    </div>
+                    
+                    <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <div class="flex flex-col space-y-3 pb-4">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="stores.html" class="nav-link">Stores</a>
+                    <a href='Dashboard.html'>Dashboard</a>
+                    <a href="hubs.html" class="nav-link">Hubs</a>
+                    <a href="conquerors-club.html" class="nav-link">Conqueror's Club</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <!-- Wallet Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold mb-2">My Wallet</h1>
+                <p class="text-gray-600 dark:text-gray-300">Manage your funds and payment methods</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition shadow-md hover:shadow-lg">
+                    <i class="fas fa-exchange-alt mr-2"></i> Transfer Funds
+                </button>
+            </div>
+        </div>
+        
+        <!-- Wallet Balance -->
+        <div class="wallet-balance rounded-xl p-6 text-white mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <p class="text-sm opacity-80">Available Balance</p>
+                    <h2 class="text-3xl font-bold">$1,245.50</h2>
+                    <p class="text-sm opacity-80 mt-1">â‰ˆ â‚¦950,000.00</p>
+                </div>
+                <div class="flex space-x-3">
+                    <button class="bg-white/20 hover:bg-white/30 backdrop-blur-sm px-4 py-2 rounded-lg text-sm font-medium transition">
+                        <i class="fas fa-plus mr-1"></i> Deposit
+                    </button>
+                    <button class="bg-white/20 hover:bg-white/30 backdrop-blur-sm px-4 py-2 rounded-lg text-sm font-medium transition">
+                        <i class="fas fa-arrow-up mr-1"></i> Withdraw
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="border-b border-gray-200 dark:border-gray-700 mb-8">
+            <div class="flex space-x-8 overflow-x-auto">
+                <button class="tab-button py-3 px-1 font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition" data-tab="deposit">
+                    <i class="fas fa-wallet mr-2"></i> Deposit
+                </button>
+                <button class="tab-button py-3 px-1 font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition" data-tab="withdraw">
+                    <i class="fas fa-money-bill-wave mr-2"></i> Withdraw
+                </button>
+                <button class="tab-button py-3 px-1 font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition" data-tab="transactions">
+                    <i class="fas fa-history mr-2"></i> Transactions
+                </button>
+                <button class="tab-button py-3 px-1 font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition" data-tab="cards">
+                    <i class="fas fa-credit-card mr-2"></i> Cards
+                </button>
+                <button class="tab-button py-3 px-1 font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition" data-tab="settings">
+                    <i class="fas fa-cog mr-2"></i> Settings
+                </button>
+            </div>
+        </div>
+        
+        <!-- Deposit Tab Content -->
+        <div id="deposit" class="tab-content active">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-4">Deposit Funds</h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">Add money to your VVV wallet using any of the payment methods below.</p>
+                
+                <!-- Amount Input -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
+                    <h3 class="text-lg font-semibold mb-4">Enter Amount</h3>
+                    <div class="relative">
+                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                        <input type="number" placeholder="0.00" class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <button class="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm">$10</button>
+                        <button class="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm">$20</button>
+                        <button class="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm">$50</button>
+                        <button class="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm">$100</button>
+                        <button class="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm">$200</button>
+                        <button class="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm">$500</button>
+                    </div>
+                </div>
+                
+                <!-- Payment Methods -->
+                <h3 class="text-lg font-semibold mb-4">Select Payment Method</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Mobile Money -->
+                    <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4 class="font-medium">Mobile Money</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Deposit via M-Pesa, MTN MoMo, Airtel Money, etc.</p>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                            Select
+                        </button>
+                    </div>
+                    
+                    <!-- Bank Transfer -->
+                    <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <h4 class="font-medium">Bank Transfer</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Direct transfer from your bank account</p>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                            Select
+                        </button>
+                    </div>
+                    
+                    <!-- Debit/Credit Card -->
+                    <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                <i class="far fa-credit-card"></i>
+                            </div>
+                            <h4 class="font-medium">Debit/Credit Card</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Visa, Mastercard, Verve, etc.</p>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                            Select
+                        </button>
+                    </div>
+                    
+                    <!-- USSD -->
+                    <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h4 class="font-medium">USSD</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Make payments via USSD code</p>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                            Select
+                        </button>
+                    </div>
+                    
+                    <!-- PayPal -->
+                    <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                <i class="fab fa-paypal"></i>
+                            </div>
+                            <h4 class="font-medium">PayPal</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Send money via PayPal</p>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                            Select
+                        </button>
+                    </div>
+                    
+                    <!-- Cryptocurrency -->
+                    <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                <i class="fab fa-bitcoin"></i>
+                            </div>
+                            <h4 class="font-medium">Cryptocurrency</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Bitcoin, USDT, Ethereum, etc.</p>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                            Select
+                        </button>
+                    </div>
+                    
+                    <!-- POS Terminal -->
+                    <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                <i class="fas fa-cash-register"></i>
+                            </div>
+                            <h4 class="font-medium">POS Terminal</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Pay at authorized POS locations</p>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                            Select
+                        </button>
+                    </div>
+                    
+                    <!-- Cash on Delivery -->
+                    <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <h4 class="font-medium">Cash on Delivery</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Pay when your order arrives</p>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                            Select
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- More Payment Options Button -->
+                <div class="mt-8 text-center">
+                    <button id="showMorePayments" class="text-blue-600 dark:text-blue-400 font-medium hover:underline">
+                        <i class="fas fa-chevron-down mr-2"></i> Show More Payment Options
+                    </button>
+                </div>
+                
+                <!-- Additional Payment Options (Hidden by default) -->
+                <div id="morePayments" class="hidden mt-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <!-- Flutterwave -->
+                        <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                    <i class="fas fa-wave-square"></i>
+                                </div>
+                                <h4 class="font-medium">Flutterwave</h4>
+                            </div>
+                            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                                Select
+                            </button>
+                        </div>
+                        
+                        <!-- Paystack -->
+                        <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                                <h4 class="font-medium">Paystack</h4>
+                            </div>
+                            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                                Select
+                            </button>
+                        </div>
+                        
+                        <!-- Chipper Cash -->
+                        <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                    <i class="fas fa-money-bill-alt"></i>
+                                </div>
+                                <h4 class="font-medium">Chipper Cash</h4>
+                            </div>
+                            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                                Select
+                            </button>
+                        </div>
+                        
+                        <!-- Eversend -->
+                        <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                    <i class="fas fa-paper-plane"></i>
+                                </div>
+                                <h4 class="font-medium">Eversend</h4>
+                            </div>
+                            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                                Select
+                            </button>
+                        </div>
+                        
+                        <!-- Wave -->
+                        <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                    <i class="fas fa-water"></i>
+                                </div>
+                                <h4 class="font-medium">Wave</h4>
+                            </div>
+                            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                                Select
+                            </button>
+                        </div>
+                        
+                        <!-- Opay -->
+                        <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                    <i class="fas fa-mobile"></i>
+                                </div>
+                                <h4 class="font-medium">Opay</h4>
+                            </div>
+                            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                                Select
+                            </button>
+                        </div>
+                        
+                        <!-- Paga -->
+                        <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <h4 class="font-medium">Paga</h4>
+                            </div>
+                            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                                Select
+                            </button>
+                        </div>
+                        
+                        <!-- Interswitch -->
+                        <div class="payment-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                                <h4 class="font-medium">Interswitch</h4>
+                            </div>
+                            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                                Select
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Withdraw Tab Content -->
+        <div id="withdraw" class="tab-content">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h2 class="text-2xl font-bold mb-4">Withdraw Funds</h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">Transfer money from your VVV wallet to your bank account or mobile money.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Withdrawal Details</h3>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Amount</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                                <input type="number" placeholder="0.00" class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Withdrawal Method</label>
+                            <select class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                                <option value="">Select method</option>
+                                <option value="bank">Bank Transfer</option>
+                                <option value="mobile">Mobile Money</option>
+                                <option value="paypal">PayPal</option>
+                                <option value="crypto">Cryptocurrency</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Account Details</label>
+                            <input type="text" placeholder="Account number or phone number" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                        </div>
+                        
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition shadow-md hover:shadow-lg">
+                            Request Withdrawal
+                        </button>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Withdrawal Limits</h3>
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                            <div class="flex justify-between py-2 border-b border-gray-200 dark:border-gray-600">
+                                <span class="text-gray-600 dark:text-gray-300">Daily Limit</span>
+                                <span class="font-medium">$5,000</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b border-gray-200 dark:border-gray-600">
+                                <span class="text-gray-600 dark:text-gray-300">Weekly Limit</span>
+                                <span class="font-medium">$20,000</span>
+                            </div>
+                            <div class="flex justify-between py-2">
+                                <span class="text-gray-600 dark:text-gray-300">Minimum Withdrawal</span>
+                                <span class="font-medium">$10</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-medium mb-2">Processing Time</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">
+                                Withdrawals are typically processed within 1-3 business days. Mobile money transfers may be instant.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Transactions Tab Content -->
+        <div id="transactions" class="tab-content">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold">Transaction History</h2>
+                        <div class="flex items-center space-x-2">
+                            <button class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm">
+                                <i class="fas fa-filter mr-2"></i> Filter
+                            </button>
+                            <button class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm">
+                                <i class="fas fa-download mr-2"></i> Export
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead class="bg-gray-50 dark:bg-gray-700">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Date</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Description</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Amount</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">Jun 15, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Deposit via Paystack</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">+$100.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Completed</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">Jun 12, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Payment to Store #4567</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600">-$45.20</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Completed</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">Jun 10, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Withdrawal to GTBank</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600">-$200.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">Pending</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">Jun 5, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Deposit via MTN MoMo</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">+$50.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Completed</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">Jun 1, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Referral Bonus</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">+$10.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Completed</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300">View</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
+                        <div class="flex-1 flex justify-between sm:hidden">
+                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800">
+                                Previous
+                            </a>
+                            <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800">
+                                Next
+                            </a>
+                        </div>
+                        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                            <div>
+                                <p class="text-sm text-gray-700 dark:text-gray-300">
+                                    Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">24</span> results
+                                </p>
+                            </div>
+                            <div>
+                                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white dark:bg-gray-800 text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                        <span class="sr-only">Previous</span>
+                                        <i class="fas fa-chevron-left"></i>
+                                    </a>
+                                    <a href="#" aria-current="page" class="z-10 bg-blue-50 dark:bg-blue-900/30 border-blue-500 text-blue-600 dark:text-blue-400 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                        1
+                                    </a>
+                                    <a href="#" class="bg-white dark:bg-gray-800 border-gray-300 text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                        2
+                                    </a>
+                                    <a href="#" class="bg-white dark:bg-gray-800 border-gray-300 text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                        3
+                                    </a>
+                                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white dark:bg-gray-800 text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                        <span class="sr-only">Next</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cards Tab Content -->
+        <div id="cards" class="tab-content">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold">My Payment Cards</h2>
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                            <i class="fas fa-plus mr-2"></i> Add New Card
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <!-- Card 1 -->
+                        <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-6 text-white">
+                            <div class="flex justify-between items-start mb-8">
+                                <div>
+                                    <p class="text-sm opacity-80">Balance</p>
+                                    <h3 class="text-xl font-bold">$1,245.50</h3>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-sm opacity-80">Expires</p>
+                                    <h3 class="text-xl font-bold">06/25</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-sm opacity-80 mb-1">Card Number</p>
+                                    <h3 class="text-lg font-medium tracking-wider">â€¢â€¢â€¢â€¢ â€¢â€¢â€¢â€¢ â€¢â€¢â€¢â€¢ 4567</h3>
+                                </div>
+                                <div class="w-12 h-8 bg-white/20 rounded flex items-center justify-center">
+                                    <i class="fab fa-cc-visa text-xl"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center mt-6">
+                                <div>
+                                    <p class="text-sm opacity-80 mb-1">Card Holder</p>
+                                    <h3 class="text-lg font-medium">John Doe</h3>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                        <i class="fas fa-pen text-xs"></i>
+                                    </button>
+                                    <button class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                        <i class="fas fa-trash text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 2 -->
+                        <div class="bg-gradient-to-r from-purple-600 to-purple-800 rounded-xl p-6 text-white">
+                            <div class="flex justify-between items-start mb-8">
+                                <div>
+                                    <p class="text-sm opacity-80">Balance</p>
+                                    <h3 class="text-xl font-bold">$350.00</h3>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-sm opacity-80">Expires</p>
+                                    <h3 class="text-xl font-bold">09/24</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-sm opacity-80 mb-1">Card Number</p>
+                                    <h3 class="text-lg font-medium tracking-wider">â€¢â€¢â€¢â€¢ â€¢â€¢â€¢â€¢ â€¢â€¢â€¢â€¢ 8910</h3>
+                                </div>
+                                <div class="w-12 h-8 bg-white/20 rounded flex items-center justify-center">
+                                    <i class="fab fa-cc-mastercard text-xl"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center mt-6">
+                                <div>
+                                    <p class="text-sm opacity-80 mb-1">Card Holder</p>
+                                    <h3 class="text-lg font-medium">John Doe</h3>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                        <i class="fas fa-pen text-xs"></i>
+                                    </button>
+                                    <button class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                        <i class="fas fa-trash text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">Add New Card</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Card Number</label>
+                                <input type="text" placeholder="1234 5678 9012 3456" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Card Holder Name</label>
+                                <input type="text" placeholder="John Doe" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Expiration Date</label>
+                                <div class="flex space-x-2">
+                                    <select class="w-1/2 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                                        <option value="">Month</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <!-- More months -->
+                                    </select>
+                                    <select class="w-1/2 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                                        <option value="">Year</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <!-- More years -->
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">CVV</label>
+                                <input type="text" placeholder="123" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition shadow-md hover:shadow-lg">
+                                Save Card
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Tab Content -->
+        <div id="settings" class="tab-content">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+                <div class="p-6">
+                    <h2 class="text-2xl font-bold mb-6">Wallet Settings</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="md:col-span-2">
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 mb-6">
+                                <h3 class="text-lg font-semibold mb-4">Security Settings</h3>
+                                
+                                <div class="space-y-4">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-medium">Two-Factor Authentication</h4>
+                                            <p class="text-sm text-gray-600 dark:text-gray-300">Add an extra layer of security to your wallet</p>
+                                        </div>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" class="sr-only peer">
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-500 peer-checked:bg-blue-600"></div>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-medium">Email Notifications</h4>
+                                            <p class="text-sm text-gray-600 dark:text-gray-300">Receive email alerts for transactions</p>
+                                        </div>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" class="sr-only peer" checked>
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-500 peer-checked:bg-blue-600"></div>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-medium">SMS Notifications</h4>
+                                            <p class="text-sm text-gray-600 dark:text-gray-300">Receive text alerts for transactions</p>
+                                        </div>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" class="sr-only peer" checked>
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-500 peer-checked:bg-blue-600"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                                <h3 class="text-lg font-semibold mb-4">Transaction Limits</h3>
+                                
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Daily Deposit Limit</label>
+                                        <select class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                                            <option value="1000">$1,000</option>
+                                            <option value="5000" selected>$5,000</option>
+                                            <option value="10000">$10,000</option>
+                                            <option value="20000">$20,000</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Daily Withdrawal Limit</label>
+                                        <select class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                                            <option value="500">$500</option>
+                                            <option value="1000" selected>$1,000</option>
+                                            <option value="2000">$2,000</option>
+                                            <option value="5000">$5,000</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Single Transaction Limit</label>
+                                        <select class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                                            <option value="100">$100</option>
+                                            <option value="500" selected>$500</option>
+                                            <option value="1000">$1,000</option>
+                                            <option value="2000">$2,000</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-6">
+                                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition shadow-md hover:shadow-lg">
+                                        Save Settings
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 mb-6">
+                                <h3 class="text-lg font-semibold mb-4">Wallet PIN</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Set a 4-digit PIN for authorizing transactions</p>
+                                
+                                <div class="flex space-x-2">
+                                    <input type="password" maxlength="1" class="w-12 h-12 text-center border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                                    <input type="password" maxlength="1" class="w-12 h-12 text-center border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                                    <input type="password" maxlength="1" class="w-12 h-12 text-center border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                                    <input type="password" maxlength="1" class="w-12 h-12 text-center border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                                </div>
+                                
+                                <button class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                                    Set PIN
+                                </button>
+                            </div>
+                            
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                                <h3 class="text-lg font-semibold mb-4">Linked Accounts</h3>
+                                
+                                <div class="space-y-4">
+                                    <div class="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                                <i class="fas fa-university"></i>
+                                            </div>
+                                            <span class="font-medium">GTBank</span>
+                                        </div>
+                                        <button class="text-red-500 hover:text-red-700 dark:hover:text-red-400">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                                <i class="fas fa-mobile-alt"></i>
+                                            </div>
+                                            <span class="font-medium">MTN MoMo</span>
+                                        </div>
+                                        <button class="text-red-500 hover:text-red-700 dark:hover:text-red-400">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <button class="w-full mt-4 border border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-3 text-blue-600 dark:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+                                        <i class="fas fa-plus mr-2"></i> Link New Account
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
+

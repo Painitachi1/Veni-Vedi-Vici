@@ -1,0 +1,525 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dispute Center | Premium Resolution Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .dispute-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .priority-badge {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+        .progress-bar {
+            transition: width 0.6s ease;
+        }
+        .dispute-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 17px;
+            height: 100%;
+            width: 2px;
+            background: #e5e7eb;
+        }
+        .chat-container {
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        .chat-container.open {
+            transform: translateY(0);
+        }
+        .vip-badge {
+            background: linear-gradient(135deg, #f59e0b, #f97316, #ef4444);
+            background-size: 200% 200%;
+            animation: gradient 3s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-balance-scale text-2xl text-red-600"></i>
+                    <span class="text-xl font-bold">Dispute Center</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-red-600 font-medium">My Disputes</a>
+                    <a href="#" class="text-gray-600 hover:text-red-600 font-medium">New Dispute</a>
+                    <div class="flex items-center space-x-1 bg-gradient-to-r from-red-600 to-red-800 px-3 py-1 rounded-full">
+                        <div class="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center">
+                            <i class="fas fa-crown text-white text-xs"></i>
+                        </div>
+                        <span class="text-sm font-medium text-white">VIP Member</span>
+                    </div>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- VIP Banner -->
+    <div class="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white">
+        <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+            <div class="flex items-center">
+                <i class="fas fa-star mr-2"></i>
+                <span class="font-medium">VIP ACCESS ACTIVATED</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-4">
+                <span class="text-sm">Priority Support</span>
+                <span class="text-sm">â€¢</span>
+                <span class="text-sm">Exclusive Features</span>
+                <span class="text-sm">â€¢</span>
+                <span class="text-sm">24/7 Live Assistance</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-red-600 to-red-800 text-white">
+        <div class="container mx-auto px-4 py-12 md:py-16">
+            <div class="max-w-3xl">
+                <div class="flex items-center mb-4">
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium">VIP SERVICE</span>
+                    <span class="ml-3 text-sm">Instant Chat â€¢ Dedicated Specialist â€¢ Priority Resolution</span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">VIP Dispute Resolution Center</h1>
+                <p class="text-lg mb-6">As a VIP member, enjoy instant access to our live support team and expedited resolution of all your disputes.</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#new-dispute" class="bg-white text-red-600 hover:bg-gray-100 font-medium px-6 py-3 rounded-lg transition">
+                        File New Dispute <i class="fas fa-plus ml-2"></i>
+                    </a>
+                    <a href="#active-disputes" class="bg-red-800 hover:bg-red-700 font-medium px-6 py-3 rounded-lg transition">
+                        View Active Disputes <i class="fas fa-chevron-down ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Premium Benefits -->
+    <div class="bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div class="flex items-start">
+                    <div class="bg-red-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-comment-dots text-red-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Live Chat Support</h3>
+                        <p class="text-sm text-gray-600">Instant access to dispute specialists via our 24/7 live chat</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="bg-red-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-bolt text-red-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Instant Escalation</h3>
+                        <p class="text-sm text-gray-600">VIP disputes automatically prioritized in our system</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="bg-red-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-user-tie text-red-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Senior Specialists</h3>
+                        <p class="text-sm text-gray-600">Your cases handled by our most experienced resolution experts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Active Disputes -->
+            <div class="lg:col-span-2">
+                <div class="flex justify-between items-center mb-6" id="active-disputes">
+                    <h2 class="text-2xl font-bold">Your Active Disputes</h2>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-500">Sort by:</span>
+                        <select class="text-sm border border-gray-300 rounded px-3 py-1 bg-white">
+                            <option>Most Recent</option>
+                            <option>Status</option>
+                            <option>Transaction Date</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Dispute Cards -->
+                <div class="space-y-4">
+                    <!-- Dispute 1 (In Progress) -->
+                    <div class="dispute-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden transition duration-300">
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <div class="flex items-center mb-1">
+                                        <h3 class="font-semibold">Order #45892 - Item Not Received</h3>
+                                        <span class="ml-3 bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5 rounded">In Progress</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500">Transaction Date: May 15, 2023</p>
+                                </div>
+                                <span class="priority-badge bg-red-600 text-white text-xs px-2 py-1 rounded-full">VIP Priority</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">You reported not receiving the purchased item. Seller claims it was shipped. Our team is reviewing tracking information.</p>
+                            
+                            <div class="mb-3">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>Progress</span>
+                                    <span>60%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="progress-bar bg-yellow-500 h-2 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-3">
+                                <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded flex items-center">
+                                    <i class="fas fa-comment-dots text-gray-600 mr-2"></i> Add Comment
+                                </button>
+                                <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded flex items-center">
+                                    <i class="fas fa-paperclip text-gray-600 mr-2"></i> Add Evidence
+                                </button>
+                                <button class="text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded flex items-center" onclick="openChat()">
+                                    <i class="fas fa-headset mr-2"></i> Live Chat
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dispute 2 (Awaiting Response) -->
+                    <div class="dispute-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden transition duration-300">
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <div class="flex items-center mb-1">
+                                        <h3 class="font-semibold">Order #42317 - Item Not as Described</h3>
+                                        <span class="ml-3 bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded">Awaiting Response</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500">Transaction Date: April 28, 2023</p>
+                                </div>
+                                <span class="priority-badge bg-red-600 text-white text-xs px-2 py-1 rounded-full">VIP Priority</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">You reported the received item differs significantly from the description. Waiting for seller's response to our inquiry.</p>
+                            
+                            <div class="mb-3">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>Progress</span>
+                                    <span>30%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="progress-bar bg-blue-500 h-2 rounded-full" style="width: 30%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-3">
+                                <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded flex items-center">
+                                    <i class="fas fa-comment-dots text-gray-600 mr-2"></i> Add Comment
+                                </button>
+                                <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded flex items-center">
+                                    <i class="fas fa-paperclip text-gray-600 mr-2"></i> Add Evidence
+                                </button>
+                                <button class="text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded flex items-center" onclick="openChat()">
+                                    <i class="fas fa-headset mr-2"></i> Live Chat
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="mt-10">
+                    <h3 class="text-xl font-semibold mb-6">Recent Activity</h3>
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                        <div class="p-5">
+                            <div class="relative dispute-timeline pl-10 space-y-6">
+                                <!-- Timeline Item 1 -->
+                                <div class="relative">
+                                    <div class="absolute left-0 h-6 w-6 rounded-full bg-red-100 border-2 border-red-500 flex items-center justify-center">
+                                        <i class="fas fa-check text-red-500 text-xs"></i>
+                                    </div>
+                                    <div class="pl-6">
+                                        <div class="flex justify-between items-start">
+                                            <h4 class="font-medium">Dispute resolved</h4>
+                                            <span class="text-sm text-gray-500">Jun 2, 2023</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Your dispute #DP-39845 was resolved in your favor. Refund processed.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Timeline Item 2 -->
+                                <div class="relative">
+                                    <div class="absolute left-0 h-6 w-6 rounded-full bg-blue-100 border-2 border-blue-500 flex items-center justify-center">
+                                        <i class="fas fa-comment text-blue-500 text-xs"></i>
+                                    </div>
+                                    <div class="pl-6">
+                                        <div class="flex justify-between items-start">
+                                            <h4 class="font-medium">Specialist comment</h4>
+                                            <span class="text-sm text-gray-500">May 30, 2023</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Sarah K. (Dispute Specialist): "We've reviewed your evidence and contacted the seller for their response."</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div>
+                <!-- New Dispute -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6" id="new-dispute">
+                    <div class="bg-red-50 px-5 py-4 border-b border-gray-200">
+                        <h3 class="font-semibold flex items-center">
+                            <i class="fas fa-plus-circle text-red-600 mr-2"></i> File New Dispute
+                        </h3>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-sm text-gray-600 mb-4">Can't find a resolution with the seller? Open a formal dispute and our team will investigate.</p>
+                        <button class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fas fa-exclamation-triangle mr-2"></i> Start New Dispute
+                        </button>
+                    </div>
+                </div>
+
+                <!-- VIP Support Card -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+                    <div class="bg-gradient-to-r from-red-600 to-red-800 px-5 py-4">
+                        <h3 class="font-semibold text-white flex items-center">
+                            <i class="fas fa-crown mr-2"></i> VIP Support Center
+                        </h3>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-red-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-user-shield text-red-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-1">Your Dedicated Specialist</h4>
+                                <p class="text-sm text-gray-600">Sarah K. (Senior Dispute Analyst)</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="openChat()" class="w-full flex items-center text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded transition">
+                                <i class="fas fa-headset mr-2"></i> Instant Live Chat
+                            </button>
+                            <a href="#" class="flex items-center text-sm bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded transition">
+                                <i class="fas fa-phone-alt text-gray-600 mr-2"></i> Request Callback
+                            </a>
+                            <a href="#" class="flex items-center text-sm bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded transition">
+                                <i class="fas fa-video text-gray-600 mr-2"></i> Schedule Video Meeting
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIP Features -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="bg-gray-50 px-5 py-4 border-b border-gray-200">
+                        <h3 class="font-semibold flex items-center">
+                            <i class="fas fa-gem text-red-600 mr-2"></i> Your VIP Benefits
+                        </h3>
+                    </div>
+                    <div class="p-5">
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <div class="bg-red-100 p-1 rounded-full mr-3 mt-0.5">
+                                    <i class="fas fa-check text-red-600 text-xs"></i>
+                                </div>
+                                <span class="text-sm">24/7 Live Chat with Senior Specialists</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-red-100 p-1 rounded-full mr-3 mt-0.5">
+                                    <i class="fas fa-check text-red-600 text-xs"></i>
+                                </div>
+                                <span class="text-sm">Average Resolution Time: 3-5 Days</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-red-100 p-1 rounded-full mr-3 mt-0.5">
+                                    <i class="fas fa-check text-red-600 text-xs"></i>
+                                </div>
+                                <span class="text-sm">Direct Access to Resolution Managers</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-red-100 p-1 rounded-full mr-3 mt-0.5">
+                                    <i class="fas fa-check text-red-600 text-xs"></i>
+                                </div>
+                                <span class="text-sm">Priority in Mediation Queues</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-red-100 p-1 rounded-full mr-3 mt-0.5">
+                                    <i class="fas fa-check text-red-600 text-xs"></i>
+                                </div>
+                                <span class="text-sm">Document Preparation Assistance</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Chat Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button onclick="openChat()" class="vip-badge text-white h-14 w-14 rounded-full shadow-xl flex items-center justify-center text-xl hover:scale-110 transition-transform">
+            <i class="fas fa-headset"></i>
+        </button>
+    </div>
+
+    <!-- Live Chat Container -->
+    <div id="chatContainer" class="chat-container fixed bottom-0 right-6 w-80 bg-white rounded-t-lg shadow-xl border border-gray-300 z-40">
+        <div class="bg-gradient-to-r from-red-600 to-red-800 text-white px-4 py-3 rounded-t-lg flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-headset mr-2"></i>
+                <span class="font-medium">VIP Live Support</span>
+            </div>
+            <button onclick="closeChat()" class="text-white hover:text-gray-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="p-4 h-80 overflow-y-auto bg-gray-50">
+            <div class="flex mb-4">
+                <div class="bg-white p-3 rounded-lg shadow-sm max-w-xs">
+                    <p class="text-sm">Hello! I'm Sarah, your dedicated dispute specialist. How can I assist you today?</p>
+                    <span class="text-xs text-gray-500 block mt-1">Sarah K. | Just now</span>
+                </div>
+            </div>
+            <div class="flex justify-end mb-4">
+                <div class="bg-red-600 text-white p-3 rounded-lg shadow-sm max-w-xs">
+                    <p class="text-sm">Hi Sarah, I need help with my recent dispute #DP-45892</p>
+                    <span class="text-xs text-white/70 block mt-1">You | Just now</span>
+                </div>
+            </div>
+        </div>
+        <div class="p-3 border-t border-gray-200 bg-white">
+            <div class="flex">
+                <input type="text" placeholder="Type your message..." class="flex-1 border border-gray-300 rounded-l-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-red-500">
+                <button class="bg-red-600 text-white px-4 py-2 rounded-r-lg hover:bg-red-700">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="bg-gray-50 border-t border-gray-200 py-12">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-2xl font-bold text-center mb-8">VIP Dispute Center FAQs</h2>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                    <button class="w-full px-5 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition" onclick="toggleFAQ(this)">
+                        <span class="font-medium">How does VIP live chat support work?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div class="px-5 pb-4 hidden">
+                        <p class="text-gray-600">VIP members have 24/7 access to our live chat with senior dispute specialists. Average response time is under 2 minutes during business hours (9AM-9PM EST) and under 15 minutes at other times. Chat history is saved to your account for future reference.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                    <button class="w-full px-5 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition" onclick="toggleFAQ(this)">
+                        <span class="font-medium">What makes VIP dispute resolution faster?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div class="px-5 pb-4 hidden">
+                        <p class="text-gray-600">VIP disputes benefit from:
+                        <br>- Automatic priority in our processing queues
+                        <br>- Dedicated senior specialists who handle fewer cases
+                        <br>- Direct escalation paths to resolution managers
+                        <br>- Extended business hours for faster responses
+                        <br>- Pre-approval for certain types of refunds</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                    <button class="w-full px-5 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition" onclick="toggleFAQ(this)">
+                        <span class="font-medium">Can I request a specific specialist?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div class="px-5 pb-4 hidden">
+                        <p class="text-gray-600">Yes, as a VIP member you can request to work with your preferred specialist. While we can't guarantee immediate availability, we'll make every effort to connect you with your requested specialist within 4 business hours.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-900 mb-4">Dispute Center</h3>
+                    <ul class="space-y-2">
+                        <li><a href="VipDisputeterms.html" class="text-sm text-gray-600 hover:text-red-600">How It Works</a></li>
+                        <li><a href="VipDisputeterms.html" class="text-sm text-gray-600 hover:text-red-600">Resolution Process</a></li>
+                        <li><a href="VipDisputeterms.html" class="text-sm text-gray-600 hover:text-red-600">Success Rates</a></li>
+                        <li><a href="VipDisputeterms.html" class="text-sm text-gray-600 hover:text-red-600">VIP Benefits</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-900 mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="VipDisputeterms.html" class="text-sm text-gray-600 hover:text-red-600">Help Center</a></li>
+                        <li><a href="VipDisputeterms.html" class="text-sm text-gray-600 hover:text-red-600">Evidence Guidelines</a></li>
+                        <li><a href="VipDisputeterms.html" class="text-sm text-gray-600 hover:text-red-600">Dispute Policies</a></li>
+                        <li><a href="VipDisputeterms.html" class="text-sm text-gray-600 hover:text-red-600">Fee Structure</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-900 mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="termsandcondition.html" class="text-sm text-gray-600 hover:text-red-600">Terms of Service</
+</html>
+
+

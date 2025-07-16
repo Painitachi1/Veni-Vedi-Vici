@@ -1,0 +1,820 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Payment Options | Checkout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .payment-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .payment-option.selected {
+            border-color: #4f46e5;
+            background-color: #f5f3ff;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .tab-button.active {
+            border-bottom: 3px solid #4f46e5;
+            color: #4f46e5;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">Complete Your Purchase</h1>
+                <p class="text-gray-600">Select your preferred payment method</p>
+            </div>
+            <div class="flex items-center">
+                <div class="mr-4 text-right">
+                    <p class="text-gray-500 text-sm">Total Amount</p>
+                    <p class="text-2xl font-bold text-indigo-600">$120.00</p>
+                </div>
+                <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-shopping-cart text-indigo-600 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="mb-10">
+            <div class="flex justify-between relative">
+                <div class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -z-10"></div>
+                <div class="absolute top-1/2 left-0 w-2/3 h-1 bg-indigo-600 -z-10"></div>
+                
+                <div class="flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white mb-2">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span class="text-sm font-medium text-indigo-600">Cart</span>
+                </div>
+                
+                <div class="flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white mb-2">
+                        <span>2</span>
+                    </div>
+                    <span class="text-sm font-medium text-indigo-600">Payment</span>
+                </div>
+                
+                <div class="flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 mb-2">
+                        <span>3</span>
+                    </div>
+                    <span class="text-sm font-medium text-gray-500">Confirmation</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Payment Methods -->
+            <div class="md:w-2/3">
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <h2 class="text-xl font-semibold mb-6 text-gray-800">Payment Methods</h2>
+                    
+                    <!-- Tabs -->
+                    <div class="flex border-b border-gray-200 mb-6 overflow-x-auto">
+                        <button class="tab-button px-4 py-2 text-sm font-medium active" data-tab="digital-wallets">
+                            <i class="fas fa-wallet mr-2"></i>Digital Wallets
+                        </button>
+                        <button class="tab-button px-4 py-2 text-sm font-medium" data-tab="bank-cards">
+                            <i class="far fa-credit-card mr-2"></i>Cards & Banks
+                        </button>
+                        <button class="tab-button px-4 py-2 text-sm font-medium" data-tab="mobile-money">
+                            <i class="fas fa-mobile-alt mr-2"></i>Mobile Money
+                        </button>
+                        <button class="tab-button px-4 py-2 text-sm font-medium" data-tab="other">
+                            <i class="fas fa-ellipsis-h mr-2"></i>Other Options
+                        </button>
+                    </div>
+                    
+                    <!-- Tab Contents -->
+                    <div class="tab-content active" id="digital-wallets">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- PayPal -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="paypal">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fab fa-paypal text-blue-500 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">PayPal</h3>
+                                        <p class="text-xs text-gray-500">Pay with your PayPal account</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Flutterwave -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="flutterwave">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-wave-square text-purple-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Flutterwave</h3>
+                                        <p class="text-xs text-gray-500">Secure payments across Africa</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Paystack -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="paystack">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-bolt text-green-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Paystack</h3>
+                                        <p class="text-xs text-gray-500">Fast payments in Nigeria</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Chipper Cash -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="chipper">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-yellow-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-exchange-alt text-yellow-500 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Chipper Cash</h3>
+                                        <p class="text-xs text-gray-500">Cross-border payments</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Skrill -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="skrill">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fab fa-skrill text-red-500 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Skrill</h3>
+                                        <p class="text-xs text-gray-500">Digital wallet for global payments</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Cryptocurrency -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="crypto">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fab fa-bitcoin text-yellow-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Cryptocurrency</h3>
+                                        <p class="text-xs text-gray-500">Pay with Bitcoin, USDT, etc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="bank-cards">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Visa -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="visa">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fab fa-cc-visa text-blue-900 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Visa Card</h3>
+                                        <p class="text-xs text-gray-500">Pay with your Visa card</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Mastercard -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="mastercard">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fab fa-cc-mastercard text-red-700 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Mastercard</h3>
+                                        <p class="text-xs text-gray-500">Pay with your Mastercard</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Verve -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="verve">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-credit-card text-purple-800 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Verve Card</h3>
+                                        <p class="text-xs text-gray-500">Nigeria's leading card</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Bank Transfer -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="bank-transfer">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-university text-green-700 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Bank Transfer</h3>
+                                        <p class="text-xs text-gray-500">Direct bank transfer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Internet Banking -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="internet-banking">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-globe text-indigo-700 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Internet Banking</h3>
+                                        <p class="text-xs text-gray-500">Login to your bank</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- USSD -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="ussd">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-yellow-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-mobile text-yellow-700 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">USSD Payment</h3>
+                                        <p class="text-xs text-gray-500">Dial *code# to pay</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="mobile-money">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- M-Pesa -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="mpesa">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-money-bill-wave text-green-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">M-Pesa</h3>
+                                        <p class="text-xs text-gray-500">Kenya & East Africa</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- MTN MoMo -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="mtn-momo">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-yellow-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-mobile-alt text-yellow-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">MTN MoMo</h3>
+                                        <p class="text-xs text-gray-500">West & Central Africa</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Airtel Money -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="airtel-money">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-money-bill-alt text-red-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Airtel Money</h3>
+                                        <p class="text-xs text-gray-500">Across Africa</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Orange Money -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="orange-money">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-orange-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-money-check-alt text-orange-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Orange Money</h3>
+                                        <p class="text-xs text-gray-500">West & Central Africa</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- EcoCash -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="ecocash">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-wallet text-green-700 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">EcoCash</h3>
+                                        <p class="text-xs text-gray-500">Zimbabwe</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- PalmPay -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="palmpay">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-hand-holding-usd text-blue-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">PalmPay</h3>
+                                        <p class="text-xs text-gray-500">Nigeria & Ghana</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="other">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Cash on Delivery -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="cod">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-money-bill-wave text-gray-700 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Cash on Delivery</h3>
+                                        <p class="text-xs text-gray-500">Pay when you receive</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- POS Terminal -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="pos">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-cash-register text-purple-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">POS Terminal</h3>
+                                        <p class="text-xs text-gray-500">Pay with card at pickup</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Bank Deposit -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="bank-deposit">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-piggy-bank text-blue-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Bank Deposit</h3>
+                                        <p class="text-xs text-gray-500">Deposit cash at bank</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Western Union -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="western-union">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-exchange-alt text-green-700 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Western Union</h3>
+                                        <p class="text-xs text-gray-500">International money transfer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- MoneyGram -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="moneygram">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-globe-americas text-red-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">MoneyGram</h3>
+                                        <p class="text-xs text-gray-500">Global money transfer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Remitly -->
+                            <div class="payment-option p-4 border rounded-lg cursor-pointer transition-all duration-200" data-method="remitly">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-paper-plane text-indigo-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Remitly</h3>
+                                        <p class="text-xs text-gray-500">International remittance</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Selected Payment Form -->
+                <div class="bg-white rounded-xl shadow-sm p-6" id="payment-form-container">
+                    <div class="text-center py-10">
+                        <i class="fas fa-hand-holding-usd text-4xl text-gray-300 mb-4"></i>
+                        <h3 class="text-lg font-medium text-gray-500">Select a payment method to continue</h3>
+                        <p class="text-gray-400">Choose from our secure payment options above</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Summary -->
+            <div class="md:w-1/3">
+                <div class="bg-white rounded-xl shadow-sm p-6 sticky top-6">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-800">Order Summary</h2>
+                    
+                    <div class="border-b border-gray-200 pb-4 mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-600">Product Subtotal</span>
+                            <span class="font-medium">$100.00</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-600">Shipping</span>
+                            <span class="font-medium">$15.00</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-600">Tax</span>
+                            <span class="font-medium">$5.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between mb-6">
+                        <span class="text-lg font-semibold">Total</span>
+                        <span class="text-xl font-bold text-indigo-600">$120.00</span>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-medium mb-2">Items (3)</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gray-100 rounded-md mr-3"></div>
+                                <div>
+                                    <p class="text-sm font-medium">Wireless Headphones</p>
+                                    <p class="text-xs text-gray-500">1 Ã— $50.00</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gray-100 rounded-md mr-3"></div>
+                                <div>
+                                    <p class="text-sm font-medium">Smart Watch</p>
+                                    <p class="text-xs text-gray-500">1 Ã— $30.00</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gray-100 rounded-md mr-3"></div>
+                                <div>
+                                    <p class="text-sm font-medium">Phone Case</p>
+                                    <p class="text-xs text-gray-500">1 Ã— $20.00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-indigo-50 rounded-lg p-4 mb-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-tag text-indigo-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-indigo-800">Discount Available</h4>
+                                <p class="text-sm text-indigo-600">Use code WELCOME10 for 10% off</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="complete-payment" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-4 rounded-lg font-medium transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Complete Payment
+                    </button>
+                    
+                    <p class="text-xs text-gray-400 mt-4 text-center">
+                        <i class="fas fa-lock mr-1"></i> Your payment is secure and encrypted
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.getAttribute('data-tab');
+                    
+                    // Update active tab button
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Show corresponding tab content
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === tabId) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Payment option selection
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            const paymentFormContainer = document.getElementById('payment-form-container');
+            const completePaymentBtn = document.getElementById('complete-payment');
+            let selectedMethod = null;
+            
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Update UI
+                    paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    
+                    // Enable payment button
+                    completePaymentBtn.disabled = false;
+                    
+                    // Store selected method
+                    selectedMethod = option.getAttribute('data-method');
+                    
+                    // Show appropriate payment form
+                    showPaymentForm(selectedMethod);
+                });
+            });
+            
+            // Show payment form based on selected method
+            function showPaymentForm(method) {
+                let formHTML = '';
+                
+                switch(method) {
+                    case 'paypal':
+                        formHTML = `
+                            <h3 class="text-lg font-semibold mb-4">Pay with PayPal</h3>
+                            <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                                <p class="text-sm text-blue-800">You will be redirected to PayPal to complete your payment securely.</p>
+                            </div>
+                            <button class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg font-medium transition duration-200">
+                                Continue to PayPal <i class="fab fa-paypal ml-2"></i>
+                            </button>
+                        `;
+                        break;
+                        
+                    case 'mpesa':
+                        formHTML = `
+                            <h3 class="text-lg font-semibold mb-4">Pay with M-Pesa</h3>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                <input type="tel" placeholder="e.g. 254712345678" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg mb-4">
+                                <p class="text-sm text-green-800">You will receive a payment request on your phone. Enter your M-Pesa PIN to complete payment.</p>
+                            </div>
+                            <button class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium transition duration-200">
+                                Request Payment <i class="fas fa-mobile-alt ml-2"></i>
+                            </button>
+                        `;
+                        break;
+                        
+                    case 'visa':
+                    case 'mastercard':
+                    case 'verve':
+                        formHTML = `
+                            <h3 class="text-lg font-semibold mb-4">Pay with Card</h3>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
+                                <input type="text" placeholder="1234 5678 9012 3456" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
+                                    <input type="text" placeholder="MM/YY" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">CVV</label>
+                                    <input type="text" placeholder="123" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                </div>
+                            </div>
+                            <div class="flex items-center mb-4">
+                                <input type="checkbox" id="save-card" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                                <label for="save-card" class="ml-2 block text-sm text-gray-700">Save card for future payments</label>
+                            </div>
+                            <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg font-medium transition duration-200">
+                                Pay $120.00 <i class="far fa-credit-card ml-2"></i>
+                            </button>
+                        `;
+                        break;
+                        
+                    case 'bank-transfer':
+                        formHTML = `
+                            <h3 class="text-lg font-semibold mb-4">Bank Transfer</h3>
+                            <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm text-gray-600">Bank Name:</span>
+                                    <span class="text-sm font-medium">Zenith Bank</span>
+                                </div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm text-gray-600">Account Name:</span>
+                                    <span class="text-sm font-medium">TechStore Ltd</span>
+                                </div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm text-gray-600">Account Number:</span>
+                                    <span class="text-sm font-medium">1012345678</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-sm text-gray-600">Reference:</span>
+                                    <span class="text-sm font-medium">ORD-${Math.floor(100000 + Math.random() * 900000)}</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Please transfer the exact amount of $120.00 and use the reference above. Your order will be processed once payment is confirmed.</p>
+                            <button class="w-full bg-gray-700 hover:bg-gray-800 text-white py-2 px-4 rounded-lg font-medium transition duration-200">
+                                I've Made the Transfer
+                            </button>
+                        `;
+                        break;
+                        
+                    case 'ussd':
+                        formHTML = `
+                            <h3 class="text-lg font-semibold mb-4">USSD Payment</h3>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Bank</label>
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                    <option>Select your bank</option>
+                                    <option>GTBank (*737#)</option>
+                                    <option>Zenith Bank (*966#)</option>
+                                    <option>Access Bank (*901#)</option>
+                                    <option>First Bank (*894#)</option>
+                                    <option>UBA (*919#)</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                <input type="tel" placeholder="e.g. 08012345678" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            <div class="bg-yellow-50 p-4 rounded-lg mb-4">
+                                <p class="text-sm text-yellow-800">Dial the USSD code for your bank and follow the prompts to complete payment.</p>
+                            </div>
+                            <button class="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg font-medium transition duration-200">
+                                Continue to USSD <i class="fas fa-mobile-alt ml-2"></i>
+                            </button>
+                        `;
+                        break;
+                        
+                    case 'cod':
+                        formHTML = `
+                            <h3 class="text-lg font-semibold mb-4">Cash on Delivery</h3>
+                            <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                                <p class="text-sm text-gray-800">Pay with cash when your order is delivered. An additional $5.00 handling fee applies.</p>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Delivery Instructions (Optional)</label>
+                                <textarea rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g. Call before delivery"></textarea>
+                            </div>
+                            <button class="w-full bg-gray-700 hover:bg-gray-800 text-white py-2 px-4 rounded-lg font-medium transition duration-200">
+                                Confirm Cash on Delivery
+                            </button>
+                        `;
+                        break;
+                        
+                    default:
+                        formHTML = `
+                            <h3 class="text-lg font-semibold mb-4">${method.charAt(0).toUpperCase() + method.slice(1).replace('-', ' ')}</h3>
+                            <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                                <p class="text-sm text-gray-800">You will be redirected to complete your payment securely.</p>
+                            </div>
+                            <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg font-medium transition duration-200">
+                                Continue to Payment
+                            </button>
+                        `;
+                }
+                
+                paymentFormContainer.innerHTML = formHTML;
+            }
+            
+            // Complete payment button
+            completePaymentBtn.addEventListener('click', () => {
+                if (!selectedMethod) return;
+                
+                // Show processing state
+                completePaymentBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...';
+                completePaymentBtn.disabled = true;
+                
+                // Simulate payment processing
+                setTimeout(() => {
+                    // Show success message
+                    paymentFormContainer.innerHTML = `
+                        <div class="text-center py-10">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-check text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-medium text-gray-800 mb-2">Payment Successful!</h3>
+                            <p class="text-gray-500 mb-6">Your order has been placed successfully.</p>
+                            <a href="productpaymentpae.html" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-lg font-medium transition duration-200">
+                                View Order Details
+                            </a>
+                        </div>
+                    `;
+                    
+                    // Reset payment button
+                    completePaymentBtn.innerHTML = 'Payment Complete';
+                }, 2000);
+            });
+        });
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+

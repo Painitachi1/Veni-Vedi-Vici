@@ -1,0 +1,609 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVV Premium - Announcements</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4f46e5',
+                        secondary: '#10b981',
+                        dark: '#1e293b',
+                        light: '#f8fafc',
+                        premium: '#f59e0b'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* Pulse animation for new announcements */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(79, 70, 229, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Marquee animation for important announcements */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 20s linear infinite;
+        }
+        
+        /* Platform color coding */
+        .platform-amazon { border-left: 4px solid #FF9900; }
+        .platform-ebay { border-left: 4px solid #0064D2; }
+        .platform-shopify { border-left: 4px solid #7AB55C; }
+        .platform-walmart { border-left: 4px solid #007dc6; }
+        .platform-etsy { border-left: 4px solid #F56400; }
+        .platform-other { border-left: 4px solid #6b7280; }
+    </style>
+</head>
+<body class="bg-gray-50 text-dark">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-store-alt text-primary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-primary">VVV Premium</span>
+                    </div>
+                    <nav class="hidden md:flex space-x-8">
+                        <a href='Dashboard.html'>Dashboard</a>
+                        <a href="index.html" class="text-gray-500 hover:text-primary">Products</a>
+                        <a href="Activity.html" class="text-primary font-medium">Activity</a>
+                        <a href="announcements.html" class="text-gray-500 hover:text-primary">Announcements</a>
+                        <a href="accountsettings.html" class="text-gray-500 hover:text-primary">Settings</a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                        </button>
+                    </div>
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 focus:outline-none">
+                            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                            <span class="hidden md:inline text-gray-700">John Doe</span>
+                            <span class="px-2 py-0.5 bg-premium text-white text-xs rounded-full">Premium</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Navigation -->
+        <div class="md:hidden bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+                <nav class="flex justify-between space-x-4 overflow-x-auto py-2">
+                    <a href='Dashboard.html'>Dashboard</a>
+                    <a href="index.html" class="whitespace-nowrap px-3 py-2 text-sm font-medium text-gray-500 hover:text-primary">Products</a>
+                    <a href="Activity.html" class="whitespace-nowrap px-3 py-2 text-sm font-medium text-primary border-b-2 border-primary">Activity</a>
+                    <a href="announcements.html" class="whitespace-nowrap px-3 py-2 text-sm font-medium text-gray-500 hover:text-primary">Announcements</a>
+                    <a href="accountsettings.html" class="whitespace-nowrap px-3 py-2 text-sm font-medium text-gray-500 hover:text-primary">Settings</a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Important Announcement Banner -->
+        <div class="bg-yellow-50 border-b border-yellow-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+                <div class="flex items-center justify-between">
+                    <div class="overflow-hidden w-full">
+                        <div class="marquee flex items-center">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded mr-2">Important</span>
+                            <span class="text-sm text-yellow-800">Black Friday preparation webinar tomorrow at 2PM EST - </span>
+                            <span class="text-sm font-medium text-yellow-900 ml-2">Register now to secure your spot!</span>
+                            <span class="mx-4 text-yellow-300">|</span>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded mr-2">New</span>
+                            <span class="text-sm text-yellow-800">Amazon API changes coming November 15th - </span>
+                            <span class="text-sm font-medium text-yellow-900 ml-2">Update your integration settings</span>
+                        </div>
+                    </div>
+                    <button class="ml-4 text-yellow-500 hover:text-yellow-700 focus:outline-none">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="flex-grow">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <!-- Page Header -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">Shoutouts & Announcements</h1>
+                        <p class="mt-1 text-sm text-gray-500">Platform-wide news, updates, and promotions for all VVV users</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex space-x-3">
+                        <button class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            <i class="fas fa-bell-slash mr-2"></i> Mute
+                        </button>
+                        <button class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            <i class="fas fa-plus mr-2"></i> Create Announcement
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Announcement Filters -->
+                <div class="bg-white rounded-lg shadow mb-6 p-4">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm font-medium text-gray-700">Filter by:</span>
+                            <select class="block w-full md:w-40 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md">
+                                <option>All Announcements</option>
+                                <option>Platform Updates</option>
+                                <option>Promotions</option>
+                                <option>Maintenance</option>
+                                <option>New Features</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm font-medium text-gray-700">Audience:</span>
+                            <select class="block w-full md:w-40 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md">
+                                <option>All Users</option>
+                                <option>Premium Only</option>
+                                <option>Basic Users</option>
+                                <option>Specific Platforms</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm font-medium text-gray-700">Status:</span>
+                            <select class="block w-full md:w-40 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md">
+                                <option>All Statuses</option>
+                                <option>Unread</option>
+                                <option>Important</option>
+                                <option>Archived</option>
+                            </select>
+                        </div>
+                        <button class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary">
+                            Apply Filters
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Announcement Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-indigo-50 text-indigo-600">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-500">Total Announcements</p>
+                                <p class="text-xl font-semibold text-gray-900">24</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-50 text-green-600">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-500">Views This Month</p>
+                                <p class="text-xl font-semibold text-gray-900">1,245</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-premium/10 text-premium">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-500">Premium Exclusives</p>
+                                <p class="text-xl font-semibold text-gray-900">8</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Announcement Tabs -->
+                <div class="border-b border-gray-200 mb-6">
+                    <nav class="-mb-px flex space-x-8">
+                        <a href="announcements.html" class="border-primary text-primary whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">All Announcements</a>
+                        <a href="Errorpage.html" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Unread</a>
+                        <a href="Errorpage.html" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Important</a>
+                        <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Premium Only</a>
+                    </nav>
+                </div>
+
+                <!-- Announcement List -->
+                <div class="bg-white shadow overflow-hidden rounded-lg">
+                    <div class="divide-y divide-gray-200">
+                        <!-- Announcement Header -->
+                        <div class="px-6 py-4 bg-gray-50 flex items-center justify-between">
+                            <h3 class="text-lg font-medium text-gray-900">Recent Announcements</h3>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm text-gray-500">Sort by:</span>
+                                <select class="block pl-3 pr-10 py-1 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md">
+                                    <option>Newest First</option>
+                                    <option>Oldest First</option>
+                                    <option>Most Viewed</option>
+                                    <option>Most Important</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Announcement List -->
+                        <div class="divide-y divide-gray-200 max-h-[600px] overflow-y-auto">
+                            <!-- Announcement Item - New Feature (Premium) -->
+                            <div class="px-6 py-4 hover:bg-gray-50">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 pt-1">
+                                        <div class="h-10 w-10 rounded-full bg-premium/10 flex items-center justify-center text-premium">
+                                            <i class="fas fa-crown"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-900">New Premium Feature: Multi-platform Analytics Dashboard</p>
+                                                <div class="mt-1 flex items-center space-x-2">
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-premium/10 text-premium">Premium Only</span>
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">New Feature</span>
+                                                </div>
+                                            </div>
+                                            <div class="ml-2 flex-shrink-0 flex">
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Important</span>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 text-sm text-gray-500">
+                                            <p>We're excited to announce our new cross-platform analytics dashboard, available exclusively to Premium members. Track performance across all your connected marketplaces in one unified view with advanced filtering and export options.</p>
+                                        </div>
+                                        <div class="mt-3 flex items-center text-xs text-gray-500">
+                                            <i class="fas fa-clock mr-1"></i>
+                                            <span>Posted 2 hours ago by VVV Team</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-eye mr-1"></i> 142 views</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-comment mr-1"></i> 8 comments</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-shrink-0">
+                                        <button class="p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Announcement Item - Platform Update -->
+                            <div class="px-6 py-4 hover:bg-gray-50">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 pt-1">
+                                        <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-900">Amazon API Changes - Action Required</p>
+                                                <div class="mt-1 flex items-center space-x-2">
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Platform Update</span>
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Action Required</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 text-sm text-gray-500">
+                                            <p>Amazon has announced changes to their Seller Central API that will affect how VVV integrates with your account. Please update your integration settings by November 15th to avoid any disruption to your order processing.</p>
+                                        </div>
+                                        <div class="mt-3 flex items-center text-xs text-gray-500">
+                                            <i class="fas fa-clock mr-1"></i>
+                                            <span>Posted 1 day ago by VVV Team</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-eye mr-1"></i> 324 views</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-comment mr-1"></i> 12 comments</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Announcement Item - Promotion -->
+                            <div class="px-6 py-4 hover:bg-gray-50">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 pt-1">
+                                        <div class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 pulse">
+                                            <i class="fas fa-gift"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-900">Black Friday Preparation Webinar</p>
+                                                <div class="mt-1 flex items-center space-x-2">
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">Promotion</span>
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Free for All</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 text-sm text-gray-500">
+                                            <p>Join our exclusive webinar on November 10th at 2PM EST where our e-commerce experts will share strategies to maximize your sales during the Black Friday/Cyber Monday weekend. Premium members get early access to the recording.</p>
+                                        </div>
+                                        <div class="mt-3 flex items-center text-xs text-gray-500">
+                                            <i class="fas fa-clock mr-1"></i>
+                                            <span>Posted 3 days ago by VVV Team</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-eye mr-1"></i> 587 views</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-comment mr-1"></i> 23 comments</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-shrink-0">
+                                        <button class="px-3 py-1 bg-primary text-white text-sm rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary">
+                                            Register
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Announcement Item - Maintenance -->
+                            <div class="px-6 py-4 hover:bg-gray-50">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 pt-1">
+                                        <div class="h-10 w-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
+                                            <i class="fas fa-tools"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-900">Scheduled Maintenance - November 12th</p>
+                                                <div class="mt-1 flex items-center space-x-2">
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-100 text-orange-800">Maintenance</span>
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">Notice</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 text-sm text-gray-500">
+                                            <p>VVV will be undergoing scheduled maintenance on November 12th from 2:00 AM to 4:00 AM EST. During this time, the platform may be temporarily unavailable. We apologize for any inconvenience and appreciate your understanding.</p>
+                                        </div>
+                                        <div class="mt-3 flex items-center text-xs text-gray-500">
+                                            <i class="fas fa-clock mr-1"></i>
+                                            <span>Posted 5 days ago by VVV Team</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-eye mr-1"></i> 198 views</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Announcement Item - New Integration -->
+                            <div class="px-6 py-4 hover:bg-gray-50">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 pt-1">
+                                        <div class="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                                            <i class="fas fa-plug"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-900">New Platform Integration: TikTok Shop</p>
+                                                <div class="mt-1 flex items-center space-x-2">
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">New Feature</span>
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-premium/10 text-premium">Premium First</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 text-sm text-gray-500">
+                                            <p>We're thrilled to announce our new integration with TikTok Shop! Premium members can now connect their TikTok Shop accounts starting today. Basic users will gain access to this integration on December 1st.</p>
+                                        </div>
+                                        <div class="mt-3 flex items-center text-xs text-gray-500">
+                                            <i class="fas fa-clock mr-1"></i>
+                                            <span>Posted 1 week ago by VVV Team</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-eye mr-1"></i> 432 views</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-comment mr-1"></i> 17 comments</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-shrink-0">
+                                        <button class="px-3 py-1 bg-gray-100 text-gray-800 text-sm rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                                            Learn More
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="bg-gray-50 px-6 py-3 flex items-center justify-between border-t border-gray-200">
+                            <div class="flex-1 flex justify-between sm:hidden">
+                                <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Previous</a>
+                                <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Next</a>
+                            </div>
+                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-700">
+                                        Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">24</span> announcements
+                                    </p>
+                                </div>
+                                <div>
+                                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                        <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <span class="sr-only">Previous</span>
+                                            <i class="fas fa-chevron-left"></i>
+                                        </a>
+                                        <a href="#" aria-current="page" class="z-10 bg-primary border-primary text-white relative inline-flex items-center px-4 py-2 border text-sm font-medium">1</a>
+                                        <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">2</a>
+                                        <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">3</a>
+                                        <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">4</a>
+                                        <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">5</a>
+                                        <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <span class="sr-only">Next</span>
+                                            <i class="fas fa-chevron-right"></i>
+                                        </a>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        
+    </div>
+
+    <script>
+        // Simple script to handle announcement interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Close important announcement banner
+            const closeBannerBtn = document.querySelector('.bg-yellow-50 button');
+            if (closeBannerBtn) {
+                closeBannerBtn.addEventListener('click', function() {
+                    this.closest('.bg-yellow-50').style.display = 'none';
+                });
+            }
+
+            // Toggle announcement details
+            const announcementItems = document.querySelectorAll('.hover\\:bg-gray-50');
+            announcementItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // Don't trigger if clicking on a button or link
+                    if (!e.target.closest('button') && !e.target.closest('a')) {
+                        console.log('Viewing announcement details');
+                        // Here you would implement the announcement detail view
+                    }
+                });
+            });
+
+            // Filter tabs
+            const filterTabs = document.querySelectorAll('nav.-mb-px a');
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Remove active class from all tabs
+                    filterTabs.forEach(t => t.classList.remove('border-primary', 'text-primary'));
+                    // Add active class to clicked tab
+                    this.classList.add('border-primary', 'text-primary');
+                    console.log('Filtering by:', this.textContent.trim());
+                    // Here you would implement the filtering logic
+                });
+            });
+
+            // Create announcement modal (placeholder)
+            const createAnnouncementBtn = document.querySelector('button:has(.fa-plus)');
+            if (createAnnouncementBtn) {
+                createAnnouncementBtn.addEventListener('click', function() {
+                    console.log('Opening create announcement modal');
+                    // Here you would implement the create announcement modal
+                });
+            }
+        });
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
+

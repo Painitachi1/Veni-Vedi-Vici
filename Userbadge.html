@@ -1,0 +1,534 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Badges & Achievements Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .badge-card:hover .badge-icon {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.5s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="hidden md:flex flex-col w-64 bg-indigo-800 text-white">
+            <!-- Logo -->
+            <div class="flex items-center justify-center p-4 border-b border-indigo-700">
+                <i class="fas fa-trophy text-2xl mr-2"></i>
+                <span class="text-xl font-bold">AchievePro</span>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="flex-1 overflow-y-auto py-4">
+                <div class="px-4 space-y-2">
+                    <a href="Dashboard.html" class="flex items-center space-x-3 p-3 rounded-lg text-indigo-200 hover:bg-indigo-700 hover:text-white">
+                        <i class="fas fa-home w-5"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg bg-indigo-900 text-white">
+                        <i class="fas fa-trophy w-5"></i>
+                        <span>Badges & Achievements</span>
+                    </a>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-indigo-200 hover:bg-indigo-700 hover:text-white">
+                        <i class="fas fa-users w-5"></i>
+                        <span>Leaderboard</span>
+                    </a>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-indigo-200 hover:bg-indigo-700 hover:text-white">
+                        <i class="fas fa-chart-line w-5"></i>
+                        <span>Progress</span>
+                    </a>
+                    <a href="accountsettings.html" class="flex items-center space-x-3 p-3 rounded-lg text-indigo-200 hover:bg-indigo-700 hover:text-white">
+                        <i class="fas fa-cog w-5"></i>
+                        <span>Settings</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <!-- User Profile -->
+            <div class="p-4 border-t border-indigo-700">
+                <div class="flex items-center space-x-3">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-10 h-10 rounded-full">
+                    <div>
+                        <p class="font-medium">Sarah Johnson</p>
+                        <p class="text-xs text-indigo-300">Level 15 Achiever</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <div class="flex items-center space-x-4">
+                        <button class="md:hidden text-gray-500">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h1 class="text-xl font-semibold text-gray-800">Badges & Achievements Gallery</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative hidden md:block">
+                            <input type="text" placeholder="Search badges..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 w-64">
+                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                        </div>
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-bell"></i>
+                        </button>
+                        <div class="flex items-center space-x-2">
+                            <span class="hidden md:inline text-sm font-medium">3,450 XP</span>
+                            <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-yellow-800 font-bold">
+                                15
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-50">
+                <!-- User Profile Summary -->
+                <div class="bg-white rounded-xl shadow p-6 mb-6">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="relative mb-4 md:mb-0 md:mr-6">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-24 h-24 rounded-full border-4 border-indigo-100">
+                            <div class="absolute -bottom-2 -right-2 bg-yellow-400 text-yellow-800 font-bold rounded-full w-10 h-10 flex items-center justify-center">
+                                15
+                            </div>
+                        </div>
+                        <div class="flex-1 text-center md:text-left">
+                            <h2 class="text-2xl font-bold text-gray-800">Sarah Johnson</h2>
+                            <p class="text-gray-600 mb-2">Community Leader & Top Contributor</p>
+                            <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-trophy text-yellow-500 mr-2"></i>
+                                    <span class="font-medium">42 Badges</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-medal text-blue-500 mr-2"></i>
+                                    <span class="font-medium">8 Achievements</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-purple-500 mr-2"></i>
+                                    <span class="font-medium">Top 5%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 md:mt-0">
+                            <div class="relative w-24 h-24">
+                                <svg class="w-full h-full" viewBox="0 0 100 100">
+                                    <circle class="text-gray-200" stroke-width="8" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
+                                    <circle class="text-indigo-600" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="75.36" stroke-linecap="round" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center flex-col">
+                                    <span class="text-2xl font-bold text-gray-800">70%</span>
+                                    <span class="text-xs text-gray-500">to Lvl 16</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Filter Navigation -->
+                <div class="bg-white rounded-xl shadow p-4 mb-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div class="flex space-x-2 mb-4 md:mb-0 overflow-x-auto pb-2 md:pb-0">
+                            <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium whitespace-nowrap">
+                                All Badges
+                            </button>
+                            <button class="px-4 py-2 border rounded-lg text-sm font-medium whitespace-nowrap hover:bg-gray-50">
+                                <i class="fas fa-medal text-blue-500 mr-2"></i> Achievements
+                            </button>
+                            <button class="px-4 py-2 border rounded-lg text-sm font-medium whitespace-nowrap hover:bg-gray-50">
+                                <i class="fas fa-fire text-orange-500 mr-2"></i> Popular
+                            </button>
+                            <button class="px-4 py-2 border rounded-lg text-sm font-medium whitespace-nowrap hover:bg-gray-50">
+                                <i class="fas fa-lock text-gray-500 mr-2"></i> Locked
+                            </button>
+                            <button class="px-4 py-2 border rounded-lg text-sm font-medium whitespace-nowrap hover:bg-gray-50">
+                                <i class="fas fa-tags text-green-500 mr-2"></i> Categories
+                            </button>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="relative">
+                                <button class="flex items-center space-x-2 px-3 py-2 border rounded-lg text-sm">
+                                    <span>Sort: Newest</span>
+                                    <i class="fas fa-chevron-down text-xs"></i>
+                                </button>
+                            </div>
+                            <button class="p-2 text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-th-large"></i>
+                            </button>
+                            <button class="p-2 text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Badges Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Badge Card 1 - Earned -->
+                    <div class="badge-card bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg">
+                        <div class="p-6 flex flex-col items-center">
+                            <div class="badge-icon mb-4 w-24 h-24 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-white text-4xl transition-transform duration-300">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">Superstar</h3>
+                            <p class="text-sm text-gray-600 text-center mb-4">Earned for being in top 5% of users</p>
+                            <div class="flex items-center text-yellow-500 mb-4">
+                                <i class="fas fa-check-circle mr-2"></i>
+                                <span class="text-sm font-medium">Earned: May 15, 2023</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Badge Card 2 - In Progress -->
+                    <div class="badge-card bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg">
+                        <div class="p-6 flex flex-col items-center">
+                            <div class="badge-icon mb-4 w-24 h-24 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-4xl transition-transform duration-300">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">Community Hero</h3>
+                            <p class="text-sm text-gray-600 text-center mb-4">Make 100 helpful comments</p>
+                            <div class="flex items-center text-blue-500 mb-4">
+                                <i class="fas fa-spinner mr-2"></i>
+                                <span class="text-sm font-medium">72/100 (72%)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: 72%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Badge Card 3 - Locked -->
+                    <div class="badge-card bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg">
+                        <div class="p-6 flex flex-col items-center relative">
+                            <div class="absolute top-4 right-4 text-gray-400">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="badge-icon mb-4 w-24 h-24 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center text-gray-500 text-4xl transition-transform duration-300">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">Diamond Contributor</h3>
+                            <p class="text-sm text-gray-600 text-center mb-4">Reach level 20 in the community</p>
+                            <div class="flex items-center text-gray-500 mb-4">
+                                <i class="fas fa-lock mr-2"></i>
+                                <span class="text-sm font-medium">Locked (Level 15/20)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gray-400 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Badge Card 4 - Rare Achievement -->
+                    <div class="badge-card bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg">
+                        <div class="p-6 flex flex-col items-center">
+                            <div class="badge-icon mb-4 w-24 h-24 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white text-4xl transition-transform duration-300">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">Fast Learner</h3>
+                            <p class="text-sm text-gray-600 text-center mb-4">Complete 5 courses in one week</p>
+                            <div class="flex items-center text-purple-500 mb-4">
+                                <i class="fas fa-check-circle mr-2"></i>
+                                <span class="text-sm font-medium">Rare Achievement</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-purple-500 h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Badge Card 5 - New -->
+                    <div class="badge-card bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg">
+                        <div class="p-6 flex flex-col items-center">
+                            <div class="badge-icon mb-4 w-24 h-24 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white text-4xl transition-transform duration-300">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">Early Adopter</h3>
+                            <p class="text-sm text-gray-600 text-center mb-4">Joined in the first month</p>
+                            <div class="flex items-center text-green-500 mb-4">
+                                <i class="fas fa-check-circle mr-2"></i>
+                                <span class="text-sm font-medium">Earned: Jan 2022</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Badge Card 6 - Almost There -->
+                    <div class="badge-card bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg">
+                        <div class="p-6 flex flex-col items-center">
+                            <div class="badge-icon mb-4 w-24 h-24 rounded-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center text-white text-4xl transition-transform duration-300">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">Community Favorite</h3>
+                            <p class="text-sm text-gray-600 text-center mb-4">Receive 50 likes on your posts</p>
+                            <div class="flex items-center text-red-500 mb-4">
+                                <i class="fas fa-spinner mr-2"></i>
+                                <span class="text-sm font-medium">42/50 (84%)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-red-500 h-2 rounded-full" style="width: 84%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Badge Card 7 - Secret Badge -->
+                    <div class="badge-card bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg">
+                        <div class="p-6 flex flex-col items-center relative">
+                            <div class="absolute top-4 right-4 text-gray-400">
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <div class="badge-icon mb-4 w-24 h-24 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center text-gray-500 text-4xl transition-transform duration-300">
+                                <i class="fas fa-question"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">Secret Achievement</h3>
+                            <p class="text-sm text-gray-600 text-center mb-4">Complete secret requirements</p>
+                            <div class="flex items-center text-gray-500 mb-4">
+                                <i class="fas fa-lock mr-2"></i>
+                                <span class="text-sm font-medium">Locked</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gray-400 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Badge Card 8 - Legendary -->
+                    <div class="badge-card bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg">
+                        <div class="p-6 flex flex-col items-center">
+                            <div class="badge-icon mb-4 w-24 h-24 rounded-full bg-gradient-to-br from-yellow-500 to-yellow-700 flex items-center justify-center text-white text-4xl transition-transform duration-300">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">Legendary Status</h3>
+                            <p class="text-sm text-gray-600 text-center mb-4">Earn all other achievements</p>
+                            <div class="flex items-center text-yellow-500 mb-4">
+                                <i class="fas fa-spinner mr-2"></i>
+                                <span class="text-sm font-medium">5/12 (42%)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-yellow-500 h-2 rounded-full" style="width: 42%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="mt-8 flex justify-center">
+                    <nav class="flex items-center space-x-2">
+                        <button class="px-3 py-1 border rounded text-sm disabled:text-gray-400" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="px-3 py-1 bg-indigo-600 text-white rounded text-sm">1</button>
+                        <button class="px-3 py-1 border rounded text-sm hover:bg-gray-50">2</button>
+                        <button class="px-3 py-1 border rounded text-sm hover:bg-gray-50">3</button>
+                        <span class="px-2">...</span>
+                        <button class="px-3 py-1 border rounded text-sm hover:bg-gray-50">8</button>
+                        <button class="px-3 py-1 border rounded text-sm hover:bg-gray-50">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </nav>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Badge Detail Modal -->
+    <div id="badgeDetailModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-xl max-w-md w-full mx-4">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-gray-800">Superstar Badge</h3>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="flex flex-col items-center mb-6">
+                    <div class="w-32 h-32 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-white text-6xl mb-4">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-sm text-gray-600 text-center mb-4">
+                        Awarded for being in the top 5% of all users based on activity and contributions.
+                    </p>
+                    <div class="bg-yellow-50 text-yellow-800 px-4 py-2 rounded-lg text-sm font-medium">
+                        <i class="fas fa-trophy mr-2"></i> Rare Achievement
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-200 pt-4 mb-4">
+                    <h4 class="text-sm font-medium text-gray-500 uppercase mb-2">Details</h4>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <p class="text-gray-500">Earned</p>
+                            <p class="font-medium">May 15, 2023</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500">XP Awarded</p>
+                            <p class="font-medium">250 XP</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500">Category</p>
+                            <p class="font-medium">Community</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500">Rarity</p>
+                            <p class="font-medium">5% of users</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-200 pt-4">
+                    <h4 class="text-sm font-medium text-gray-500 uppercase mb-2">Share your achievement</h4>
+                    <div class="flex space-x-2">
+                        <button class="p-2 bg-blue-100 text-blue-600 rounded-full">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button class="p-2 bg-blue-400 text-white rounded-full">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                        <button class="p-2 bg-pink-500 text-white rounded-full">
+                            <i class="fab fa-instagram"></i>
+                        </button>
+                        <button class="p-2 bg-gray-800 text-white rounded-full">
+                            <i class="fab fa-linkedin-in"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Open badge detail modal
+        function openBadgeDetail() {
+            document.getElementById('badgeDetailModal').classList.remove('hidden');
+        }
+        
+        // Close modal
+        function closeModal() {
+            document.getElementById('badgeDetailModal').classList.add('hidden');
+        }
+        
+        // Make badge cards clickable
+        document.querySelectorAll('.badge-card').forEach(card => {
+            card.addEventListener('click', openBadgeDetail);
+        });
+        
+        // Close modal when clicking outside
+        document.getElementById('badgeDetailModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+        
+        // Initialize progress rings
+        function initProgressRings() {
+            const rings = document.querySelectorAll('.progress-ring__circle');
+            rings.forEach(ring => {
+                const radius = ring.r.baseVal.value;
+                const circumference = radius * 2 * Math.PI;
+                
+                ring.style.strokeDasharray = circumference;
+                ring.style.strokeDashoffset = circumference;
+                
+                const offset = circumference - (70 / 100) * circumference;
+                ring.style.strokeDashoffset = offset;
+            });
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', initProgressRings);
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+

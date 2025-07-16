@@ -1,0 +1,677 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVV Premium - My Hubs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4f46e5',
+                        secondary: '#10b981',
+                        dark: '#1e293b',
+                        light: '#f8fafc',
+                        premium: '#f59e0b',
+                        hub: '#8b5cf6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* Map container */
+        #hubMap {
+            height: 400px;
+            width: 100%;
+            border-radius: 0.5rem;
+        }
+        
+        /* Hub status indicators */
+        .hub-active {
+            position: relative;
+        }
+        .hub-active::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background-color: #10b981;
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+        }
+        
+        /* Animation for new hub */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(139, 92, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+        }
+        .pulse-hub {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-dark">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-store-alt text-primary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-primary">VVV Premium</span>
+                    </div>
+                    <nav class="hidden md:flex space-x-8">
+                        <a href='Dashboard.html'>Dashboard</a>
+                        <a href="index.html" class="text-gray-500 hover:text-primary">Products</a>
+                        <a href='Order.html'>Orders</a>
+                        <a href="HubPickupPage.html" class="text-gray-500 hover:text-primary">My Hubs</a>
+                        <a href="Hub.html" class="text-gray-500 hover:text-primary">Settings</a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                        </button>
+                    </div>
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 focus:outline-none">
+                            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                            <span class="hidden md:inline text-gray-700">John Doe</span>
+                            <span class="px-2 py-0.5 bg-premium text-white text-xs rounded-full">Premium</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Navigation -->
+        <div class="md:hidden bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+                <nav class="flex justify-between space-x-4 overflow-x-auto py-2">
+                    <a href='Dashboard.html'>Dashboard</a>
+                    <a href="index.html" class="whitespace-nowrap px-3 py-2 text-sm font-medium text-gray-500 hover:text-primary">Products</a>
+                    <a href='Order.html'>Orders</a>
+                    <a href="HubPickupPage.html" class="whitespace-nowrap px-3 py-2 text-sm font-medium text-gray-500 hover:text-primary">My Hubs</a>
+                    <a href="Hub.html" class="whitespace-nowrap px-3 py-2 text-sm font-medium text-gray-500 hover:text-primary">Settings</a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="flex-grow">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <!-- Page Header -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">My Hubs</h1>
+                        <p class="mt-1 text-sm text-gray-500">Manage your preferred pickup locations and delivery redirects</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex space-x-3">
+                        <button onclick="openHubModal()" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-hub hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-hub">
+                            <i class="fas fa-plus mr-2"></i> Add New Hub
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hub Management Tabs -->
+                <div class="border-b border-gray-200 mb-6">
+                    <nav class="-mb-px flex space-x-8">
+                        <a href="HubPickupPage.html" class="border-hub text-hub whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">All Hubs</a>
+                        <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Primary Hub</a>
+                        <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Pickup Locations</a>
+                        <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Delivery Redirects</a>
+                    </nav>
+                </div>
+
+                <!-- Hub Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-hub/10 text-hub">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-500">Total Hubs</p>
+                                <p class="text-xl font-semibold text-gray-900">5</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-50 text-green-600">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-500">Active Hub</p>
+                                <p class="text-xl font-semibold text-gray-900">Main Warehouse</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-blue-50 text-blue-600">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-500">Redirected Orders</p>
+                                <p class="text-xl font-semibold text-gray-900">12</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hub Map -->
+                <div class="bg-white shadow rounded-lg p-4 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-medium text-gray-900">Hub Locations Map</h3>
+                        <div class="flex items-center space-x-2">
+                            <button class="px-3 py-1 bg-gray-100 text-gray-800 text-sm rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                                <i class="fas fa-sync-alt mr-1"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+                    <div id="hubMap" class="border border-gray-200">
+                        <!-- Map will be rendered here -->
+                        <div class="flex items-center justify-center h-full bg-gray-100 text-gray-400">
+                            <div class="text-center">
+                                <i class="fas fa-map-marked-alt text-4xl mb-2"></i>
+                                <p>Interactive map of your hub locations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hub List -->
+                <div class="bg-white shadow overflow-hidden rounded-lg">
+                    <div class="divide-y divide-gray-200">
+                        <!-- Hub List Header -->
+                        <div class="px-6 py-4 bg-gray-50 flex items-center justify-between">
+                            <h3 class="text-lg font-medium text-gray-900">Your Hubs</h3>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm text-gray-500">Sort by:</span>
+                                <select class="block pl-3 pr-10 py-1 text-base border-gray-300 focus:outline-none focus:ring-hub focus:border-hub sm:text-sm rounded-md">
+                                    <option>Most Used</option>
+                                    <option>Recently Added</option>
+                                    <option>Alphabetical</option>
+                                    <option>By Distance</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Hub List Items -->
+                        <div class="divide-y divide-gray-200 max-h-[600px] overflow-y-auto">
+                            <!-- Primary Hub -->
+                            <div class="px-6 py-4 hover:bg-gray-50 hub-active">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 pt-1">
+                                        <div class="h-10 w-10 rounded-full bg-hub/10 flex items-center justify-center text-hub">
+                                            <i class="fas fa-home"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-900">Main Warehouse</p>
+                                                <div class="mt-1 flex items-center space-x-2">
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Primary Hub</span>
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-hub/10 text-hub">Default Pickup</span>
+                                                </div>
+                                            </div>
+                                            <div class="ml-2 flex-shrink-0 flex">
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-premium/10 text-premium">Premium Feature</span>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 text-sm text-gray-500">
+                                            <p><i class="fas fa-map-marker-alt text-hub mr-1"></i> 123 Commerce St, Business Park, NY 10001</p>
+                                            <p class="mt-1"><i class="fas fa-phone-alt text-hub mr-1"></i> (555) 123-4567</p>
+                                        </div>
+                                        <div class="mt-3 flex items-center text-xs text-gray-500">
+                                            <span><i class="fas fa-box mr-1"></i> 45 orders processed</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-user-clock mr-1"></i> 24/7 access</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-calendar-alt mr-1"></i> Added 6 months ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-shrink-0 flex space-x-2">
+                                        <button class="p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pickup Location -->
+                            <div class="px-6 py-4 hover:bg-gray-50">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 pt-1">
+                                        <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                                            <i class="fas fa-store"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-900">Downtown Pickup Point</p>
+                                                <div class="mt-1 flex items-center space-x-2">
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Pickup Location</span>
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">Business Hours</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 text-sm text-gray-500">
+                                            <p><i class="fas fa-map-marker-alt text-blue-600 mr-1"></i> 456 Urban Ave, Downtown, NY 10002</p>
+                                            <p class="mt-1"><i class="fas fa-clock text-blue-600 mr-1"></i> Mon-Fri: 9AM-6PM, Sat: 10AM-4PM</p>
+                                        </div>
+                                        <div class="mt-3 flex items-center text-xs text-gray-500">
+                                            <span><i class="fas fa-box mr-1"></i> 22 orders picked up</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-walking mr-1"></i> Walk-in only</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-calendar-alt mr-1"></i> Added 3 months ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-shrink-0 flex space-x-2">
+                                        <button class="p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Delivery Redirect -->
+                            <div class="px-6 py-4 hover:bg-gray-50">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 pt-1">
+                                        <div class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                                            <i class="fas fa-redo"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-900">Customer Redirect - Sarah Johnson</p>
+                                                <div class="mt-1 flex items-center space-x-2">
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">Delivery Redirect</span>
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending Approval</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 text-sm text-gray-500">
+                                            <p><i class="fas fa-map-marker-alt text-purple-600 mr-1"></i> 789 Residential Ln, Suburb, NY 10003</p>
+                                            <p class="mt-1"><i class="fas fa-user-tag text-purple-600 mr-1"></i> Sarah Johnson (555) 987-6543</p>
+                                            <p class="mt-1"><i class="fas fa-info-circle text-purple-600 mr-1"></i> Leave package with doorman</p>
+                                        </div>
+                                        <div class="mt-3 flex items-center text-xs text-gray-500">
+                                            <span><i class="fas fa-box mr-1"></i> 3 redirected orders</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-calendar-day mr-1"></i> Active until Dec 15, 2023</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-calendar-alt mr-1"></i> Added 2 weeks ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-shrink-0 flex space-x-2">
+                                        <button class="p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- New Hub (with pulse animation) -->
+                            <div class="px-6 py-4 hover:bg-gray-50 pulse-hub">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 pt-1">
+                                        <div class="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                                            <i class="fas fa-plus"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-900">New Partner Location</p>
+                                                <div class="mt-1 flex items-center space-x-2">
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">New</span>
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-100 text-orange-800">Needs Setup</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 text-sm text-gray-500">
+                                            <p><i class="fas fa-map-marker-alt text-green-600 mr-1"></i> 321 Partner Plaza, Business District, NY 10004</p>
+                                            <p class="mt-1"><i class="fas fa-handshake text-green-600 mr-1"></i> Partner: QuickPick Logistics</p>
+                                        </div>
+                                        <div class="mt-3 flex items-center text-xs text-gray-500">
+                                            <span><i class="fas fa-exclamation-circle mr-1"></i> Complete setup to activate</span>
+                                            <span class="mx-1">â€¢</span>
+                                            <span><i class="fas fa-calendar-alt mr-1"></i> Added 2 days ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-shrink-0 flex space-x-2">
+                                        <button class="px-3 py-1 bg-hub text-white text-sm rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-hub">
+                                            Setup
+                                        </button>
+                                        <button class="p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="bg-gray-50 px-6 py-3 flex items-center justify-between border-t border-gray-200">
+                            <div class="flex-1 flex justify-between sm:hidden">
+                                <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Previous</a>
+                                <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Next</a>
+                            </div>
+                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-700">
+                                        Showing <span class="font-medium">1</span> to <span class="font-medium">4</span> of <span class="font-medium">5</span> hubs
+                                    </p>
+                                </div>
+                                <div>
+                                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                        <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <span class="sr-only">Previous</span>
+                                            <i class="fas fa-chevron-left"></i>
+                                        </a>
+                                        <a href="#" aria-current="page" class="z-10 bg-hub border-hub text-white relative inline-flex items-center px-4 py-2 border text-sm font-medium">1</a>
+                                        <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">2</a>
+                                        <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <span class="sr-only">Next</span>
+                                            <i class="fas fa-chevron-right"></i>
+                                        </a>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        
+
+        <!-- Add Hub Modal -->
+        <div id="hubModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-hub/10 sm:mx-0 sm:h-10 sm:w-10">
+                                <i class="fas fa-map-marker-alt text-hub"></i>
+                            </div>
+                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Add New Hub</h3>
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-500">Add a new pickup location or delivery redirect for your orders.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            <div class="sm:col-span-6">
+                                <label for="hub-type" class="block text-sm font-medium text-gray-700">Hub Type</label>
+                                <select id="hub-type" name="hub-type" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-hub focus:border-hub sm:text-sm rounded-md">
+                                    <option>Pickup Location</option>
+                                    <option>Delivery Redirect</option>
+                                    <option>Partner Location</option>
+                                    <option>Warehouse</option>
+                                </select>
+                            </div>
+
+                            <div class="sm:col-span-6">
+                                <label for="hub-name" class="block text-sm font-medium text-gray-700">Hub Name</label>
+                                <input type="text" name="hub-name" id="hub-name" class="mt-1 focus:ring-hub focus:border-hub block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+
+                            <div class="sm:col-span-4">
+                                <label for="address" class="block text-sm font-medium text-gray-700">Street address</label>
+                                <input type="text" name="address" id="address" autocomplete="street-address" class="mt-1 focus:ring-hub focus:border-hub block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="apt" class="block text-sm font-medium text-gray-700">Apt/Suite</label>
+                                <input type="text" name="apt" id="apt" class="mt-1 focus:ring-hub focus:border-hub block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+                                <input type="text" name="city" id="city" autocomplete="address-level2" class="mt-1 focus:ring-hub focus:border-hub block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="state" class="block text-sm font-medium text-gray-700">State / Province</label>
+                                <input type="text" name="state" id="state" autocomplete="address-level1" class="mt-1 focus:ring-hub focus:border-hub block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="zip" class="block text-sm font-medium text-gray-700">ZIP / Postal code</label>
+                                <input type="text" name="zip" id="zip" autocomplete="postal-code" class="mt-1 focus:ring-hub focus:border-hub block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+
+                            <div class="sm:col-span-3">
+                                <label for="contact-name" class="block text-sm font-medium text-gray-700">Contact Name</label>
+                                <input type="text" name="contact-name" id="contact-name" class="mt-1 focus:ring-hub focus:border-hub block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+
+                            <div class="sm:col-span-3">
+                                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                                <input type="text" name="phone" id="phone" autocomplete="tel" class="mt-1 focus:ring-hub focus:border-hub block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+
+                            <div class="sm:col-span-6">
+                                <label for="instructions" class="block text-sm font-medium text-gray-700">Special Instructions</label>
+                                <textarea id="instructions" name="instructions" rows="3" class="mt-1 shadow-sm focus:ring-hub focus:border-hub block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+                            </div>
+
+                            <div class="sm:col-span-6">
+                                <div class="flex items-start">
+                                    <div class="flex items-center h-5">
+                                        <input id="primary-hub" name="primary-hub" type="checkbox" class="focus:ring-hub h-4 w-4 text-hub border-gray-300 rounded">
+                                    </div>
+                                    <div class="ml-3 text-sm">
+                                        <label for="primary-hub" class="font-medium text-gray-700">Set as primary hub</label>
+                                        <p class="text-gray-500">This will be your default pickup location for all orders</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-6">
+                                <div class="flex items-start">
+                                    <div class="flex items-center h-5">
+                                        <input id="notify-picker" name="notify-picker" type="checkbox" class="focus:ring-hub h-4 w-4 text-hub border-gray-300 rounded">
+                                    </div>
+                                    <div class="ml-3 text-sm">
+                                        <label for="notify-picker" class="font-medium text-gray-700">Notify picker when order arrives</label>
+                                        <p class="text-gray-500">Send an automatic notification when items are ready for pickup</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-hub text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-hub sm:ml-3 sm:w-auto sm:text-sm">
+                            Save Hub
+                        </button>
+                        <button type="button" onclick="closeHubModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-hub sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hub modal functions
+        function openHubModal() {
+            document.getElementById('hubModal').classList.remove('hidden');
+        }
+
+        function closeHubModal() {
+            document.getElementById('hubModal').classList.add('hidden');
+        }
+
+        // Simple script to handle hub interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hub tabs
+            const hubTabs = document.querySelectorAll('nav.-mb-px a');
+            hubTabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Remove active class from all tabs
+                    hubTabs.forEach(t => t.classList.remove('border-hub', 'text-hub'));
+                    // Add active class to clicked tab
+                    this.classList.add('border-hub', 'text-hub');
+                    console.log('Filtering by:', this.textContent.trim());
+                    // Here you would implement the filtering logic
+                });
+            });
+
+            // Hub type change
+            const hubTypeSelect = document.getElementById('hub-type');
+            if (hubTypeSelect) {
+                hubTypeSelect.addEventListener('change', function() {
+                    console.log('Hub type changed to:', this.value);
+                    // Here you would show/hide fields based on hub type
+                });
+            }
+
+            // Close modal when clicking outside
+            const modal = document.getElementById('hubModal');
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        closeHubModal();
+                    }
+                });
+            }
+
+            // In a real implementation, you would initialize a map here
+            // For example, using Google Maps API:
+            /*
+            function initMap() {
+                const map = new google.maps.Map(document.getElementById("hubMap"), {
+                    center: { lat: 40.7128, lng: -74.0060 },
+                    zoom: 12,
+                });
+                // Add markers for each hub location
+            }
+            */
+        });
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
+

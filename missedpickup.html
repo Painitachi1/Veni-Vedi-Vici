@@ -1,0 +1,825 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVV Premium - Missed Pickup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .pickup-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        .animate-pulse-slow {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-indigo-700 text-white shadow-lg">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-truck text-3xl"></i>
+                        <h1 class="text-2xl font-bold">VVV Premium Pickups</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="hidden md:flex items-center space-x-2 bg-indigo-600 px-4 py-2 rounded-full">
+                            <span class="font-medium">Premium Member</span>
+                            <i class="fas fa-crown text-yellow-400"></i>
+                        </div>
+                        <div class="relative">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-10 h-10 rounded-full border-2 border-white">
+                            <div class="absolute -bottom-1 -right-1 bg-yellow-400 text-yellow-800 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                                <i class="fas fa-check text-[10px]"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Left Column - Main Content -->
+                <div class="lg:col-span-3 space-y-6">
+                    <!-- Missed Pickup Alert -->
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg shadow-sm">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-red-500 text-2xl mr-4"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-bold text-red-800">Missed Pickup Notification</h2>
+                                <p class="text-red-600 mt-1">Your scheduled pickup was not completed. Please review the details below.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pickup Details -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6">Pickup Details</h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h3 class="font-medium text-gray-700 mb-2">Scheduled Pickup</h3>
+                                <div class="flex items-center space-x-3">
+                                    <div class="bg-indigo-100 p-3 rounded-full">
+                                        <i class="fas fa-calendar-day text-indigo-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">June 15, 2023</p>
+                                        <p class="text-sm text-gray-500">2:00 PM - 4:00 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="font-medium text-gray-700 mb-2">Pickup Location</h3>
+                                <div class="flex items-center space-x-3">
+                                    <div class="bg-indigo-100 p-3 rounded-full">
+                                        <i class="fas fa-map-marker-alt text-indigo-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">123 Business Center Dr</p>
+                                        <p class="text-sm text-gray-500">Suite 200, New York, NY 10001</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="font-medium text-gray-700 mb-2">Package Details</h3>
+                                <div class="flex items-center space-x-3">
+                                    <div class="bg-indigo-100 p-3 rounded-full">
+                                        <i class="fas fa-box-open text-indigo-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">2 Packages</p>
+                                        <p class="text-sm text-gray-500">Total weight: 12.5 lbs</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="font-medium text-gray-700 mb-2">Service Level</h3>
+                                <div class="flex items-center space-x-3">
+                                    <div class="bg-indigo-100 p-3 rounded-full">
+                                        <i class="fas fa-bolt text-indigo-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">Priority Express</p>
+                                        <p class="text-sm text-gray-500">Guaranteed next-day delivery</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Penalty & Reschedule Options -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6">Next Steps</h2>
+                        
+                        <!-- Penalty Notice -->
+                        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg mb-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-exclamation-circle text-yellow-500 mr-3"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-yellow-800">Missed Pickup Fee</h3>
+                                    <p class="text-yellow-700 text-sm mt-1">
+                                        Due to our guaranteed service commitment, a <span class="font-bold">$25 missed pickup fee</span> will be applied to your account. 
+                                        This fee will be waived if you reschedule within 24 hours.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Reschedule Options -->
+                        <div class="space-y-4">
+                            <h3 class="font-bold text-gray-700">Reschedule Options</h3>
+                            
+                            <!-- Option 1: Immediate Reschedule -->
+                            <div class="pickup-card bg-white border border-gray-200 rounded-lg p-5 transition duration-200 cursor-pointer hover:border-indigo-300" onclick="showRescheduleModal('today')">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-green-100 p-3 rounded-full">
+                                        <i class="fas fa-bolt text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Same-Day Pickup</h4>
+                                        <p class="text-gray-600 text-sm mt-1">Request immediate pickup (within 2 hours). Additional $15 expedite fee applies.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Option 2: Next Day -->
+                            <div class="pickup-card bg-white border border-gray-200 rounded-lg p-5 transition duration-200 cursor-pointer hover:border-indigo-300" onclick="showRescheduleModal('next-day')">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-blue-100 p-3 rounded-full">
+                                        <i class="fas fa-calendar-check text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Next Business Day</h4>
+                                        <p class="text-gray-600 text-sm mt-1">Standard pickup during our next available time slot (no additional fee).</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Option 3: Custom Date -->
+                            <div class="pickup-card bg-white border border-gray-200 rounded-lg p-5 transition duration-200 cursor-pointer hover:border-indigo-300" onclick="showRescheduleModal('custom')">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-purple-100 p-3 rounded-full">
+                                        <i class="fas fa-calendar-alt text-purple-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Custom Date & Time</h4>
+                                        <p class="text-gray-600 text-sm mt-1">Select your preferred date and time from available slots.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Waiver Request -->
+                        <div class="mt-6 pt-6 border-t border-gray-200">
+                            <h3 class="font-bold text-gray-700 mb-3">Fee Waiver Request</h3>
+                            <p class="text-gray-600 text-sm mb-4">
+                                If you believe this missed pickup was due to an error on our part, you may request a fee waiver.
+                            </p>
+                            <button onclick="showWaiverModal()" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                                <i class="fas fa-file-alt mr-2"></i> Request Fee Waiver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Sidebar -->
+                <div class="space-y-6">
+                    <!-- Account Status -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-4">Pickup Status</h2>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700">Completed Pickups</span>
+                                <span class="font-semibold">24</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700">Missed Pickups</span>
+                                <span class="font-semibold text-red-600">1</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700">On-Time Rate</span>
+                                <span class="font-semibold">96%</span>
+                            </div>
+                            <div class="pt-3 mt-3 border-t border-gray-200">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-700 font-medium">Membership Level</span>
+                                    <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Premium</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Support Card -->
+                    <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-6">
+                        <h2 class="text-lg font-bold text-indigo-800 mb-3">Need Help?</h2>
+                        <p class="text-indigo-700 text-sm mb-4">
+                            Our support team is available 24/7 to assist with any pickup issues or questions.
+                        </p>
+                        <div class="space-y-3">
+                            <button onclick="contactSupport('chat')" class="w-full bg-white hover:bg-gray-50 text-indigo-700 font-medium py-2 px-4 rounded-lg border border-indigo-200 transition duration-200 flex items-center justify-center">
+                                <i class="fas fa-comment-dots mr-2"></i> Live Chat
+                            </button>
+                            <button onclick="contactSupport('call')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200 flex items-center justify-center">
+                                <i class="fas fa-phone-alt mr-2"></i> Call Support
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Penalty History -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-3">Pickup History</h2>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between items-center pb-2 border-b border-gray-100">
+                                <div>
+                                    <p class="font-medium">June 10, 2023</p>
+                                    <p class="text-gray-500 text-xs">On-time pickup</p>
+                                </div>
+                                <i class="fas fa-check-circle text-green-500"></i>
+                            </div>
+                            <div class="flex justify-between items-center pb-2 border-b border-gray-100">
+                                <div>
+                                    <p class="font-medium">June 5, 2023</p>
+                                    <p class="text-gray-500 text-xs">Rescheduled</p>
+                                </div>
+                                <i class="fas fa-calendar-alt text-blue-500"></i>
+                            </div>
+                            <div class="flex justify-between items-center pb-2 border-b border-gray-100">
+                                <div>
+                                    <p class="font-medium">May 28, 2023</p>
+                                    <p class="text-gray-500 text-xs">On-time pickup</p>
+                                </div>
+                                <i class="fas fa-check-circle text-green-500"></i>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="font-medium">May 20, 2023</p>
+                                    <p class="text-gray-500 text-xs">Late pickup (15 min)</p>
+                                </div>
+                                <i class="fas fa-clock text-yellow-500"></i>
+                            </div>
+                        </div>
+                        <button class="w-full mt-4 text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+                            View Full History
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Reschedule Modal -->
+    <div id="rescheduleModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-xl max-w-md w-full mx-4 overflow-hidden">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-gray-800" id="rescheduleModalTitle">Reschedule Pickup</h3>
+                    <button onclick="closeRescheduleModal()" class="text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="py-4">
+                    <div id="todayOptions" class="hidden">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Available Time Slots</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button onclick="selectTimeSlot('ASAP')" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-200">
+                                    ASAP (2 hours)
+                                </button>
+                                <button onclick="selectTimeSlot('3:00 PM')" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-200">
+                                    3:00 - 5:00 PM
+                                </button>
+                                <button onclick="selectTimeSlot('5:00 PM')" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-200">
+                                    5:00 - 7:00 PM
+                                </button>
+                                <button onclick="selectTimeSlot('7:00 PM')" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-200">
+                                    7:00 - 9:00 PM
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg mb-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-exclamation-circle text-yellow-500 mr-3"></i>
+                                </div>
+                                <div>
+                                    <p class="text-yellow-700 text-sm">
+                                        <span class="font-bold">$15 expedite fee</span> applies for same-day pickup. 
+                                        Missed pickup fee will be waived.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="nextDayOptions" class="hidden">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Available Time Slots</label>
+                            <div class="space-y-3">
+                                <button onclick="selectTimeSlot('9:00 AM')" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-200 text-left">
+                                    9:00 - 11:00 AM
+                                </button>
+                                <button onclick="selectTimeSlot('11:00 AM')" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-200 text-left">
+                                    11:00 AM - 1:00 PM
+                                </button>
+                                <button onclick="selectTimeSlot('2:00 PM')" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-200 text-left">
+                                    2:00 - 4:00 PM
+                                </button>
+                                <button onclick="selectTimeSlot('4:00 PM')" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-200 text-left">
+                                    4:00 - 6:00 PM
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg mb-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                </div>
+                                <div>
+                                    <p class="text-green-700 text-sm">
+                                        <span class="font-bold">No additional fees</span> and missed pickup fee will be waived.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="customOptions" class="hidden">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Select Date</label>
+                            <input type="date" id="customDate" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500" min="2023-06-16">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Available Time Slots</label>
+                            <div class="grid grid-cols-2 gap-3" id="timeSlotsContainer">
+                                <!-- Time slots will be populated based on date selection -->
+                                <div class="bg-gray-200 text-gray-400 font-medium py-2 px-4 rounded-lg border border-gray-300 text-center">
+                                    Select date first
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-info-circle text-blue-500 mr-3"></i>
+                                </div>
+                                <div>
+                                    <p class="text-blue-700 text-sm">
+                                        Missed pickup fee will be waived if rescheduled within 24 hours of original pickup time.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="confirmationSection" class="hidden">
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Reschedule Details</h4>
+                            <p class="text-gray-700" id="confirmationText"></p>
+                            <p class="text-gray-700 mt-2" id="feeText"></p>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <input id="confirmReschedule" type="checkbox" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                            <label for="confirmReschedule" class="ml-2 block text-sm text-gray-700">
+                                I confirm that my packages will be ready for pickup at the scheduled time
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="rescheduleError" class="hidden bg-red-50 text-red-600 p-3 rounded-lg text-sm mb-4">
+                        <i class="fas fa-exclamation-circle mr-2"></i>
+                        <span id="rescheduleErrorMessage">Please select a time slot</span>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-200 pt-4 flex justify-between">
+                    <button onclick="closeRescheduleModal()" class="bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-200">
+                        Cancel
+                    </button>
+                    <button onclick="confirmReschedule()" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200" id="rescheduleActionButton">
+                        Select Time
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fee Waiver Modal -->
+    <div id="waiverModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-xl max-w-md w-full mx-4 overflow-hidden">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-gray-800">Request Fee Waiver</h3>
+                    <button onclick="closeWaiverModal()" class="text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="py-4">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Reason for Waiver</label>
+                        <select id="waiverReason" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
+                            <option value="">Select a reason</option>
+                            <option value="driver_error">Driver did not arrive</option>
+                            <option value="time_window">Pickup was outside scheduled window</option>
+                            <option value="system_error">System scheduling error</option>
+                            <option value="other">Other (please specify)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4 hidden" id="otherReasonContainer">
+                        <label for="otherReason" class="block text-sm font-medium text-gray-700 mb-2">Please specify</label>
+                        <textarea id="otherReason" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"></textarea>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Additional Information</label>
+                        <textarea id="waiverDetails" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500" placeholder="Provide any additional details that might help us process your request"></textarea>
+                    </div>
+                    
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-info-circle text-blue-500 mr-3"></i>
+                            </div>
+                            <div>
+                                <p class="text-blue-700 text-sm">
+                                    Waiver requests are typically processed within 24 hours. You'll receive an email notification once your request has been reviewed.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="waiverError" class="hidden bg-red-50 text-red-600 p-3 rounded-lg text-sm mb-4">
+                        <i class="fas fa-exclamation-circle mr-2"></i>
+                        <span id="waiverErrorMessage">Please select a reason for your waiver request</span>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-200 pt-4 flex justify-between">
+                    <button onclick="closeWaiverModal()" class="bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-200">
+                        Cancel
+                    </button>
+                    <button onclick="submitWaiverRequest()" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200">
+                        Submit Request
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-xl max-w-md w-full mx-4 overflow-hidden text-center">
+            <div class="p-6">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                    <i class="fas fa-check text-green-600 text-xl"></i>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mt-3" id="successTitle">Success!</h3>
+                <div class="mt-2">
+                    <p class="text-sm text-gray-500" id="successMessage">Your pickup has been successfully rescheduled.</p>
+                </div>
+                <div class="mt-6">
+                    <button onclick="closeSuccessModal()" type="button" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:text-sm">
+                        Done
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Current reschedule data
+        let currentRescheduleType = '';
+        let selectedTimeSlot = '';
+        let selectedDate = '';
+        
+        // Show reschedule modal based on type
+        function showRescheduleModal(type) {
+            currentRescheduleType = type;
+            document.getElementById('rescheduleModal').classList.remove('hidden');
+            document.getElementById('rescheduleError').classList.add('hidden');
+            document.getElementById('confirmationSection').classList.add('hidden');
+            document.getElementById('rescheduleActionButton').textContent = 'Select Time';
+            
+            // Hide all options first
+            document.getElementById('todayOptions').classList.add('hidden');
+            document.getElementById('nextDayOptions').classList.add('hidden');
+            document.getElementById('customOptions').classList.add('hidden');
+            
+            // Show relevant options
+            if (type === 'today') {
+                document.getElementById('rescheduleModalTitle').textContent = 'Same-Day Pickup';
+                document.getElementById('todayOptions').classList.remove('hidden');
+            } else if (type === 'next-day') {
+                document.getElementById('rescheduleModalTitle').textContent = 'Next Business Day Pickup';
+                document.getElementById('nextDayOptions').classList.remove('hidden');
+            } else if (type === 'custom') {
+                document.getElementById('rescheduleModalTitle').textContent = 'Custom Pickup Date';
+                document.getElementById('customOptions').classList.remove('hidden');
+                
+                // Set minimum date to tomorrow
+                const today = new Date();
+                const tomorrow = new Date(today);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                const tomorrowStr = tomorrow.toISOString().split('T')[0];
+                document.getElementById('customDate').min = tomorrowStr;
+            }
+        }
+        
+        // Close reschedule modal
+        function closeRescheduleModal() {
+            document.getElementById('rescheduleModal').classList.add('hidden');
+        }
+        
+        // Select time slot for today or next day
+        function selectTimeSlot(time) {
+            selectedTimeSlot = time;
+            
+            // Show confirmation
+            document.getElementById('confirmationSection').classList.remove('hidden');
+            document.getElementById('rescheduleActionButton').textContent = 'Confirm Reschedule';
+            
+            let confirmationText = '';
+            let feeText = '';
+            
+            if (currentRescheduleType === 'today') {
+                confirmationText = `Your pickup has been rescheduled for today ${time === 'ASAP' ? 'within 2 hours' : 'between ' + time}.`;
+                feeText = '$15 expedite fee will be applied. $25 missed pickup fee will be waived.';
+            } else if (currentRescheduleType === 'next-day') {
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                const options = { weekday: 'long', month: 'long', day: 'numeric' };
+                const dateStr = tomorrow.toLocaleDateString('en-US', options);
+                
+                confirmationText = `Your pickup has been rescheduled for tomorrow (${dateStr}) between ${time}.`;
+                feeText = 'No additional fees. $25 missed pickup fee will be waived.';
+            }
+            
+            document.getElementById('confirmationText').textContent = confirmationText;
+            document.getElementById('feeText').textContent = feeText;
+        }
+        
+        // Handle date selection for custom reschedule
+        document.getElementById('customDate').addEventListener('change', function(e) {
+            selectedDate = e.target.value;
+            
+            // Generate time slots (in a real app, this would come from an API)
+            const timeSlotsContainer = document.getElementById('timeSlotsContainer');
+            timeSlotsContainer.innerHTML = '';
+            
+            const slots = ['9:00 AM', '11:00 AM', '2:00 PM', '4:00 PM'];
+            slots.forEach(slot => {
+                const button = document.createElement('button');
+                button.className = 'bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-200';
+                button.textContent = slot;
+                button.onclick = function() {
+                    // Remove active class from all buttons
+                    document.querySelectorAll('#timeSlotsContainer button').forEach(btn => {
+                        btn.classList.remove('bg-indigo-100', 'border-indigo-300');
+                    });
+                    
+                    // Add active class to selected button
+                    button.classList.add('bg-indigo-100', 'border-indigo-300');
+                    selectedTimeSlot = slot;
+                    
+                    // Show confirmation
+                    document.getElementById('confirmationSection').classList.remove('hidden');
+                    document.getElementById('rescheduleActionButton').textContent = 'Confirm Reschedule';
+                    
+                    const dateObj = new Date(selectedDate);
+                    const options = { weekday: 'long', month: 'long', day: 'numeric' };
+                    const dateStr = dateObj.toLocaleDateString('en-US', options);
+                    
+                    const confirmationText = `Your pickup has been rescheduled for ${dateStr} between ${slot}.`;
+                    let feeText = '$25 missed pickup fee will be waived.';
+                    
+                    // Check if within 24 hours for fee waiver
+                    const now = new Date();
+                    const originalPickupTime = new Date(now); // In a real app, this would be the actual original pickup time
+                    originalPickupTime.setHours(14, 0, 0, 0); // Set to 2:00 PM as example
+                    
+                    const rescheduleTime = new Date(selectedDate);
+                    const [hours, period] = slot.split(' ');
+                    let hour = parseInt(hours);
+                    if (period === 'PM' && hour < 12) hour += 12;
+                    if (period === 'AM' && hour === 12) hour = 0;
+                    rescheduleTime.setHours(hour, 0, 0, 0);
+                    
+                    const timeDiff = rescheduleTime - originalPickupTime;
+                    const hoursDiff = timeDiff / (1000 * 60 * 60);
+                    
+                    if (hoursDiff > 24) {
+                        feeText = '$25 missed pickup fee will be applied.';
+                    }
+                    
+                    document.getElementById('confirmationText').textContent = confirmationText;
+                    document.getElementById('feeText').textContent = feeText;
+                };
+                
+                timeSlotsContainer.appendChild(button);
+            });
+        });
+        
+        // Confirm reschedule
+        function confirmReschedule() {
+            const confirmCheckbox = document.getElementById('confirmReschedule');
+            
+            if (document.getElementById('confirmationSection').classList.contains('hidden')) {
+                // No time slot selected yet
+                document.getElementById('rescheduleErrorMessage').textContent = 'Please select a time slot';
+                document.getElementById('rescheduleError').classList.remove('hidden');
+                return;
+            }
+            
+            if (!confirmCheckbox.checked) {
+                document.getElementById('rescheduleErrorMessage').textContent = 'Please confirm your packages will be ready';
+                document.getElementById('rescheduleError').classList.remove('hidden');
+                return;
+            }
+            
+            // In a real app, this would send to your backend
+            console.log('Rescheduling pickup:', {
+                type: currentRescheduleType,
+                date: selectedDate,
+                time: selectedTimeSlot
+            });
+            
+            closeRescheduleModal();
+            
+            // Show success
+            document.getElementById('successTitle').textContent = 'Pickup Rescheduled!';
+            document.getElementById('successMessage').textContent = 'Your pickup has been successfully rescheduled. You will receive a confirmation email shortly.';
+            document.getElementById('successModal').classList.remove('hidden');
+        }
+        
+        // Show waiver modal
+        function showWaiverModal() {
+            document.getElementById('waiverModal').classList.remove('hidden');
+            document.getElementById('waiverError').classList.add('hidden');
+            document.getElementById('otherReasonContainer').classList.add('hidden');
+            document.getElementById('waiverReason').value = '';
+            document.getElementById('otherReason').value = '';
+            document.getElementById('waiverDetails').value = '';
+        }
+        
+        // Close waiver modal
+        function closeWaiverModal() {
+            document.getElementById('waiverModal').classList.add('hidden');
+        }
+        
+        // Handle waiver reason change
+        document.getElementById('waiverReason').addEventListener('change', function(e) {
+            if (e.target.value === 'other') {
+                document.getElementById('otherReasonContainer').classList.remove('hidden');
+            } else {
+                document.getElementById('otherReasonContainer').classList.add('hidden');
+            }
+        });
+        
+        // Submit waiver request
+        function submitWaiverRequest() {
+            const reason = document.getElementById('waiverReason').value;
+            const otherReason = document.getElementById('otherReason').value;
+            const details = document.getElementById('waiverDetails').value;
+            
+            if (!reason) {
+                document.getElementById('waiverErrorMessage').textContent = 'Please select a reason for your waiver request';
+                document.getElementById('waiverError').classList.remove('hidden');
+                return;
+            }
+            
+            if (reason === 'other' && !otherReason) {
+                document.getElementById('waiverErrorMessage').textContent = 'Please specify the reason for your waiver request';
+                document.getElementById('waiverError').classList.remove('hidden');
+                return;
+            }
+            
+            // In a real app, this would send to your backend
+            console.log('Submitting waiver request:', {
+                reason: reason === 'other' ? otherReason : reason,
+                details: details
+            });
+            
+            closeWaiverModal();
+            
+            // Show success
+            document.getElementById('successTitle').textContent = 'Waiver Request Submitted';
+            document.getElementById('successMessage').textContent = 'Your fee waiver request has been submitted. You will receive an email notification once your request has been processed.';
+            document.getElementById('successModal').classList.remove('hidden');
+        }
+        
+        // Close success modal
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.add('hidden');
+        }
+        
+        // Contact support
+        function contactSupport(method) {
+            if (method === 'chat') {
+                alert('Connecting you to live chat support...');
+            } else if (method === 'call') {
+                alert('Calling support at 1-800-VVV-HELP...');
+            }
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any initialization code if needed
+        });
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+

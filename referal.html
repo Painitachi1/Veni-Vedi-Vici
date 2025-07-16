@@ -1,0 +1,365 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invite Friends | Premium E-Commerce Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+        }
+        .referral-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .copy-btn:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-store-alt text-3xl"></i>
+                    <span class="text-2xl font-bold">E-Commerce Suite</span>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href='Dashboard.html'>Dashboard</a>
+                    <a href="index.html" class="hover:text-gray-200 transition">Stores</a>
+                    <a href="Activity.html" class="hover:text-gray-200 transition">Analytics</a>
+                    <a href="accountsettings.html" class="hover:text-gray-200 transition">Settings</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <button class="md:hidden">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                    <div class="relative">
+                        <i class="fas fa-bell text-xl cursor-pointer"></i>
+                        <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                    </div>
+                    <div class="h-10 w-10 rounded-full bg-white flex items-center justify-center">
+                        <i class="fas fa-user text-purple-600"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Page Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">Invite Friends & Earn Rewards</h1>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Share your unique referral link and earn exclusive benefits when your friends join our premium e-commerce platform.
+                </p>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                    <div class="text-purple-600 mb-3">
+                        <i class="fas fa-users text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">12</h3>
+                    <p class="text-gray-600">Friends Invited</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                    <div class="text-green-500 mb-3">
+                        <i class="fas fa-coins text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">$240</h3>
+                    <p class="text-gray-600">Total Earnings</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                    <div class="text-blue-500 mb-3">
+                        <i class="fas fa-gift text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">3</h3>
+                    <p class="text-gray-600">Rewards Unlocked</p>
+                </div>
+            </div>
+
+            <!-- Referral Link Section -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-12">
+                <div class="gradient-bg px-6 py-4">
+                    <h2 class="text-xl font-semibold text-white">Your Unique Referral Link</h2>
+                </div>
+                <div class="p-6">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-grow relative">
+                            <input 
+                                type="text" 
+                                id="referralLink" 
+                                value="https://ecommercesuite.com/ref/yourusername123" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                                readonly
+                            >
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none md:hidden">
+                                <span class="text-gray-500">Tap to copy</span>
+                            </div>
+                        </div>
+                        <button 
+                            id="copyButton" 
+                            class="copy-btn px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition relative"
+                        >
+                            <span>Copy Link</span>
+                            <span class="tooltip absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-sm px-3 py-1 rounded opacity-0 invisible transition">
+                                Copied!
+                            </span>
+                        </button>
+                    </div>
+                    <p class="text-gray-500 mt-3 text-sm">
+                        Share this link with friends and earn 15% of their first payment plus unlock exclusive rewards.
+                    </p>
+                </div>
+            </div>
+
+            <!-- How It Works Section -->
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">How It Works</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="referral-card bg-white p-6 rounded-xl shadow-md transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-purple-100 text-purple-600 h-10 w-10 rounded-full flex items-center justify-center mr-4">
+                                <span class="font-bold">1</span>
+                            </div>
+                            <h3 class="text-lg font-semibold">Share Your Link</h3>
+                        </div>
+                        <p class="text-gray-600">
+                            Send your unique referral link to friends via email, social media, or messaging apps.
+                        </p>
+                    </div>
+                    <div class="referral-card bg-white p-6 rounded-xl shadow-md transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-purple-100 text-purple-600 h-10 w-10 rounded-full flex items-center justify-center mr-4">
+                                <span class="font-bold">2</span>
+                            </div>
+                            <h3 class="text-lg font-semibold">They Sign Up</h3>
+                        </div>
+                        <p class="text-gray-600">
+                            Your friends sign up using your link and make their first purchase on any connected platform.
+                        </p>
+                    </div>
+                    <div class="referral-card bg-white p-6 rounded-xl shadow-md transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-purple-100 text-purple-600 h-10 w-10 rounded-full flex items-center justify-center mr-4">
+                                <span class="font-bold">3</span>
+                            </div>
+                            <h3 class="text-lg font-semibold">You Earn Rewards</h3>
+                        </div>
+                        <p class="text-gray-600">
+                            You receive commission and unlock rewards when they become active users.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Share Options Section -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-12">
+                <div class="gradient-bg px-6 py-4">
+                    <h2 class="text-xl font-semibold text-white">Share Via Social Media</h2>
+                </div>
+                <div class="p-6">
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button class="social-icon bg-blue-600 text-white p-3 rounded-full w-12 h-12 flex items-center justify-center hover:bg-blue-700">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button class="social-icon bg-blue-400 text-white p-3 rounded-full w-12 h-12 flex items-center justify-center hover:bg-blue-500">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                        <button class="social-icon bg-pink-600 text-white p-3 rounded-full w-12 h-12 flex items-center justify-center hover:bg-pink-700">
+                            <i class="fab fa-instagram"></i>
+                        </button>
+                        <button class="social-icon bg-green-500 text-white p-3 rounded-full w-12 h-12 flex items-center justify-center hover:bg-green-600">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                        <button class="social-icon bg-gray-800 text-white p-3 rounded-full w-12 h-12 flex items-center justify-center hover:bg-gray-900">
+                            <i class="fab fa-linkedin-in"></i>
+                        </button>
+                        <button class="social-icon bg-red-500 text-white p-3 rounded-full w-12 h-12 flex items-center justify-center hover:bg-red-600">
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rewards Tier Section -->
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Your Referral Rewards</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center border-2 border-purple-200">
+                        <div class="bg-purple-100 text-purple-600 h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-medal text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Bronze Tier</h3>
+                        <p class="text-gray-600 text-sm mb-3">5 successful referrals</p>
+                        <div class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full inline-block">
+                            Completed
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center border-2 border-purple-200">
+                        <div class="bg-purple-100 text-purple-600 h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-award text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Silver Tier</h3>
+                        <p class="text-gray-600 text-sm mb-3">15 successful referrals</p>
+                        <div class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full inline-block">
+                            8/15 completed
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center border-2 border-gray-200">
+                        <div class="bg-gray-100 text-gray-400 h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-trophy text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Gold Tier</h3>
+                        <p class="text-gray-600 text-sm mb-3">30 successful referrals</p>
+                        <div class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full inline-block">
+                            Locked
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center border-2 border-gray-200">
+                        <div class="bg-gray-100 text-gray-400 h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-crown text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Platinum Tier</h3>
+                        <p class="text-gray-600 text-sm mb-3">50 successful referrals</p>
+                        <div class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full inline-block">
+                            Locked
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const copyButton = document.getElementById('copyButton');
+            const referralLink = document.getElementById('referralLink');
+            
+            copyButton.addEventListener('click', function() {
+                // Select the text field
+                referralLink.select();
+                referralLink.setSelectionRange(0, 99999); // For mobile devices
+                
+                // Copy the text inside the text field
+                navigator.clipboard.writeText(referralLink.value);
+                
+                // Show tooltip
+                const tooltip = document.querySelector('.tooltip');
+                tooltip.classList.remove('opacity-0', 'invisible');
+                tooltip.classList.add('opacity-100', 'visible');
+                
+                // Hide tooltip after 2 seconds
+                setTimeout(() => {
+                    tooltip.classList.remove('opacity-100', 'visible');
+                    tooltip.classList.add('opacity-0', 'invisible');
+                }, 2000);
+            });
+            
+            // Mobile tap to copy functionality
+            referralLink.addEventListener('click', function() {
+                if (window.innerWidth < 768) {
+                    this.select();
+                    navigator.clipboard.writeText(this.value);
+                    
+                    // Show mobile notification
+                    alert('Referral link copied to clipboard!');
+                }
+            });
+        });
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
+

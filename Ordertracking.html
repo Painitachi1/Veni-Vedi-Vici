@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVV Premium | Global Order Tracking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .shadow-glow {
+            box-shadow: 0 10px 30px -15px rgba(102, 126, 234, 0.5);
+        }
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: calc(50% - 1px);
+            top: 40px;
+            height: calc(100% - 40px);
+            width: 2px;
+            background: #e2e8f0;
+            z-index: 1;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        .animate-pulse-custom {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="gradient-bg text-white">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <span class="text-2xl font-bold">VVV</span>
+                </div>
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="Dashboard.html" class="hover:text-gray-200">Dashboard</a>
+                    <a href="order.html" class="hover:text-gray-200">Orders</a>
+                    <a href="support.html" class="hover:text-gray-200">Support</a>
+                    <button class="bg-white text-indigo-700 px-4 py-2 rounded-full font-medium hover:bg-gray-100 transition duration-300"><a href="Account.html" class="hover:text-gray-200">Account</a></button>
+                </div>
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- Order Tracking Header -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Global Order Tracking</h1>
+                    <p class="text-gray-600">Track your purchase across multiple e-commerce platforms worldwide</p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <p class="text-sm text-gray-500 mb-1">Need help with your order?</p>
+                    <button class="bg-indigo-600 text-white px-6 py-2 rounded-full font-medium hover:bg-indigo-700 transition duration-300 flex items-center space-x-2">
+                        <i class="fas fa-headset"></i>
+                        <span>Contact Support</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tracking Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+                <div class="p-6 md:p-8 border-b border-gray-200">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-800 mb-1">Order #VVV-2023-98765</h2>
+                            <p class="text-gray-600">Track your order from Amazon US, Alibaba, and eBay UK</p>
+                        </div>
+                        <div class="mt-4 md:mt-0 flex items-center space-x-4">
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Processing</span>
+                            <div class="relative group">
+                                <button class="text-indigo-600 hover:text-indigo-800">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                                <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden group-hover:block">
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">View Details</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cancel Order</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Print Receipt</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 md:p-8">
+                    <!-- Order Summary -->
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="font-medium text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-shopping-bag mr-2 text-indigo-600"></i>
+                            Order Summary
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Order Date</span>
+                                <span class="font-medium">Nov 15, 2023</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Estimated Delivery</span>
+                                <span class="font-medium">Dec 3-7, 2023</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Shipping Method</span>
+                                <span class="font-medium">Express Global</span>
+                            </div>
+                            <div class="flex justify-between border-t border-gray-200 pt-4">
+                                <span class="text-gray-600">Total Amount</span>
+                                <span class="font-bold text-lg">$1,249.98</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tracking Timeline -->
+                    <div class="md:col-span-2 relative">
+                        <h3 class="font-medium text-gray-800 mb-6 flex items-center">
+                            <i class="fas fa-map-marked-alt mr-2 text-indigo-600"></i>
+                            Tracking History
+                        </h3>
+                        <div class="space-y-8">
+                            <!-- Current Status -->
+                            <div class="relative timeline-item">
+                                <div class="flex space-x-4">
+                                    <div class="flex-shrink-0 relative z-10">
+                                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-indigo-600 text-white ring-8 ring-indigo-100">
+                                            <i class="fas fa-box-open"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 pt-1">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h4 class="font-medium text-gray-900">Package in Transit</h4>
+                                                <p class="text-gray-600 text-sm">Your package is on its way to the next facility</p>
+                                            </div>
+                                            <span class="text-sm text-gray-500">Today, 10:30 AM</span>
+                                        </div>
+                                        <div class="mt-2 p-3 bg-blue-50 rounded-lg">
+                                            <p class="text-sm text-blue-800">
+                                                <i class="fas fa-info-circle mr-1"></i>
+                                                Currently in Hong Kong International Airport (HKG)
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Past Statuses -->
+                            <div class="relative timeline-item">
+                                <div class="flex space-x-4">
+                                    <div class="flex-shrink-0 relative z-10">
+                                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white ring-8 ring-green-100">
+                                            <i class="fas fa-plane-departure"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 pt-1">
+                                        <div class="flex justify-between">
+                                            <h4 class="font-medium text-gray-900">Shipped Internationally</h4>
+                                            <span class="text-sm text-gray-500">Nov 28, 2:15 PM</span>
+                                        </div>
+                                        <p class="text-gray-600 text-sm">Package departed Amazon US facility</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="relative timeline-item">
+                                <div class="flex space-x-4">
+                                    <div class="flex-shrink-0 relative z-10">
+                                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-300 text-gray-600 ring-8 ring-gray-100">
+                                            <i class="fas fa-warehouse"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 pt-1">
+                                        <div class="flex justify-between">
+                                            <h4 class="font-medium text-gray-900">Processing Complete</h4>
+                                            <span class="text-sm text-gray-500">Nov 22, 9:47 AM</span>
+                                        </div>
+                                        <p class="text-gray-600 text-sm">All items gathered from multiple sellers</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="relative">
+                                <div class="flex space-x-4">
+                                    <div class="flex-shrink-0 relative z-10">
+                                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-300 text-gray-600 ring-8 ring-gray-100">
+                                            <i class="fas fa-receipt"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 pt-1">
+                                        <div class="flex justify-between">
+                                            <h4 class="font-medium text-gray-900">Order Placed</h4>
+                                            <span class="text-sm text-gray-500">Nov 15, 4:20 PM</span>
+                                        </div>
+                                        <p class="text-gray-600 text-sm">We've received your order</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Details -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+                <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-800">Order Contents</h2>
+                </div>
+                
+                <div class="divide-y divide-gray-200">
+                    <!-- Product 1 -->
+                    <div class="p-6">
+                        <div class="flex flex-col md:flex-row">
+                            <div class="md:w-32 md:h-32 w-full h-48 mb-4 md:mb-0 overflow-hidden rounded-lg">
+                                <img src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=640&q=80" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="md:flex-1 md:pl-6">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="text-lg font-medium text-gray-800">Apple MacBook Pro 16" M2 Max</h3>
+                                        <p class="text-gray-600">Space Gray, 32GB RAM, 1TB SSD</p>
+                                        <div class="mt-2 flex items-center space-x-2">
+                                            <span class="text-xs font-medium px-2 py-1 bg-blue-100 text-blue-800 rounded">From Amazon US</span>
+                                            <span class="text-xs font-medium px-2 py-1 bg-purple-100 text-purple-800 rounded">Fulfilled by VVV</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 md:mt-0 text-right">
+                                        <p class="text-lg font-semibold">$2,399.00</p>
+                                        <p class="text-sm text-gray-500">Qty: 1</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="p-6">
+                        <div class="flex flex-col md:flex-row">
+                            <div class="md:w-32 md:h-32 w-full h-48 mb-4 md:mb-0 overflow-hidden rounded-lg">
+                                <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=640&q=80" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="md:flex-1 md:pl-6">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="text-lg font-medium text-gray-800">Sony WH-1000XM5 Wireless Headphones</h3>
+                                        <p class="text-gray-600">Premium Noise Canceling, Black</p>
+                                        <div class="mt-2 flex items-center space-x-2">
+                                            <span class="text-xs font-medium px-2 py-1 bg-red-100 text-red-800 rounded">From eBay UK</span>
+                                            <span class="text-xs font-medium px-2 py-1 bg-purple-100 text-purple-800 rounded">Fulfilled by VVV</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 md:mt-0 text-right">
+                                        <p class="text-lg font-semibold">$299.99</p>
+                                        <p class="text-sm text-gray-500">Qty: 1</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="p-6">
+                        <div class="flex flex-col md:flex-row">
+                            <div class="md:w-32 md:h-32 w-full h-48 mb-4 md:mb-0 overflow-hidden rounded-lg">
+                                <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=640&q=80" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="md:flex-1 md:pl-6">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="text-lg font-medium text-gray-800">Xiaomi 13 Pro Smartphone</h3>
+                                        <p class="text-gray-600">Ceramic Black, 256GB, International Version</p>
+                                        <div class="mt-2 flex items-center space-x-2">
+                                            <span class="text-xs font-medium px-2 py-1 bg-yellow-100 text-yellow-800 rounded">From Alibaba</span>
+                                            <span class="text-xs font-medium px-2 py-1 bg-purple-100 text-purple-800 rounded">Fulfilled by VVV</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 md:mt-0 text-right">
+                                        <p class="text-lg font-semibold">$699.00</p>
+                                        <p class="text-sm text-gray-500">Qty: 1</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-6 border-t border-gray-200 bg-gray-50">
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                        <div class="mb-4 md:mb-0">
+                            <h4 class="font-medium text-gray-800 mb-1">Tracking Number</h4>
+                            <div class="flex items-center space-x-2">
+                                <span class="px-3 py-1 bg-white rounded-full border border-gray-300 font-mono">VVV-9X7B-2023</span>
+                                <button class="text-indigo-600 hover:text-indigo-800">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button class="flex items-center space-x-2 text-gray-700 hover:text-indigo-600">
+                                <i class="fas fa-print"></i>
+                                <span>Print Label</span>
+                            </button>
+                            <button class="flex items-center space-x-2 text-gray-700 hover:text-indigo-600">
+                                <i class="fas fa-redo"></i>
+                                <span>Track Again</span>
+                            </button>
+                            <button class="flex items-center space-x-2 text-indigo-600 hover:text-indigo-800 font-medium">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Report Issue</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Shipping Information -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6 border-b border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-800 flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-indigo-600"></i>
+                            Shipping Address
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-2">
+                            <p class="font-medium">John Smith</p>
+                            <p>1234 Main Street</p>
+                            <p>Apartment 5B</p>
+                            <p>New York, NY 10001</p>
+                            <p>United States</p>
+                            <p class="pt-2">+1 (555) 123-4567</p>
+                            <p>john.smith@example.com</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6 border-b border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-800 flex items-center">
+                            <i class="fas fa-credit-card mr-2 text-indigo-600"></i>
+                            Payment Method
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-8 bg-gray-100 rounded flex items-center justify-center">
+                                <i class="fab fa-cc-visa text-2xl text-blue-900"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">Visa ending in 4242</p>
+                                <p class="text-gray-600 text-sm">Expires 05/2025</p>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <h4 class="font-medium mb-2">Billing Summary</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span>Subtotal</span>
+                                    <span>$3,397.99</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Shipping</span>
+                                    <span>$49.99</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Import Fees</span>
+                                    <span>$98.00</span>
+                                </div>
+                                <div class="flex justify-between pt-2 border-t border-gray-200 font-medium">
+                                    <span>Total</span>
+                                    <span>$3,545.98</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Help Section -->
+            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl shadow-lg overflow-hidden p-8 text-center">
+                <div class="max-w-2xl mx-auto">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Need Help With Your Order?</h2>
+                    <p class="text-gray-600 mb-6">Our global support team is available 24/7 to assist with any questions about your cross-platform order.</p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                        <button class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition duration-300 flex items-center justify-center space-x-2">
+                            <i class="fas fa-headset"></i>
+                            <span>Live Chat Support</span>
+                        </button>
+                        <button class="border border-gray-300 bg-white text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition duration-300 flex items-center justify-center space-x-2">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>Call +1 (800) 123-4567</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        VVV
+                    </h3>
+                    <p class="text-gray-400 text-sm">The world's first truly global e-commerce aggregator and fulfillment service.</p>
+                </div>
+                <div>
+                    <h4 class="text-md font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="Aboutus.html" class="text-gray-400 hover:text-white transition duration-300 text-sm">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Press</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-md font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="support.html" class="text-gray-400 hover:text-white transition duration-300 text-sm">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Order Status</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Shipping & Returns</a></li>
+                        <li><a href="Contactus.html" class="text-gray-400 hover:text-white transition duration-300 text-sm">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-md font-semibold mb-4">Connect With Us</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-xl"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-xl"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <h5 class="text-sm font-medium mb-2">Download Our App</h5>
+                    <div class="flex space-x-2">
+                        <button class="bg-gray-800 hover:bg-gray-700 transition duration-300 px-3 py-1 rounded flex items-center">
+                            <i class="fab fa-apple mr-2"></i>
+                            <span class="text-xs">App Store</span>
+                        </button>
+                        <button class="bg-gray-800 hover:bg-gray-700 transition duration-300 px-3 py-1 rounded flex items-center">
+                            <i class="fab fa-google-play mr-2"></i>
+                            <span class="text-xs">Play Store</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 VVV Premium Global E-Commerce. All rights reserved.</p>
+                    <div class="flex space-x-6">
+                        <a href="Termsandcondition.html" class="text-gray-400 hover:text-white transition duration-300 text-sm">Terms of Service</a>
+                        <a href="Privacy.html" class="text-gray-400 hover:text-white transition duration-300 text-sm">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Basic functionality for demonstration
+        document.addEventListener('DOMContentLoaded', function() {
+            // Copy tracking number functionality
+            const copyButtons = document.querySelectorAll('[data-copy]');
+            copyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const trackingNumber = this.previousElementSibling.textContent;
+                    navigator.clipboard.writeText(trackingNumber.trim()).then(() => {
+                        const originalHTML = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-check"></i>';
+                        setTimeout(() => {
+                            this.innerHTML = originalHTML;
+                        }, 2000);
+                    });
+                });
+            });
+            
+            // Simple tracking status animation
+            const statusIndicator = document.querySelector('.status-indicator');
+            if (statusIndicator) {
+                setInterval(() => {
+                    statusIndicator.classList.toggle('animate-pulse-custom');
+                }, 4000);
+            }
+        });
+    </script>
+</body>
+</html>

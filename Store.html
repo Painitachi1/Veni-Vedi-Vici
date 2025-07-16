@@ -1,0 +1,436 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Shopping Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <nav style="background:#000; color:#fff; padding:10px;">
+  <a href="index.html" style="color:white; margin-right:15px;">Home</a>
+  <a href="store.html" style="color:white; margin-right:15px;">Store Tiers</a>
+  <a href="search.html" style="color:white; margin-right:15px;">Search</a>
+  <a href="checkout.html" style="color:white; margin-right:15px;">Checkout</a>
+  <a href="dashboard.html" style="color:white; margin-right:15px;">Dashboard</a>
+  <a href="order.html" style="color:white; margin-right:15px;">Orders</a>
+  <a href="hub.html" style="color:white; margin-right:15px;">Hub Pickup</a>
+  <a href="verification.html" style="color:white; margin-right:15px;">Verify Badge</a>
+  <a href="payment.html" style="color:white; margin-right:15px;">Payment</a>
+  <a href="signup.html" style="color:white; margin-right:15px;">Sign Up / Login</a>
+</nav>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .store-card {
+            transition: all 0.3s ease;
+        }
+        .store-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .locked {
+            position: relative;
+            filter: grayscale(80%);
+            opacity: 0.7;
+        }
+        .locked::after {
+            content: attr(data-unlock);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+        .tier-iron {
+            border-bottom: 4px solid #a1a1aa;
+        }
+        .tier-bronze {
+            border-bottom: 4px solid #cd7f32;
+        }
+        .tier-silver {
+            border-bottom: 4px solid #c0c0c0;
+        }
+        .tier-gold {
+            border-bottom: 4px solid #ffd700;
+        }
+        .search-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .search-container input {
+            padding-left: 50px;
+            border-radius: 50px;
+        }
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <i class="fas fa-crown text-yellow-500 text-3xl mr-3"></i>
+                    <h1 class="text-2xl font-bold text-gray-800">Premium Shopping</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <i class="fas fa-shopping-cart text-gray-600 text-xl"></i><a href="Checkout.html" class="text-gray-400 hover:text-white transition">
+                        <span class="absolute -top-2 -right-2 bg-yellow-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span></a>
+                    </div>
+                    <div class="relative">
+                        <i class="fas fa-bell text-gray-600 text-xl"></i>
+                        <a href="Checkout.html" class="text-gray-400 hover:text-white transition">
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">5</span></a>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
+                        <i class="fas fa-user text-gray-600"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Search Bar -->
+        <div class="search-container mb-12">
+            <div class="relative">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" placeholder="Search across all stores..." class="w-full py-4 px-12 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
+                <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-yellow-500 text-white px-6 py-2 rounded-full hover:bg-yellow-600 transition">Search</button>
+            </div>
+        </div>
+
+        <!-- User Tier Status -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-800">Your Shopping Status</h2>
+                    <p class="text-gray-600">Current Tier: <span class="font-medium text-yellow-600">Silver</span></p>
+                </div>
+                <div class="bg-gray-100 rounded-lg p-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="text-center">
+                            <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center mx-auto mb-1">
+                                <i class="fas fa-lock-open text-green-500"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">Bronze</span>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center mx-auto mb-1">
+                                <i class="fas fa-lock-open text-green-500"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">Silver</span>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center mx-auto mb-1">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">Gold</span>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                        <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 30%"></div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Spend $1,000 more to unlock Gold tier</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Store Categories -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Browse by Category</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div class="bg-white rounded-lg shadow-sm p-4 text-center hover:bg-gray-50 cursor-pointer transition">
+                    <i class="fas fa-mobile-alt text-blue-500 text-3xl mb-2"></i>
+                    <p class="font-medium">Electronics</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm p-4 text-center hover:bg-gray-50 cursor-pointer transition">
+                    <i class="fas fa-tshirt text-pink-500 text-3xl mb-2"></i>
+                    <p class="font-medium">Fashion</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm p-4 text-center hover:bg-gray-50 cursor-pointer transition">
+                    <i class="fas fa-store text-green-500 text-3xl mb-2"></i>
+                    <p class="font-medium">Marketplaces</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm p-4 text-center hover:bg-gray-50 cursor-pointer transition">
+                    <i class="fas fa-magic text-purple-500 text-3xl mb-2"></i>
+                    <p class="font-medium">Beauty</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm p-4 text-center hover:bg-gray-50 cursor-pointer transition">
+                    <i class="fas fa-running text-red-500 text-3xl mb-2"></i>
+                    <p class="font-medium">Sports</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm p-4 text-center hover:bg-gray-50 cursor-pointer transition">
+                    <i class="fas fa-home text-yellow-500 text-3xl mb-2"></i>
+                    <p class="font-medium">Home</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Iron Tier Stores -->
+        <div class="mb-12">
+            <div class="flex items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-800">Iron Tier</h2>
+                <span class="ml-2 bg-gray-200 text-gray-700 text-xs font-medium px-2.5 py-0.5 rounded">Free Access</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-iron">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/shein.com" alt="Shein" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Shein</h3>
+                        <p class="text-xs text-gray-500 mt-1">Fashion & Apparel</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-iron">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/temu.com" alt="Temu" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Temu</h3>
+                        <p class="text-xs text-gray-500 mt-1">Marketplace</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-iron">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/amazon.com" alt="Amazon" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Amazon</h3>
+                        <p class="text-xs text-gray-500 mt-1">Marketplace</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-iron">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/ebay.com" alt="eBay" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">eBay</h3>
+                        <p class="text-xs text-gray-500 mt-1">Marketplace</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-iron">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/walmart.com" alt="Walmart" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Walmart</h3>
+                        <p class="text-xs text-gray-500 mt-1">Marketplace</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bronze Tier Stores -->
+        <div class="mb-12">
+            <div class="flex items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-800">Bronze Tier</h2>
+                <span class="ml-2 bg-amber-100 text-amber-800 text-xs font-medium px-2.5 py-0.5 rounded">Unlocked at $500</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-bronze">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/apple.com" alt="Apple" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Apple</h3>
+                        <p class="text-xs text-gray-500 mt-1">Electronics</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-bronze">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/samsung.com" alt="Samsung" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Samsung</h3>
+                        <p class="text-xs text-gray-500 mt-1">Electronics</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-bronze">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/nike.com" alt="Nike" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Nike</h3>
+                        <p class="text-xs text-gray-500 mt-1">Sports</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-bronze">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/adidas.com" alt="Adidas" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Adidas</h3>
+                        <p class="text-xs text-gray-500 mt-1">Sports</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-bronze">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/ikea.com" alt="IKEA" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">IKEA</h3>
+                        <p class="text-xs text-gray-500 mt-1">Home</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Silver Tier Stores -->
+        <div class="mb-12">
+            <div class="flex items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-800">Silver Tier</h2>
+                <span class="ml-2 bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Unlocked at $1,500</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-silver">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/gucci.com" alt="Gucci" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Gucci</h3>
+                        <p class="text-xs text-gray-500 mt-1">Luxury Fashion</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-silver">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/louisvuitton.com" alt="Louis Vuitton" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Louis Vuitton</h3>
+                        <p class="text-xs text-gray-500 mt-1">Luxury Fashion</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-silver">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/chanel.com" alt="Chanel" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Chanel</h3>
+                        <p class="text-xs text-gray-500 mt-1">Luxury Fashion</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-silver">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/rolex.com" alt="Rolex" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Rolex</h3>
+                        <p class="text-xs text-gray-500 mt-1">Luxury Watches</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-silver">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/cartier.com" alt="Cartier" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Cartier</h3>
+                        <p class="text-xs text-gray-500 mt-1">Luxury Jewelry</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gold Tier Stores -->
+        <div class="mb-12">
+            <div class="flex items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-800">Gold Tier</h2>
+                <span class="ml-2 bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Unlock at $5,000</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-gold locked" data-unlock="Unlock at $5,000">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/hermes.com" alt="Hermes" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Hermes</h3>
+                        <p class="text-xs text-gray-500 mt-1">Ultra Luxury</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-gold locked" data-unlock="Unlock at $5,000">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/versace.com" alt="Versace" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Versace</h3>
+                        <p class="text-xs text-gray-500 mt-1">Luxury Fashion</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-gold locked" data-unlock="Unlock at $5,000">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/prada.com" alt="Prada" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Prada</h3>
+                        <p class="text-xs text-gray-500 mt-1">Luxury Fashion</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-gold locked" data-unlock="Unlock at $5,000">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/tiffany.com" alt="Tiffany & Co." class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Tiffany & Co.</h3>
+                        <p class="text-xs text-gray-500 mt-1">Luxury Jewelry</p>
+                    </div>
+                </div>
+                <div class="store-card bg-white rounded-lg shadow-md overflow-hidden tier-gold locked" data-unlock="Unlock at $5,000">
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="https://logo.clearbit.com/balenciaga.com" alt="Balenciaga" class="h-16 w-16 object-contain mb-3">
+                        <h3 class="font-medium text-gray-800">Balenciaga</h3>
+                        <p class="text-xs text-gray-500 mt-1">Luxury Fashion</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                    <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="Faq.html" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                        <li><a href="Privacy" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="Terms.hmtl" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-400">Subscribe to our newsletter</p>
+                        <div class="flex mt-2">
+                            <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                            <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation for store cards on hover
+        document.querySelectorAll('.store-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.1)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            });
+        });
+    </script>
+    <footer style="background:#111; color:#ccc; text-align:center; padding:20px; margin-top:40px;">
+  <p>&copy; 2025 VVV Store — All rights reserved.</p>
+  <a href="index.html" style="color:#ccc; margin: 0 10px;">Home</a>
+  <a href="store.html" style="color:#ccc; margin: 0 10px;">Store Tiers</a>
+  <a href="dashboard.html" style="color:#ccc; margin: 0 10px;">My Account</a>
+  <a href="verification.html" style="color:#ccc; margin: 0 10px;">Get Verified</a>
+  <a href="payment.html" style="color:#ccc; margin: 0 10px;">Payment</a>
+</footer>
+</body>
+</html>

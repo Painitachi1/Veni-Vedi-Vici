@@ -1,0 +1,608 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tier Comparison & Upgrade | Premium Benefits</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tier-iron {
+            background: linear-gradient(135deg, #a1a1aa 0%, #71717a 100%);
+        }
+        .tier-gold {
+            background: linear-gradient(135deg, #f5d020 0%, #f59e0b 100%);
+        }
+        .tier-conqueror {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .glow-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        .glow-effect::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+            animation: glow 3s infinite;
+        }
+        @keyframes glow {
+            0% { transform: rotate(30deg) translate(-30%, -30%); }
+            50% { transform: rotate(30deg) translate(30%, 30%); }
+            100% { transform: rotate(30deg) translate(-30%, -30%); }
+        }
+        .tier-card {
+            transition: all 0.3s ease;
+        }
+        .tier-card:hover {
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-crown text-2xl text-purple-600"></i>
+                    <span class="text-xl font-bold">Premium Tiers</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#comparison" class="text-gray-600 hover:text-purple-600 font-medium">Tier Comparison</a>
+                    <a href="#upgrade" class="text-gray-600 hover:text-purple-600 font-medium">Upgrade Now</a>
+                    <a href="Dashboard.html" class="flex items-center space-x-1">
+                        <div class="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center">
+                            <i class="fas fa-user text-purple-600"></i>
+                        </div>
+                        <span class="font-medium">John Doe</span>
+                    </a>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-purple-600 to-indigo-700 text-white">
+        <div class="container mx-auto px-4 py-16 md:py-24">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Unlock Premium Benefits</h1>
+                <p class="text-xl mb-8">Shop more to access exclusive features like messaging, fund transfers, and premium content</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#comparison" class="bg-white text-purple-600 hover:bg-gray-100 font-medium px-6 py-3 rounded-lg transition">
+                        Compare Tiers <i class="fas fa-chevron-down ml-2"></i>
+                    </a>
+                    <a href="#upgrade" class="bg-purple-800 hover:bg-purple-700 font-medium px-6 py-3 rounded-lg transition">
+                        Upgrade Now <i class="fas fa-arrow-up ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tier Comparison Section -->
+    <section id="comparison" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Tier Comparison</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Your tier is determined by your lifetime purchases. Higher tiers unlock more features and benefits.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Iron Tier -->
+                <div class="tier-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+                    <div class="tier-iron text-white py-6 text-center">
+                        <div class="text-2xl font-bold mb-1">Iron</div>
+                        <div class="text-sm opacity-90">$0 - $499</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-center mb-6">
+                            <div class="text-4xl font-bold mb-2">$0+</div>
+                            <div class="text-sm text-gray-500">Lifetime purchases</div>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Basic account features</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>3% transfer fees</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Standard customer support</span>
+                            </li>
+                            <li class="flex items-start text-gray-400">
+                                <i class="fas fa-times text-red-400 mt-1 mr-2"></i>
+                                <span>No messaging</span>
+                            </li>
+                            <li class="flex items-start text-gray-400">
+                                <i class="fas fa-times text-red-400 mt-1 mr-2"></i>
+                                <span>No fund transfers</span>
+                            </li>
+                            <li class="flex items-start text-gray-400">
+                                <i class="fas fa-times text-red-400 mt-1 mr-2"></i>
+                                <span>No exclusive content</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Gold Tier -->
+                <div class="tier-card bg-white rounded-xl shadow-lg overflow-hidden border-2 border-yellow-400 relative">
+                    <div class="absolute top-0 right-0 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                        YOUR TIER
+                    </div>
+                    <div class="tier-gold text-white py-6 text-center">
+                        <div class="text-2xl font-bold mb-1">Gold</div>
+                        <div class="text-sm opacity-90">$500 - $1,999</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-center mb-6">
+                            <div class="text-4xl font-bold mb-2">$500+</div>
+                            <div class="text-sm text-gray-500">Lifetime purchases</div>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>All Iron features</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>1.5% transfer fees</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Priority customer support</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Unlimited messaging</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Fund transfers (2% fee)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Basic exclusive content</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Conqueror Tier -->
+                <div class="tier-card bg-white rounded-xl shadow-md overflow-hidden border-2 border-purple-500 glow-effect">
+                    <div class="tier-conqueror text-white py-6 text-center">
+                        <div class="text-2xl font-bold mb-1">Conqueror</div>
+                        <div class="text-sm opacity-90">$2,000+</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-center mb-6">
+                            <div class="text-4xl font-bold mb-2">$2,000+</div>
+                            <div class="text-sm text-gray-500">Lifetime purchases</div>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>All Gold features</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>0.5% transfer fees</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>24/7 VIP support</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Unlimited messaging</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Free fund transfers</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Premium exclusive content</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Early access to new features</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Personal account manager</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Comparison Table -->
+            <div class="mt-16 max-w-6xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+                    <h3 class="text-lg font-semibold">Detailed Feature Comparison</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Feature</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Iron</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gold</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Conqueror</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Transfer Fees</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">3.0%</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">1.5%</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-600 font-bold">0.5%</td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Messaging</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Not Available</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">Unlimited</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-600 font-bold">Unlimited + Priority</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Fund Transfers</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Not Available</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">2% fee</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-600 font-bold">Free</td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Exclusive Content</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">None</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">Basic</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-600 font-bold">Premium + Early Access</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Customer Support</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Standard (48h)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">Priority (24h)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-600 font-bold">VIP (Instant)</td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Monthly Bonus</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">-</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">$10</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-600 font-bold">$50</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upgrade Section -->
+    <section id="upgrade" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Upgrade Your Tier</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Shop more in our store to unlock premium features and benefits</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <!-- Current Tier Progress -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold">Your Tier Progress</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Current Tier: <span class="font-medium">Gold</span></span>
+                                <span>$1,250 / $2,000 to Conqueror</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 62.5%"></div>
+                            </div>
+                        </div>
+                        <div class="text-sm text-gray-600">
+                            You need to spend <span class="font-medium">$750 more</span> to reach Conqueror tier.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Upgrade Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Messaging Feature -->
+                    <div class="feature-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 transition duration-300">
+                        <div class="bg-blue-50 px-6 py-4 border-b border-gray-200">
+                            <div class="flex items-center">
+                                <div class="bg-blue-100 p-2 rounded-lg mr-4">
+                                    <i class="fas fa-comments text-blue-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold">Messaging</h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4">Unlock unlimited messaging with other users on the platform.</p>
+                            <div class="flex items-center mb-4">
+                                <span class="text-sm font-medium text-gray-500 mr-2">Current Access:</span>
+                                <span class="text-sm font-medium text-green-600">Available (Gold Tier)</span>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-lg">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium">Next Tier Benefit:</span>
+                                    <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Conqueror</span>
+                                </div>
+                                <p class="text-xs text-gray-600 mt-1">Priority message delivery</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fund Transfers Feature -->
+                    <div class="feature-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 transition duration-300">
+                        <div class="bg-green-50 px-6 py-4 border-b border-gray-200">
+                            <div class="flex items-center">
+                                <div class="bg-green-100 p-2 rounded-lg mr-4">
+                                    <i class="fas fa-exchange-alt text-green-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold">Fund Transfers</h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4">Send funds to other users on the platform.</p>
+                            <div class="flex items-center mb-4">
+                                <span class="text-sm font-medium text-gray-500 mr-2">Current Access:</span>
+                                <span class="text-sm font-medium text-green-600">Available (2% fee)</span>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-lg">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium">Next Tier Benefit:</span>
+                                    <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Conqueror</span>
+                                </div>
+                                <p class="text-xs text-gray-600 mt-1">Free unlimited transfers</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exclusive Content Feature -->
+                    <div class="feature-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 transition duration-300">
+                        <div class="bg-purple-50 px-6 py-4 border-b border-gray-200">
+                            <div class="flex items-center">
+                                <div class="bg-purple-100 p-2 rounded-lg mr-4">
+                                    <i class="fas fa-star text-purple-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold">Exclusive Content</h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4">Access premium content not available to lower tiers.</p>
+                            <div class="flex items-center mb-4">
+                                <span class="text-sm font-medium text-gray-500 mr-2">Current Access:</span>
+                                <span class="text-sm font-medium text-green-600">Basic Content</span>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-lg">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium">Next Tier Benefit:</span>
+                                    <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Conqueror</span>
+                                </div>
+                                <p class="text-xs text-gray-600 mt-1">Premium content + early access</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VIP Support Feature -->
+                    <div class="feature-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 transition duration-300">
+                        <div class="bg-yellow-50 px-6 py-4 border-b border-gray-200">
+                            <div class="flex items-center">
+                                <div class="bg-yellow-100 p-2 rounded-lg mr-4">
+                                    <i class="fas fa-headset text-yellow-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold">VIP Support</h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4">Get priority customer support with faster response times.</p>
+                            <div class="flex items-center mb-4">
+                                <span class="text-sm font-medium text-gray-500 mr-2">Current Access:</span>
+                                <span class="text-sm font-medium text-green-600">Priority (24h)</span>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-lg">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium">Next Tier Benefit:</span>
+                                    <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Conqueror</span>
+                                </div>
+                                <p class="text-xs text-gray-600 mt-1">24/7 instant support + personal manager</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upgrade CTA -->
+                <div class="mt-10 text-center">
+                    <h3 class="text-xl font-bold mb-4">Ready to Upgrade?</h3>
+                    <p class="text-gray-600 mb-6 max-w-2xl mx-auto">Start shopping now to unlock premium features. Every purchase counts toward your next tier!</p>
+                    <a href="index.html" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:from-purple-700 hover:to-indigo-700 transition">
+                        Visit Store <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-2xl font-bold text-center mb-10">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="w-full px-5 py-4 text-left flex justify-between items-center bg-white hover:bg-gray-50 transition" onclick="toggleFAQ(this)">
+                        <span class="font-medium">How do I qualify for higher tiers?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div class="px-5 pb-4 hidden">
+                        <p class="text-gray-600">Your tier is automatically determined by your lifetime purchases in our store:
+                            <br>- Iron: $0 - $499
+                            <br>- Gold: $500 - $1,999
+                            <br>- Conqueror: $2,000+
+                            <br><br>Your tier updates within 24 hours of reaching the required purchase amount.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="w-full px-5 py-4 text-left flex justify-between items-center bg-white hover:bg-gray-50 transition" onclick="toggleFAQ(this)">
+                        <span class="font-medium">Can I lose my tier status?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div class="px-5 pb-4 hidden">
+                        <p class="text-gray-600">No, your tier is permanent once achieved. We may introduce higher tiers in the future, but you'll never be downgraded from your current tier unless you violate our terms of service.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="w-full px-5 py-4 text-left flex justify-between items-center bg-white hover:bg-gray-50 transition" onclick="toggleFAQ(this)">
+                        <span class="font-medium">Do subscriptions count toward tier progress?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div class="px-5 pb-4 hidden">
+                        <p class="text-gray-600">No, tier progress is based solely on your purchases in our store, not subscription payments. Only one-time purchases and recurring product orders contribute to your lifetime purchase total.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="w-full px-5 py-4 text-left flex justify-between items-center bg-white hover:bg-gray-50 transition" onclick="toggleFAQ(this)">
+                        <span class="font-medium">Are there any hidden fees for premium features?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div class="px-5 pb-4 hidden">
+                        <p class="text-gray-600">No, all fees are clearly outlined in our fee structure. Some features like fund transfers may have associated fees depending on your tier, but there are no hidden charges.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    
+
+    <script>
+        // Toggle FAQ items
+        function toggleFAQ(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            content.classList.toggle('hidden');
+            icon.classList.toggle('transform');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Animate tier cards on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.tier-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
+

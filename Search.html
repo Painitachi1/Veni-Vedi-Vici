@@ -1,0 +1,489 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVV Universe | Shop By Category</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9fafb;
+        }
+        .category-card:hover .category-overlay {
+            opacity: 1;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .country-selector::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .country-selector::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .country-selector::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        .category-overlay {
+            transition: all 0.3s ease;
+        }
+        .skeleton-loader {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-indigo-600 flex items-center">
+                <span class="mr-1">VVV</span>
+                <span class="text-gray-800">Universe</span>
+            </a>
+            
+            <div class="relative hidden md:block flex-1 max-w-xl mx-4">
+                <input type="text" placeholder="Search across all VVV stores..." 
+                    class="w-full px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-search text-xl"></i>
+                </button>
+                <button class="text-gray-600 relative">
+                    <i class="fas fa-heart text-xl"></i>
+                    <span class="absolute -top-2 -right-2 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                </button>
+                <button class="text-gray-600 relative">
+                    <i class="fas fa-shopping-bag text-xl"></i>
+                    <span class="absolute -top-2 -right-2 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">5</span>
+                </button>
+                <div class="hidden md:flex items-center space-x-2 border-l pl-4">
+                    <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
+                        <i class="fas fa-user text-gray-600"></i>
+                    </div>
+                    <span class="text-sm font-medium">Account</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section class="gradient-bg rounded-2xl p-8 text-white mb-10">
+            <div class="max-w-2xl">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Your Global Shopping Universe</h1>
+                <p class="text-lg mb-6 opacity-90">Discover premium products from the world's best brands across all our VVV stores</p>
+                <div class="flex flex-wrap gap-3">
+                    <div class="relative flex-1 min-w-[200px]">
+                        <select class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 text-white focus:outline-none focus:ring-2 focus:ring-white appearance-none">
+                            <option selected disabled>Shop by Country</option>
+                            <option>Global (English)</option>
+                            <option>United States</option>
+                            <option>United Kingdom</option>
+                            <option>European Union</option>
+                            <option>Middle East</option>
+                            <option>Asia Pacific</option>
+                        </select>
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-white pointer-events-none">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <button class="px-6 py-3 bg-white text-indigo-600 font-medium rounded-lg hover:bg-gray-100 transition duration-300 flex items-center">
+                        <i class="fas fa-route mr-2"></i>
+                        Shipping Options
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Grid -->
+        <section class="mb-12">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Shop By Category</h2>
+                <div class="flex space-x-2">
+                    <button class="px-3 py-1 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 text-sm">
+                        All Categories
+                    </button>
+                    <button class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-600 hover:bg-indigo-200 text-sm">
+                        Hot Deals
+                    </button>
+                    <button class="px-3 py-1 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 text-sm">
+                        New Arrivals
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Tech Pulse -->
+                <div class="category-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300 relative group">
+                    <div class="h-48 bg-gradient-to-r from-blue-500 to-blue-700 flex items-center justify-center">
+                        <i class="fas fa-microchip text-white text-6xl opacity-90"></i>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-1">VVV Tech Pulse</h3>
+                        <p class="text-gray-600 text-sm mb-3">Xiaomi, Huawei, Anker, DJI gadgets</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-medium bg-blue-100 text-blue-800 px-2 py-1 rounded">1,248 products</span>
+                            <button class="text-blue-600 hover:text-blue-800">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="category-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 flex flex-col justify-end p-5">
+                        <h3 class="text-white font-bold text-xl mb-1">VVV Tech Pulse</h3>
+                        <p class="text-white/90 text-sm mb-3">Cutting-edge gadgets from Asia's tech leaders</p>
+                        <button class="bg-white text-blue-600 font-medium py-2 px-4 rounded-lg hover:bg-gray-100 w-full text-center">
+                            Explore Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Trend Wave -->
+                <div class="category-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300 relative group">
+                    <div class="h-48 bg-gradient-to-r from-pink-500 to-pink-700 flex items-center justify-center">
+                        <i class="fas fa-tshirt text-white text-6xl opacity-90"></i>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-1">VVV Trend Wave</h3>
+                        <p class="text-gray-600 text-sm mb-3">Shein, Lemonade Fashion, Pinduoduo finds</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-medium bg-pink-100 text-pink-800 px-2 py-1 rounded">3,542 products</span>
+                            <button class="text-pink-600 hover:text-pink-800">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="category-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 flex flex-col justify-end p-5">
+                        <h3 class="text-white font-bold text-xl mb-1">VVV Trend Wave</h3>
+                        <p class="text-white/90 text-sm mb-3">Fashion trends straight from the streets of Asia</p>
+                        <button class="bg-white text-pink-600 font-medium py-2 px-4 rounded-lg hover:bg-gray-100 w-full text-center">
+                            Explore Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Global Market -->
+                <div class="category-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300 relative group">
+                    <div class="h-48 bg-gradient-to-r from-amber-500 to-amber-700 flex items-center justify-center">
+                        <i class="fas fa-globe text-white text-6xl opacity-90"></i>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-1">VVV Global Market</h3>
+                        <p class="text-gray-600 text-sm mb-3">AliExpress, Alibaba, JD.com curated selections</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-medium bg-amber-100 text-amber-800 px-2 py-1 rounded">7,891 products</span>
+                            <button class="text-amber-600 hover:text-amber-800">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="category-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 flex flex-col justify-end p-5">
+                        <h3 class="text-white font-bold text-xl mb-1">VVV Global Market</h3>
+                        <p class="text-white/90 text-sm mb-3">Direct sourcing from Asia's biggest marketplaces</p>
+                        <button class="bg-white text-amber-600 font-medium py-2 px-4 rounded-lg hover:bg-gray-100 w-full text-center">
+                            Explore Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Home & Lifestyle -->
+                <div class="category-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300 relative group">
+                    <div class="h-48 bg-gradient-to-r from-emerald-500 to-emerald-700 flex items-center justify-center">
+                        <i class="fas fa-home text-white text-6xl opacity-90"></i>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-1">VVV Home & Lifestyle</h3>
+                        <p class="text-gray-600 text-sm mb-3">Smart home & small appliances from Chinese brands</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-medium bg-emerald-100 text-emerald-800 px-2 py-1 rounded">2,156 products</span>
+                            <button class="text-emerald-600 hover:text-emerald-800">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="category-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 flex flex-col justify-end p-5">
+                        <h3 class="text-white font-bold text-xl mb-1">VVV Home & Lifestyle</h3>
+                        <p class="text-white/90 text-sm mb-3">Transform your living space with Asian innovation</p>
+                        <button class="bg-white text-emerald-600 font-medium py-2 px-4 rounded-lg hover:bg-gray-100 w-full text-center">
+                            Explore Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Electronics -->
+                <div class="category-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300 relative group">
+                    <div class="h-48 bg-gradient-to-r from-purple-500 to-purple-700 flex items-center justify-center">
+                        <i class="fas fa-laptop text-white text-6xl opacity-90"></i>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-1">VVV Electronics</h3>
+                        <p class="text-gray-600 text-sm mb-3">Apple, Samsung, Sony, Google Pixel</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-medium bg-purple-100 text-purple-800 px-2 py-1 rounded">1,872 products</span>
+                            <button class="text-purple-600 hover:text-purple-800">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="category-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 flex flex-col justify-end p-5">
+                        <h3 class="text-white font-bold text-xl mb-1">VVV Electronics</h3>
+                        <p class="text-white/90 text-sm mb-3">Global tech giants at competitive prices</p>
+                        <button class="bg-white text-purple-600 font-medium py-2 px-4 rounded-lg hover:bg-gray-100 w-full text-center">
+                            Explore Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Luxury Fashion -->
+                <div class="category-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300 relative group">
+                    <div class="h-48 bg-gradient-to-r from-yellow-500 to-yellow-700 flex items-center justify-center">
+                        <i class="fas fa-gem text-white text-6xl opacity-90"></i>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-1">VVV Luxury Fashion</h3>
+                        <p class="text-gray-600 text-sm mb-3">Gucci, Louis Vuitton, Dior</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-medium bg-yellow-100 text-yellow-800 px-2 py-1 rounded">689 products</span>
+                            <button class="text-yellow-600 hover:text-yellow-800">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="category-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 flex flex-col justify-end p-5">
+                        <h3 class="text-white font-bold text-xl mb-1">VVV Luxury Fashion</h3>
+                        <p class="text-white/90 text-sm mb-3">Authentic luxury with global verification</p>
+                        <button class="bg-white text-yellow-600 font-medium py-2 px-4 rounded-lg hover:bg-gray-100 w-full text-center">
+                            Explore Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sports & Lifestyle -->
+                <div class="category-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300 relative group">
+                    <div class="h-48 bg-gradient-to-r from-red-500 to-red-700 flex items-center justify-center">
+                        <i class="fas fa-running text-white text-6xl opacity-90"></i>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-1">VVV Sports & Lifestyle</h3>
+                        <p class="text-gray-600 text-sm mb-3">Nike, Adidas, Puma, Under Armour</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-medium bg-red-100 text-red-800 px-2 py-1 rounded">3,217 products</span>
+                            <button class="text-red-600 hover:text-red-800">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="category-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 flex flex-col justify-end p-5">
+                        <h3 class="text-white font-bold text-xl mb-1">VVV Sports & Lifestyle</h3>
+                        <p class="text-white/90 text-sm mb-3">Performance gear for athletes and enthusiasts</p>
+                        <button class="bg-white text-red-600 font-medium py-2 px-4 rounded-lg hover:bg-gray-100 w-full text-center">
+                            Explore Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Beauty & Wellness -->
+                <div class="category-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300 relative group">
+                    <div class="h-48 bg-gradient-to-r from-rose-500 to-rose-700 flex items-center justify-center">
+                        <i class="fas fa-spa text-white text-6xl opacity-90"></i>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-1">VVV Beauty & Wellness</h3>
+                        <p class="text-gray-600 text-sm mb-3">Sephora, local premium brands, K-beauty</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-medium bg-rose-100 text-rose-800 px-2 py-1 rounded">4,532 products</span>
+                            <button class="text-rose-600 hover:text-rose-800">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="category-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 flex flex-col justify-end p-5">
+                        <h3 class="text-white font-bold text-xl mb-1">VVV Beauty & Wellness</h3>
+                        <p class="text-white/90 text-sm mb-3">Global beauty brands and hidden Asian gems</p>
+                        <button class="bg-white text-rose-600 font-medium py-2 px-4 rounded-lg hover:bg-gray-100 w-full text-center">
+                            Explore Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Country Shopping Experience -->
+        <section class="mb-12">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Shop By Country Experience</h2>
+                <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                    View all countries <i class="fas fa-chevron-right ml-1 text-sm"></i>
+                </a>
+            </div>
+
+            <div class="country-selector flex space-x-4 pb-4 overflow-x-auto">
+                <!-- US -->
+                <div class="flex-shrink-0 w-64 bg-white rounded-xl shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition duration-300">
+                    <div class="h-32 bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center relative overflow-hidden">
+                        <img src="https://flagcdn.com/us.svg" class="absolute inset-0 w-full h-full object-cover" alt="USA Flag">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <h3 class="text-white font-bold text-xl relative z-10">United States</h3>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-gray-600 text-sm mb-3">Fast shipping, US brands, local support</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-medium bg-gray-100 text-gray-800 px-2 py-1 rounded">32,451 products</span>
+                            <button class="text-blue-600 hover:text-blue-800 font-medium text-sm">
+                                Shop US Store
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UK -->
+                <div class="flex-shrink-0 w-64 bg-white rounded-xl shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition duration-300">
+                    <div class="h-32 bg-gradient-to-r from-red-400 to-red-600 flex items-center justify-center relative overflow-hidden">
+                        <img src="https://flagcdn.com/gb.svg" class="absolute inset-0 w-full h-full object-cover" alt="UK Flag">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <h3 class="text-white font-bold text-xl relative z-10">United Kingdom</h3>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-gray-600 text-sm mb-3">EU standards, fast UK delivery</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-medium bg-gray-100 text-gray-800 px-2 py-1 rounded">28,763 products</span>
+                            <button class="text-red-600 hover:text-red-800 font-medium text-sm">
+                                Shop UK Store
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EU -->
+                <div class="flex-shrink-0 w-64 bg-white rounded-xl shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition duration-300">
+                    <div class="h-32 bg-gradient-to-r from-yellow-400 to-yellow-600 flex items-center justify-center relative overflow-hidden">
+                        <img src="https://flagcdn.com/eu.svg" class="absolute inset-0 w-full h-full object-cover" alt="EU Flag">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <h3 class="text-white font-bold text-xl relative z-10">European Union</h3>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-gray-600 text-sm mb-3">CE certified, multi-language support</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-medium bg-gray-100 text-gray-800 px-2 py-1 rounded">30,128 products</span>
+                            <button class="text-yellow-600 hover:text-yellow-800 font-medium text-sm">
+                                Shop EU Store
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle East -->
+                <div class="flex-shrink-0 w-64 bg-white rounded-xl shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition duration-300">
+                    <div class="h-32 bg-gradient-to-r from-green-400 to-green-600 flex items-center justify-center relative overflow-hidden">
+                        <img src="https://flagcdn.com/ae.svg" class="absolute inset-0 w-full h-full object-cover" alt="UAE Flag">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <h3 class="text-white font-bold text-xl relative z-10">Middle East</h3>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-gray-600 text-sm mb-3">Arabic support, GCC standards</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-medium bg-gray-100 text-gray-800 px-2 py-1 rounded">18,945 products</span>
+                            <button class="text-green-600 hover:text-green-800 font-medium text-sm">
+                                Shop ME Store
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Asia Pacific -->
+                <div class="flex-shrink-0 w-64 bg-white rounded-xl shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition duration-300">
+                    <div class="h-32 bg-gradient-to-r from-purple-400 to-purple-600 flex items-center justify-center relative overflow-hidden">
+                        <img src="https://flagcdn.com/sg.svg" class="absolute inset-0 w-full h-full object-cover" alt="Singapore Flag">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <h3 class="text-white font-bold text-xl relative z-10">Asia Pacific</h3>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-gray-600 text-sm mb-3">Fastest shipping, local specialties</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-medium bg-gray-100 text-gray-800 px-2 py-1 rounded">42,517 products</span>
+                            <button class="text-purple-600 hover:text-purple-800 font-medium text-sm">
+                                Shop APAC Store
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shopping Modes -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Shop By Mode</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Standard -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition duration-300">
+                    <div class="h-40 bg-gradient-to-r from-gray-500 to-gray-700 flex items-center justify-center">
+                        <i class="fas fa-shipping-fast text-white text-6xl opacity-90"></i>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-1">Standard Shopping</h3>
+                        <p class="text-gray-600 text-sm mb-4">Reliable delivery, perfect balance of speed and cost</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-medium bg-gray-100 text-gray-800 px-2 py-1 rounded">7-15 days delivery</span>
+                            <button class="text-gray-700 hover:text-gray-900 font-medium text-sm flex items-center">
+                                Shop Now <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Express -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition duration-300">
+                    <div class="h-40 bg-gradient-to-r from-blue-500 to-blue-700 flex items-center justify-center">
+                        <i class="fas fa-bolt text-white text-6xl opacity-90"></i>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-1">Express Shopping</h3>
+                        <p class="text
+</html>
+
+

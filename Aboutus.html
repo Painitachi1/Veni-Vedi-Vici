@@ -1,0 +1,558 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVV Premium | About Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #3b82f6, #ef4444);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -40px;
+            width: 2px;
+            height: 40px;
+            background-color: #e5e7eb;
+        }
+        
+        .dark .timeline-item:not(:last-child)::after {
+            background-color: #4b5563;
+        }
+        
+        .stats-card {
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .page-transition {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-2xl font-bold gradient-text">VVV</a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a>
+                    <a href="Store.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Products</a>
+                    <a href="disputes.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Services</a>
+                    <a href="Review.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Reviews</a>
+                    <a href="Aboutus.html" class="text-blue-600 dark:text-blue-400 font-medium">About</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <a href="notification.html" class="relative block p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                        </a>
+                    </div>
+                    <span class="hidden md:inline font-medium">Welcome, User</span>
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-red-500 flex items-center justify-center text-white font-bold">
+                        U
+                    </div>
+                    
+                    <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <div class="flex flex-col space-y-3 pb-4">
+                    <a href="index.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a>
+                    <a href="Search.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Products</a>
+                    <a href="messages.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Services</a>
+                    <a href="Review.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Reviews</a>
+                    <a href="Aboutus.html" class="text-blue-600 dark:text-blue-400 font-medium">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="app" class="pt-16 page-transition">
+        <!-- Hero Section -->
+        <section class="hero-section py-24 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Our Story</h1>
+                <p class="text-xl max-w-3xl mx-auto">
+                    From humble beginnings to becoming a leader in premium products, discover the journey that defines us.
+                </p>
+            </div>
+        </section>
+
+        <!-- About Content -->
+        <section class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Mission Section -->
+                <div class="flex flex-col lg:flex-row items-center gap-12 mb-24">
+                    <div class="w-full lg:w-1/2">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
+                             alt="Our Team" 
+                             class="rounded-xl shadow-xl w-full h-auto">
+                    </div>
+                    <div class="w-full lg:w-1/2">
+                        <h2 class="text-3xl font-bold mb-6">Our Mission</h2>
+                        <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+                            At VVV Premium, we're committed to delivering exceptional quality and unparalleled customer experiences. 
+                            We believe that premium shouldn't mean pretentious - it should mean better in every way.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                                        <i class="fas fa-check text-blue-600 dark:text-blue-400"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        <span class="font-medium">Quality First:</span> Every product undergoes rigorous testing to meet our high standards.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                                        <i class="fas fa-check text-blue-600 dark:text-blue-400"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        <span class="font-medium">Customer Centric:</span> Your satisfaction is our top priority, always.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                                        <i class="fas fa-check text-blue-600 dark:text-blue-400"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        <span class="font-medium">Sustainable Growth:</span> We're building a company that lasts while minimizing our environmental impact.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Section -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-24">
+                    <div class="stats-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 text-center">
+                        <div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">12+</div>
+                        <div class="text-gray-600 dark:text-gray-300">Years in Business</div>
+                    </div>
+                    <div class="stats-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 text-center">
+                        <div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">500K+</div>
+                        <div class="text-gray-600 dark:text-gray-300">Happy Customers</div>
+                    </div>
+                    <div class="stats-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 text-center">
+                        <div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">50+</div>
+                        <div class="text-gray-600 dark:text-gray-300">Countries Served</div>
+                    </div>
+                    <div class="stats-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 text-center">
+                        <div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">24/7</div>
+                        <div class="text-gray-600 dark:text-gray-300">Customer Support</div>
+                    </div>
+                </div>
+
+                <!-- Timeline Section -->
+                <div class="mb-24">
+                    <h2 class="text-3xl font-bold mb-12 text-center">Our Journey</h2>
+                    <div class="relative">
+                        <!-- Timeline line -->
+                        <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gray-200 dark:bg-gray-700 transform -translate-x-1/2"></div>
+                        
+                        <div class="grid md:grid-cols-2 gap-8 md:gap-0">
+                            <!-- Item 1 -->
+                            <div class="timeline-item relative">
+                                <div class="md:pr-12 text-right">
+                                    <div class="text-sm font-semibold text-blue-600 dark:text-blue-400">2010</div>
+                                    <h3 class="text-xl font-bold mb-2">Founded in a Garage</h3>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        Three friends with a vision started VVV in a small garage, crafting their first premium product by hand.
+                                    </p>
+                                </div>
+                                <div class="hidden md:block absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-blue-600 border-4 border-white dark:border-gray-900"></div>
+                            </div>
+                            
+                            <!-- Empty div for spacing on the timeline -->
+                            <div class="hidden md:block"></div>
+                            
+                            <!-- Item 2 -->
+                            <div class="timeline-item relative">
+                                <div class="hidden md:block"></div>
+                                <div class="md:pl-12 md:text-left text-right">
+                                    <div class="text-sm font-semibold text-blue-600 dark:text-blue-400">2013</div>
+                                    <h3 class="text-xl font-bold mb-2">First Major Breakthrough</h3>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        Our innovative design caught the attention of major retailers, leading to our first nationwide distribution deal.
+                                    </p>
+                                </div>
+                                <div class="hidden md:block absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-blue-600 border-4 border-white dark:border-gray-900"></div>
+                            </div>
+                            
+                            <!-- Item 3 -->
+                            <div class="timeline-item relative">
+                                <div class="md:pr-12 text-right">
+                                    <div class="text-sm font-semibold text-blue-600 dark:text-blue-400">2016</div>
+                                    <h3 class="text-xl font-bold mb-2">Going International</h3>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        Expanded operations to Europe and Asia, establishing VVV as a global premium brand.
+                                    </p>
+                                </div>
+                                <div class="hidden md:block absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-blue-600 border-4 border-white dark:border-gray-900"></div>
+                            </div>
+                            
+                            <!-- Empty div for spacing on the timeline -->
+                            <div class="hidden md:block"></div>
+                            
+                            <!-- Item 4 -->
+                            <div class="timeline-item relative">
+                                <div class="hidden md:block"></div>
+                                <div class="md:pl-12 md:text-left text-right">
+                                    <div class="text-sm font-semibold text-blue-600 dark:text-blue-400">2020</div>
+                                    <h3 class="text-xl font-bold mb-2">Sustainability Initiative</h3>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        Launched our eco-friendly product line and committed to carbon-neutral operations by 2025.
+                                    </p>
+                                </div>
+                                <div class="hidden md:block absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-blue-600 border-4 border-white dark:border-gray-900"></div>
+                            </div>
+                            
+                            <!-- Item 5 -->
+                            <div class="timeline-item relative">
+                                <div class="md:pr-12 text-right">
+                                    <div class="text-sm font-semibold text-blue-600 dark:text-blue-400">2023</div>
+                                    <h3 class="text-xl font-bold mb-2">Premium Redefined</h3>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        Introduced our most advanced product line yet, setting new industry standards for quality and innovation.
+                                    </p>
+                                </div>
+                                <div class="hidden md:block absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-blue-600 border-4 border-white dark:border-gray-900"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Section -->
+                <div class="mb-24">
+                    <h2 class="text-3xl font-bold mb-12 text-center">Meet The Leadership</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Team Member 1 -->
+                        <div class="team-card bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" 
+                                 alt="CEO" 
+                                 class="w-full h-64 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold">Alex Johnson</h3>
+                                <p class="text-blue-600 dark:text-blue-400 mb-4">CEO & Co-Founder</p>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                    Visionary leader with a passion for innovation and customer satisfaction.
+                                </p>
+                                <div class="flex space-x-3 mt-4">
+                                    <a href="#" class="text-gray-500 hover:text-blue-600 dark:hover:text-blue-400">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                    <a href="#" class="text-gray-500 hover:text-blue-600 dark:hover:text-blue-400">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Team Member 2 -->
+                        <div class="team-card bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" 
+                                 alt="CTO" 
+                                 class="w-full h-64 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold">Sarah Chen</h3>
+                                <p class="text-blue-600 dark:text-blue-400 mb-4">CTO & Co-Founder</p>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                    Tech innovator driving our product development and quality assurance.
+                                </p>
+                                <div class="flex space-x-3 mt-4">
+                                    <a href="#" class="text-gray-500 hover:text-blue-600 dark:hover:text-blue-400">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                    <a href="#" class="text-gray-500 hover:text-blue-600 dark:hover:text-blue-400">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Team Member 3 -->
+                        <div class="team-card bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition">
+                            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" 
+                                 alt="CMO" 
+                                 class="w-full h-64 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold">Michael Rodriguez</h3>
+                                <p class="text-blue-600 dark:text-blue-400 mb-4">CMO</p>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                    Marketing strategist who built our global brand presence.
+                                </p>
+                                <div class="flex space-x-3 mt-4">
+                                    <a href="#" class="text-gray-500 hover:text-blue-600 dark:hover:text-blue-400">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                    <a href="#" class="text-gray-500 hover:text-blue-600 dark:hover:text-blue-400">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Team Member 4 -->
+                        <div class="team-card bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" 
+                                 alt="CFO" 
+                                 class="w-full h-64 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold">Emily Wilson</h3>
+                                <p class="text-blue-600 dark:text-blue-400 mb-4">CFO</p>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                    Financial expert ensuring sustainable growth and operational excellence.
+                                </p>
+                                <div class="flex space-x-3 mt-4">
+                                    <a href="#" class="text-gray-500 hover:text-blue-600 dark:hover:text-blue-400">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Values Section -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 md:p-12 mb-24">
+                    <h2 class="text-3xl font-bold mb-8 text-center">Our Core Values</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Value 1 -->
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-medal text-2xl text-blue-600 dark:text-blue-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Excellence</h3>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                We never settle for "good enough." Every product, every service, every interaction must meet our high standards.
+                            </p>
+                        </div>
+                        
+                        <!-- Value 2 -->
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-hand-holding-heart text-2xl text-blue-600 dark:text-blue-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Integrity</h3>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                We do what's right, not what's easy. Transparency and honesty guide every decision we make.
+                            </p>
+                        </div>
+                        
+                        <!-- Value 3 -->
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-lightbulb text-2xl text-blue-600 dark:text-blue-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Innovation</h3>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                We challenge the status quo, constantly seeking better ways to serve our customers and improve our products.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Section -->
+                <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-xl p-8 md:p-12 text-center text-white">
+                    <h2 class="text-3xl font-bold mb-4">Join Our Journey</h2>
+                    <p class="text-xl mb-8 max-w-2xl mx-auto">
+                        Whether you're a customer, partner, or future team member, we'd love to have you with us as we continue to grow.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#" class="px-6 py-3 bg-white text-blue-600 rounded-lg font-medium hover:bg-gray-100 transition">
+                            Explore Careers
+                        </a>
+                        <a href="Contactus.html" class="px-6 py-3 border-2 border-white text-white rounded-lg font-medium hover:bg-white/10 transition">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Dark mode toggle
+        const darkModeToggle = document.createElement('div');
+        darkModeToggle.innerHTML = `
+            <div class="fixed bottom-4 right-4">
+                <button id="dark-mode-toggle" class="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 shadow-lg flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+            </div>
+        `;
+        document.body.appendChild(darkModeToggle);
+        
+        document.getElementById('dark-mode-toggle').addEventListener('click', function() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark') ? 'enabled' : 'disabled');
+        });
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.documentElement.classList.add('dark');
+        }
+
+        // Animate stats cards on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-pulse');
+                    setTimeout(() => {
+                        entry.target.classList.remove('animate-pulse');
+                    }, 1000);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stats-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
+

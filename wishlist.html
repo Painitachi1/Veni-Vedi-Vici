@@ -1,0 +1,633 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist | VVV - Visual Victory Vault</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #3b82f6, #ef4444);
+        }
+        
+        .product-card:hover .product-actions {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .product-actions {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .page-transition {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .wishlist-empty {
+            background: radial-gradient(circle, rgba(241,245,249,0.8) 0%, rgba(241,245,249,1) 100%);
+        }
+        
+        .dark .wishlist-empty {
+            background: radial-gradient(circle, rgba(17,24,39,0.8) 0%, rgba(17,24,39,1) 100%);
+        }
+        
+        .store-tab.active {
+            border-bottom: 3px solid #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        
+        .dark .store-tab.active {
+            border-bottom-color: #60a5fa;
+            color: #60a5fa;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#home" class="text-2xl font-bold gradient-text">VVV</a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a>
+                    <a href="#stores" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Stores</a>
+                    <a href='Dashboard.html'>Dashboard</a>
+                    <a href="#tracking" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Tracking</a>
+                    <a href="#wishlist" class="text-blue-600 dark:text-blue-400 font-medium">Wishlist</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="relative inline-block w-12 mr-2 align-middle select-none">
+                        <input type="checkbox" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-2 appearance-none cursor-pointer"/>
+                        <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                    </div>
+                    <span class="text-sm font-medium hidden sm:inline">Dark Mode</span>
+                    
+                    <div class="flex items-center space-x-2">
+                        <div class="relative">
+                            <a href="#wishlist" class="relative block p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                                <i class="fas fa-heart text-xl"></i>
+                                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                            </a>
+                        </div>
+                        <div class="relative">
+                            <a href="#cart" class="relative block p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                                <i class="fas fa-shopping-cart text-xl"></i>
+                                <span class="absolute -top-1 -right-1 bg-blue-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">2</span>
+                            </a>
+                        </div>
+                        <span class="hidden md:inline font-medium">Welcome, User</span>
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-red-500 flex items-center justify-center text-white font-bold">
+                            U
+                        </div>
+                    </div>
+                    
+                    <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <div class="flex flex-col space-y-3 pb-4">
+                    <a href="#home" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a>
+                    <a href="#stores" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Stores</a>
+                    <a href='Dashboard.html'>Dashboard</a>
+                    <a href="#tracking" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Tracking</a>
+                    <a href="#wishlist" class="text-blue-600 dark:text-blue-400 font-medium">Wishlist</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="app" class="pt-16">
+        <!-- Wishlist Section -->
+        <section id="wishlist" class="py-12 page-transition">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4">Your <span class="gradient-text">Wishlist</span></h1>
+                    <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                        Save your favorite items from all VVV stores in one place. Never lose track of what you love.
+                    </p>
+                </div>
+                
+                <!-- Store Filter Tabs -->
+                <div class="flex overflow-x-auto pb-2 mb-8 scrollbar-hide">
+                    <div class="flex space-x-8">
+                        <button class="store-tab active px-1 py-2 whitespace-nowrap" data-store="all">
+                            All Stores (12)
+                        </button>
+                        <button class="store-tab px-1 py-2 whitespace-nowrap" data-store="apple">
+                            <i class="fab fa-apple mr-2"></i> Apple (4)
+                        </button>
+                        <button class="store-tab px-1 py-2 whitespace-nowrap" data-store="nike">
+                            <i class="fas fa-shoe-prints mr-2"></i> Nike (3)
+                        </button>
+                        <button class="store-tab px-1 py-2 whitespace-nowrap" data-store="lv">
+                            <i class="fas fa-crown mr-2"></i> Louis Vuitton (2)
+                        </button>
+                        <button class="store-tab px-1 py-2 whitespace-nowrap" data-store="amazon">
+                            <i class="fab fa-amazon mr-2"></i> Amazon (3)
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Wishlist Content -->
+                <div class="wishlist-content">
+                    <!-- Wishlist Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <!-- Product Card 1 -->
+                        <div class="product-card bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition duration-300 hover:shadow-lg" data-store="apple">
+                            <div class="relative">
+                                <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1693009279096" 
+                                     alt="iPhone 15 Pro" 
+                                     class="w-full h-64 object-contain p-4">
+                                <div class="product-actions absolute top-3 right-3 flex flex-col space-y-2">
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-red-500 hover:bg-red-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-blue-500 hover:bg-blue-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-green-500 hover:bg-green-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                                <span class="absolute top-3 left-3 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                    NEW
+                                </span>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-bold text-lg">iPhone 15 Pro Max</h3>
+                                    <span class="text-lg font-bold text-blue-600 dark:text-blue-400">$1,199</span>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">Titanium Blue â€¢ 256GB</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fab fa-apple text-gray-500 dark:text-gray-400 mr-2"></i>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">Apple Store</span>
+                                    </div>
+                                    <div class="flex items-center text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400 ml-1">(128)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Card 2 -->
+                        <div class="product-card bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition duration-300 hover:shadow-lg" data-store="nike">
+                            <div class="relative">
+                                <img src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/61734ec7-dad8-40f3-9b39-c1f0ff4f9c19/air-jordan-1-mid-shoes-1zMCFJ.png" 
+                                     alt="Nike Air Jordan 1 Mid" 
+                                     class="w-full h-64 object-contain p-4">
+                                <div class="product-actions absolute top-3 right-3 flex flex-col space-y-2">
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-red-500 hover:bg-red-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-blue-500 hover:bg-blue-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-green-500 hover:bg-green-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-bold text-lg">Air Jordan 1 Mid</h3>
+                                    <span class="text-lg font-bold text-blue-600 dark:text-blue-400">$125</span>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">Black/White/Red â€¢ Men's Shoes</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-shoe-prints text-gray-500 dark:text-gray-400 mr-2"></i>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">Nike</span>
+                                    </div>
+                                    <div class="flex items-center text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400 ml-1">(256)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Card 3 -->
+                        <div class="product-card bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition duration-300 hover:shadow-lg" data-store="lv">
+                            <div class="relative">
+                                <img src="https://eu.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-monogram-onthego-mm-handbags--M44010_PM2_Front%20view.png" 
+                                     alt="Louis Vuitton OnTheGo MM" 
+                                     class="w-full h-64 object-contain p-4">
+                                <div class="product-actions absolute top-3 right-3 flex flex-col space-y-2">
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-red-500 hover:bg-red-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-blue-500 hover:bg-blue-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-green-500 hover:bg-green-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                                <span class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                    LUXURY
+                                </span>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-bold text-lg">Onthego MM Bag</h3>
+                                    <span class="text-lg font-bold text-blue-600 dark:text-blue-400">$2,850</span>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">Monogram Giant â€¢ Brown</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-crown text-gray-500 dark:text-gray-400 mr-2"></i>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">Louis Vuitton</span>
+                                    </div>
+                                    <div class="flex items-center text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400 ml-1">(89)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Card 4 -->
+                        <div class="product-card bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition duration-300 hover:shadow-lg" data-store="amazon">
+                            <div class="relative">
+                                <img src="https://m.media-amazon.com/images/I/71pC69I3lzL._AC_SL1500_.jpg" 
+                                     alt="AirPods Pro" 
+                                     class="w-full h-64 object-contain p-4">
+                                <div class="product-actions absolute top-3 right-3 flex flex-col space-y-2">
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-red-500 hover:bg-red-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-blue-500 hover:bg-blue-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-green-500 hover:bg-green-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                                <span class="absolute top-3 left-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                    -20%
+                                </span>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-bold text-lg">AirPods Pro (2nd Gen)</h3>
+                                    <div>
+                                        <span class="text-sm text-gray-400 line-through mr-2">$249</span>
+                                        <span class="text-lg font-bold text-blue-600 dark:text-blue-400">$199</span>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">White â€¢ MagSafe Charging Case</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fab fa-amazon text-gray-500 dark:text-gray-400 mr-2"></i>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">Amazon</span>
+                                    </div>
+                                    <div class="flex items-center text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400 ml-1">(2.4k)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Card 5 -->
+                        <div class="product-card bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition duration-300 hover:shadow-lg" data-store="apple">
+                            <div class="relative">
+                                <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MKUQ3_VW_34FR+watch-45-titanium-ultra_VW_34FR_WF_CO+watch-face-49-ocean-ultra_VW_34FR_WF_CO_GEO_IN?wid=750&hei=712&trim=1%2C0&fmt=p-jpg&qlt=95&.v=1683224241054" 
+                                     alt="Apple Watch Ultra" 
+                                     class="w-full h-64 object-contain p-4">
+                                <div class="product-actions absolute top-3 right-3 flex flex-col space-y-2">
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-red-500 hover:bg-red-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-blue-500 hover:bg-blue-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-green-500 hover:bg-green-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-bold text-lg">Apple Watch Ultra 2</h3>
+                                    <span class="text-lg font-bold text-blue-600 dark:text-blue-400">$799</span>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">Titanium Case â€¢ Ocean Band</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fab fa-apple text-gray-500 dark:text-gray-400 mr-2"></i>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">Apple Store</span>
+                                    </div>
+                                    <div class="flex items-center text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400 ml-1">(512)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Card 6 -->
+                        <div class="product-card bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition duration-300 hover:shadow-lg" data-store="nike">
+                            <div class="relative">
+                                <img src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/0f1b1d1e-1e8e-4f2e-8e9f-9f1b1d1e1e8e/air-force-1-07-shoes-1zMCFJ.png" 
+                                     alt="Nike Air Force 1" 
+                                     class="w-full h-64 object-contain p-4">
+                                <div class="product-actions absolute top-3 right-3 flex flex-col space-y-2">
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-red-500 hover:bg-red-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-blue-500 hover:bg-blue-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="w-10 h-10 rounded-full bg-white dark:bg-gray-700 shadow-md flex items-center justify-center text-green-500 hover:bg-green-50 dark:hover:bg-gray-600 transition">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                                <span class="absolute top-3 left-3 bg-purple-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                    LIMITED
+                                </span>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-bold text-lg">Air Force 1 '07</h3>
+                                    <span class="text-lg font-bold text-blue-600 dark:text-blue-400">$110</span>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">White â€¢ Men's Shoes</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-shoe-prints text-gray-500 dark:text-gray-400 mr-2"></i>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">Nike</span>
+                                    </div>
+                                    <div class="flex items-center text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400 ml-1">(1.2k)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Empty Wishlist State (hidden by default) -->
+                    <div id="empty-wishlist" class="hidden">
+                        <div class="wishlist-empty rounded-2xl p-12 text-center">
+                            <div class="max-w-md mx-auto">
+                                <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900/30 dark:to-purple-900/30 flex items-center justify-center">
+                                    <i class="fas fa-heart text-4xl text-pink-500 dark:text-pink-400"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-3">Your Wishlist is Empty</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                                    Start saving your favorite items from any VVV store by clicking the heart icon.
+                                </p>
+                                <a href="#stores" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
+                                    <i class="fas fa-store mr-2"></i> Browse Stores
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="mt-12 flex justify-center">
+                    <nav class="flex items-center space-x-2">
+                        <button class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-blue-600 hover:text-white transition">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-medium">1</button>
+                        <button class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-blue-600 hover:text-white transition">2</button>
+                        <button class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-blue-600 hover:text-white transition">3</button>
+                        <span class="px-2 text-gray-600 dark:text-gray-300">...</span>
+                        <button class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-blue-600 hover:text-white transition">8</button>
+                        <button class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-blue-600 hover:text-white transition">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </nav>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Dark mode toggle
+        document.getElementById('toggle').addEventListener('change', function() {
+            if (this.checked) {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.documentElement.classList.add('dark');
+            document.getElementById('toggle').checked = true;
+        }
+
+        // Store filter tabs functionality
+        const storeTabs = document.querySelectorAll('.store-tab');
+        const productCards = document.querySelectorAll('.product-card');
+        
+        storeTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Update active tab
+                storeTabs.forEach(t => t.classList.remove('active', 'border-blue-500', 'text-blue-600', 'dark:text-blue-400'));
+                this.classList.add('active', 'border-blue-500', 'text-blue-600', 'dark:text-blue-400');
+                
+                const store = this.getAttribute('data-store');
+                
+                // Filter products
+                if (store === 'all') {
+                    productCards.forEach(card => card.style.display = 'block');
+                } else {
+                    productCards.forEach(card => {
+                        if (card.getAttribute('data-store') === store) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // Heart icon toggle (add/remove from wishlist)
+        document.querySelectorAll('.product-actions button:first-child').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const icon = this.querySelector('i');
+                
+                if (icon.classList.contains('fas')) {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    this.classList.remove('text-red-500');
+                    this.classList.add('text-gray-500');
+                    
+                    // In a real app, you would also update the wishlist count and potentially remove from backend
+                } else {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    this.classList.remove('text-gray-500');
+                    this.classList.add('text-red-500');
+                }
+                
+                // Check if wishlist is empty (demo purposes)
+                // In a real app, you would check the actual wishlist items count
+                setTimeout(() => {
+                    const visibleProducts = document.querySelectorAll('.product-card[style="display: block"]').length;
+                    if (visibleProducts === 0) {
+                        document.getElementById('empty-wishlist').classList.remove('hidden');
+                    } else {
+                        document.getElementById('empty-wishlist').classList.add('hidden');
+                    }
+                }, 100);
+            });
+        });
+
+        // Quick add to cart functionality
+        document.querySelectorAll('.product-actions button:last-child').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                // In a real app, this would add the product to cart
+                alert('Product added to cart!');
+            });
+        });
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
+

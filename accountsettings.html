@@ -1,0 +1,656 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings | Privacy & Security</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .premium-badge {
+            background: linear-gradient(135deg, #f5d020 0%, #f53803 100%);
+        }
+        .tab-active {
+            border-bottom: 3px solid #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #3b82f6;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .confirmation-modal {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm mt-20">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-user-shield text-2xl text-blue-600"></i>
+                    <span class="text-xl font-bold">Account Settings</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-user text-blue-600"></i>
+                        </div>
+                        <span class="hidden md:inline font-medium">John Doe</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- User Profile Card -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <div class="p-6 flex flex-col md:flex-row items-start md:items-center">
+                    <div class="flex items-center mb-4 md:mb-0 md:mr-6">
+                        <div class="relative">
+                            <div class="h-20 w-20 rounded-full bg-blue-100 flex items-center justify-center">
+                                <i class="fas fa-user text-3xl text-blue-600"></i>
+                            </div>
+                            <div class="absolute -bottom-1 -right-1 bg-blue-600 text-white rounded-full px-2 py-1 text-xs">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h2 class="text-xl font-bold flex items-center">
+                                    John Doe 
+                                    <span class="ml-2 premium-badge text-white text-xs px-2 py-1 rounded-full">
+                                        <i class="fas fa-crown mr-1"></i> Premium
+                                    </span>
+                                </h2>
+                                <p class="text-gray-600">john.doe@example.com</p>
+                                <p class="text-gray-500 text-sm mt-1">Member since June 2022</p>
+                            </div>
+                            <button class="mt-4 md:mt-0 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition">
+                                <i class="fas fa-pencil-alt mr-2"></i> Edit Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Navigation Tabs -->
+            <div class="border-b border-gray-200 mb-8">
+                <nav class="flex space-x-8">
+                    <button id="privacyTab" class="tab-active py-4 px-1 text-sm font-medium">
+                        <i class="fas fa-lock mr-2"></i> Privacy & Security
+                    </button>
+                    <button id="notificationsTab" class="py-4 px-1 text-sm font-medium text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-bell mr-2"></i> Notifications
+                    </button>
+                    <button id="billingTab" class="py-4 px-1 text-sm font-medium text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-credit-card mr-2"></i> Billing
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Privacy & Security Content -->
+            <div id="privacyContent" class="settings-content">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-semibold">Account Security</h2>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+                        <!-- Password -->
+                        <div class="p-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h3 class="font-medium">Password</h3>
+                                <p class="text-gray-500 text-sm mt-1">Last changed 3 months ago</p>
+                            </div>
+                            <button class="mt-4 md:mt-0 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                                Change Password
+                            </button>
+                        </div>
+                        
+                        <!-- Two-Factor Authentication -->
+                        <div class="p-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h3 class="font-medium">Two-Factor Authentication</h3>
+                                <p class="text-gray-500 text-sm mt-1">Add an extra layer of security to your account</p>
+                            </div>
+                            <div class="mt-4 md:mt-0 flex items-center">
+                                <span class="text-sm font-medium mr-3 text-gray-700">OFF</span>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                                <span class="text-sm font-medium ml-3 text-blue-600">ON</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Login Activity -->
+                        <div class="p-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h3 class="font-medium">Recent Login Activity</h3>
+                                <p class="text-gray-500 text-sm mt-1">View all devices that have accessed your account</p>
+                            </div>
+                            <button class="mt-4 md:mt-0 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition">
+                                View Activity
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-semibold">Privacy Settings</h2>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+                        <!-- Profile Visibility -->
+                        <div class="p-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h3 class="font-medium">Profile Visibility</h3>
+                                <p class="text-gray-500 text-sm mt-1">Who can see your profile information</p>
+                            </div>
+                            <select class="mt-4 md:mt-0 block w-full md:w-48 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                <option>Public</option>
+                                <option>Friends Only</option>
+                                <option selected>Private</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Data Sharing -->
+                        <div class="p-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h3 class="font-medium">Data Sharing</h3>
+                                <p class="text-gray-500 text-sm mt-1">Allow us to use your data to improve our services</p>
+                            </div>
+                            <label class="switch mt-4 md:mt-0">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <!-- Personalized Ads -->
+                        <div class="p-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h3 class="font-medium">Personalized Ads</h3>
+                                <p class="text-gray-500 text-sm mt-1">Show ads based on your interests and activity</p>
+                            </div>
+                            <label class="switch mt-4 md:mt-0">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <!-- Premium Exclusive: Hide Activity Status -->
+                        <div class="p-6 flex flex-col md:flex-row md:items-center md:justify-between bg-yellow-50">
+                            <div>
+                                <div class="flex items-center">
+                                    <h3 class="font-medium">Hide Activity Status</h3>
+                                    <span class="ml-2 premium-badge text-white text-xs px-2 py-1 rounded-full">
+                                        <i class="fas fa-crown"></i> Premium
+                                    </span>
+                                </div>
+                                <p class="text-gray-500 text-sm mt-1">Premium members can hide their online status</p>
+                            </div>
+                            <label class="switch mt-4 md:mt-0">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <!-- Premium Exclusive: Private Mode -->
+                        <div class="p-6 flex flex-col md:flex-row md:items-center md:justify-between bg-yellow-50">
+                            <div>
+                                <div class="flex items-center">
+                                    <h3 class="font-medium">Private Mode</h3>
+                                    <span class="ml-2 premium-badge text-white text-xs px-2 py-1 rounded-full">
+                                        <i class="fas fa-crown"></i> Premium
+                                    </span>
+                                </div>
+                                <p class="text-gray-500 text-sm mt-1">Browse without leaving traces in your history</p>
+                            </div>
+                            <label class="switch mt-4 md:mt-0">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-200 bg-red-50">
+                        <h2 class="text-lg font-semibold text-red-700">Danger Zone</h2>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+                        <!-- Deactivate Account -->
+                        <div class="p-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h3 class="font-medium">Deactivate Account</h3>
+                                <p class="text-gray-500 text-sm mt-1">Temporarily disable your account</p>
+                            </div>
+                            <button id="deactivateBtn" class="mt-4 md:mt-0 px-4 py-2 border border-red-500 text-red-600 rounded-lg hover:bg-red-50 transition">
+                                Deactivate
+                            </button>
+                        </div>
+                        
+                        <!-- Delete Account -->
+                        <div class="p-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h3 class="font-medium">Delete Account</h3>
+                                <p class="text-gray-500 text-sm mt-1">Permanently delete your account and all data</p>
+                            </div>
+                            <button id="deleteBtn" class="mt-4 md:mt-0 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                                Delete Account
+                            </button>
+                        </div>
+                        
+                        <!-- Premium Cancellation -->
+                        <div class="p-6 flex flex-col md:flex-row md:items-center md:justify-between bg-yellow-50">
+                            <div>
+                                <div class="flex items-center">
+                                    <h3 class="font-medium">Cancel Premium Membership</h3>
+                                    <span class="ml-2 premium-badge text-white text-xs px-2 py-1 rounded-full">
+                                        <i class="fas fa-crown"></i> Premium
+                                    </span>
+                                </div>
+                                <p class="text-gray-500 text-sm mt-1">Downgrade to a free account</p>
+                            </div>
+                            <button id="cancelPremiumBtn" class="mt-4 md:mt-0 px-4 py-2 border border-yellow-500 text-yellow-600 rounded-lg hover:bg-yellow-50 transition">
+                                Cancel Premium
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications Content (Hidden) -->
+            <div id="notificationsContent" class="settings-content hidden">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-semibold">Notification Preferences</h2>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-500">Notification settings would appear here.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Billing Content (Hidden) -->
+            <div id="billingContent" class="settings-content hidden">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-semibold">Billing Information</h2>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-500">Billing settings would appear here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Deactivate Account Modal -->
+    <div id="deactivateModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4 confirmation-modal">
+            <div class="text-center">
+                <div class="bg-yellow-100 text-yellow-800 h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-exclamation-triangle text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Deactivate Your Account?</h3>
+                <p class="text-gray-600 mb-6">
+                    Your account will be temporarily disabled. You can reactivate it by logging in again.
+                    Some information may still be visible to others.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                    <button id="cancelDeactivate" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition">
+                        Cancel
+                    </button>
+                    <button id="confirmDeactivate" class="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition">
+                        Deactivate Account
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Account Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4 confirmation-modal">
+            <div class="text-center">
+                <div class="bg-red-100 text-red-800 h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-exclamation-circle text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Delete Your Account Permanently?</h3>
+                <p class="text-gray-600 mb-4">
+                    This action cannot be undone. All your data will be permanently erased.
+                </p>
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 text-left">
+                    <h4 class="font-bold text-red-800 mb-2">What happens when you delete your account:</h4>
+                    <ul class="list-disc list-inside text-sm text-red-700 space-y-1">
+                        <li>All your personal information will be deleted</li>
+                        <li>Your activity history will be removed</li>
+                        <li>Any premium membership will be canceled</li>
+                        <li>You won't be able to recover any data</li>
+                    </ul>
+                </div>
+                <div class="mb-4">
+                    <label class="flex items-center">
+                        <input type="checkbox" id="confirmDeleteCheckbox" class="mr-2">
+                        <span class="text-sm text-gray-700">I understand this action is irreversible</span>
+                    </label>
+                </div>
+                <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                    <button id="cancelDelete" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition">
+                        Cancel
+                    </button>
+                    <button id="confirmDelete" disabled class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition opacity-50 cursor-not-allowed">
+                        Delete Account
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cancel Premium Modal -->
+    <div id="cancelPremiumModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4 confirmation-modal">
+            <div class="text-center">
+                <div class="premium-badge text-white h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-crown text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Cancel Premium Membership?</h3>
+                <p class="text-gray-600 mb-6">
+                    Your premium benefits will continue until the end of your current billing period.
+                    After that, you'll lose access to premium features.
+                </p>
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6 text-left">
+                    <h4 class="font-bold text-yellow-800 mb-2">You'll lose access to:</h4>
+                    <ul class="list-disc list-inside text-sm text-yellow-700 space-y-1">
+                        <li>Premium-only privacy settings</li>
+                        <li>Exclusive rewards and discounts</li>
+                        <li>Ad-free experience</li>
+                        <li>Priority customer support</li>
+                    </ul>
+                </div>
+                <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                    <button id="cancelPremiumCancel" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition">
+                        Keep Premium
+                    </button>
+                    <button id="confirmPremiumCancel" class="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition">
+                        Cancel Membership
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="successToast" class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="toastMessage">Action completed successfully!</span>
+            <button class="ml-4" onclick="document.getElementById('successToast').classList.add('hidden')">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabs = {
+                privacy: {
+                    tab: document.getElementById('privacyTab'),
+                    content: document.getElementById('privacyContent')
+                },
+                notifications: {
+                    tab: document.getElementById('notificationsTab'),
+                    content: document.getElementById('notificationsContent')
+                },
+                billing: {
+                    tab: document.getElementById('billingTab'),
+                    content: document.getElementById('billingContent')
+                }
+            };
+
+            function activateTab(tabName) {
+                // Reset all tabs
+                Object.keys(tabs).forEach(key => {
+                    tabs[key].tab.classList.remove('tab-active');
+                    tabs[key].tab.classList.add('text-gray-500', 'hover:text-gray-700');
+                    tabs[key].content.classList.add('hidden');
+                });
+                
+                // Activate selected tab
+                tabs[tabName].tab.classList.add('tab-active');
+                tabs[tabName].tab.classList.remove('text-gray-500', 'hover:text-gray-700');
+                tabs[tabName].content.classList.remove('hidden');
+            }
+
+            tabs.privacy.tab.addEventListener('click', () => activateTab('privacy'));
+            tabs.notifications.tab.addEventListener('click', () => activateTab('notifications'));
+            tabs.billing.tab.addEventListener('click', () => activateTab('billing'));
+
+            // Deactivate Account Modal
+            const deactivateBtn = document.getElementById('deactivateBtn');
+            const deactivateModal = document.getElementById('deactivateModal');
+            const cancelDeactivate = document.getElementById('cancelDeactivate');
+            const confirmDeactivate = document.getElementById('confirmDeactivate');
+
+            deactivateBtn.addEventListener('click', () => {
+                deactivateModal.classList.remove('hidden');
+            });
+
+            cancelDeactivate.addEventListener('click', () => {
+                deactivateModal.classList.add('hidden');
+            });
+
+            confirmDeactivate.addEventListener('click', () => {
+                deactivateModal.classList.add('hidden');
+                showToast('Your account has been deactivated');
+            });
+
+            // Delete Account Modal
+            const deleteBtn = document.getElementById('deleteBtn');
+            const deleteModal = document.getElementById('deleteModal');
+            const cancelDelete = document.getElementById('cancelDelete');
+            const confirmDelete = document.getElementById('confirmDelete');
+            const confirmDeleteCheckbox = document.getElementById('confirmDeleteCheckbox');
+
+            deleteBtn.addEventListener('click', () => {
+                deleteModal.classList.remove('hidden');
+            });
+
+            cancelDelete.addEventListener('click', () => {
+                deleteModal.classList.add('hidden');
+            });
+
+            confirmDeleteCheckbox.addEventListener('change', function() {
+                confirmDelete.disabled = !this.checked;
+                confirmDelete.classList.toggle('opacity-50');
+                confirmDelete.classList.toggle('cursor-not-allowed');
+            });
+
+            confirmDelete.addEventListener('click', () => {
+                deleteModal.classList.add('hidden');
+                showToast('Your account has been permanently deleted');
+                // In a real app, this would redirect to home page or login
+            });
+
+            // Cancel Premium Modal
+            const cancelPremiumBtn = document.getElementById('cancelPremiumBtn');
+            const cancelPremiumModal = document.getElementById('cancelPremiumModal');
+            const cancelPremiumCancel = document.getElementById('cancelPremiumCancel');
+            const confirmPremiumCancel = document.getElementById('confirmPremiumCancel');
+
+            cancelPremiumBtn.addEventListener('click', () => {
+                cancelPremiumModal.classList.remove('hidden');
+            });
+
+            cancelPremiumCancel.addEventListener('click', () => {
+                cancelPremiumModal.classList.add('hidden');
+            });
+
+            confirmPremiumCancel.addEventListener('click', () => {
+                cancelPremiumModal.classList.add('hidden');
+                showToast('Your premium membership has been canceled');
+            });
+
+            // Show toast notification
+            function showToast(message) {
+                const toast = document.getElementById('successToast');
+                document.getElementById('toastMessage').textContent = message;
+                toast.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 5000);
+            }
+        });
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
+
+

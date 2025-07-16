@@ -1,0 +1,1155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVV Premium - Store Transfer Funds</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vvv-gold': '#FFD700',
+                        'vvv-silver': '#C0C0C0',
+                        'vvv-bronze': '#CD7F32',
+                        'vvv-deep': '#0f172a',
+                        'vvv-indigo': '#4338ca',
+                    },
+                    boxShadow: {
+                        'vvv': '0 10px 30px -15px rgba(67, 56, 202, 0.3)',
+                        'vvv-lg': '0 15px 40px -10px rgba(67, 56, 202, 0.3)',
+                        'vvv-inner': 'inset 0 2px 8px 0 rgba(67, 56, 202, 0.15)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'gradient-x': 'gradient-x 12s ease infinite',
+                        'gradient-rotate': 'gradient-rotate 8s ease infinite',
+                    },
+                    keyframes: {
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-position': '0% 50%'
+                            },
+                            '50%': {
+                                'background-position': '100% 50%'
+                            },
+                        },
+                        'gradient-rotate': {
+                            '0%': {
+                                'background-position': '0% 50%'
+                            },
+                            '50%': {
+                                'background-position': '100% 50%'
+                            },
+                            '100%': {
+                                'background-position': '0% 50%'
+                            },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        /* Premium glow effect */
+        .glow {
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .glow:hover {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #6366f1, #4338ca);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4338ca;
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(to right, #4338ca, #6366f1, #a5b4fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Shiny badge animation */
+        @keyframes shiny {
+            0% { transform: translateX(-100%) rotate(-30deg); }
+            100% { transform: translateX(300%) rotate(-30deg); }
+        }
+        
+        .shiny-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shiny-effect {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(
+                120deg,
+                rgba(255, 255, 255, 0) 20%,
+                rgba(255, 255, 255, 0.1) 40%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0.1) 60%,
+                rgba(255, 255, 255, 0) 80%
+            );
+            transform: rotate(-30deg);
+            animation: shiny 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        /* Pulse animation for premium elements */
+        @keyframes pulse-glow {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.3); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+        
+        /* Floating animation for cards */
+        .floating-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform: translateY(0);
+        }
+        
+        .floating-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -10px rgba(67, 56, 202, 0.3) !important;
+        }
+        
+        /* Gradient border */
+        .gradient-border {
+            position: relative;
+            background: white;
+            border-radius: 1rem;
+        }
+        
+        .gradient-border::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #4338ca, #6366f1, #a5b4fc, #4338ca);
+            background-size: 400% 400%;
+            border-radius: 1rem;
+            z-index: -1;
+            animation: gradient-rotate 8s ease infinite;
+            opacity: 0.7;
+        }
+        
+        /* Smooth transitions */
+        .smooth-transform {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        /* Highlighted feature */
+        .feature-highlight {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(67, 56, 202, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+            pointer-events: none;
+        }
+        
+        /* Fancy checkboxes */
+        .fancy-checkbox {
+            position: relative;
+            padding-left: 1.75rem;
+            cursor: pointer;
+        }
+        
+        .fancy-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        
+        .fancy-checkbox .checkmark {
+            position: absolute;
+            top: 0.25rem;
+            left: 0;
+            height: 1rem;
+            width: 1rem;
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 0.25rem;
+            transition: all 0.2s;
+        }
+        
+        .fancy-checkbox:hover input ~ .checkmark {
+            border-color: #6366f1;
+        }
+        
+        .fancy-checkbox input:checked ~ .checkmark {
+            background-color: #4338ca;
+            border-color: #4338ca;
+        }
+        
+        .fancy-checkbox .checkmark::after {
+            content: '';
+            position: absolute;
+            display: none;
+            left: 0.35rem;
+            top: 0.1rem;
+            width: 0.25rem;
+            height: 0.5rem;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        
+        .fancy-checkbox input:checked ~ .checkmark::after {
+            display: block;
+        }
+        
+        /* Fancy inputs */
+        .fancy-input {
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            border-radius: 0.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.7);
+        }
+        
+        .fancy-input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.2);
+        }
+        
+        /* Loading dots */
+        .loading-dots {
+            display: inline-flex;
+            align-items: center;
+            height: 1rem;
+        }
+        
+        .loading-dots span {
+            width: 0.5rem;
+            height: 0.5rem;
+            margin: 0 0.15rem;
+            background-color: currentColor;
+            border-radius: 50%;
+            display: inline-block;
+            animation: loading-dots 1.4s infinite ease-in-out both;
+        }
+        
+        .loading-dots span:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+        
+        .loading-dots span:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+        
+        @keyframes loading-dots {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 font-sans text-gray-800">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <div class="min-h-screen flex flex-col relative overflow-x-hidden">
+        <!-- Floating particles -->
+        <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+            <div class="absolute top-20 left-10 w-3 h-3 bg-vvv-gold rounded-full opacity-20 animation-float" style="animation-delay: 0s;"></div>
+            <div class="absolute top-1/3 right-20 w-2 h-2 bg-vvv-indigo rounded-full opacity-30 animation-float" style="animation-delay: 1s;"></div>
+            <div class="absolute top-2/3 left-1/4 w-3 h-3 bg-vvv-indigo rounded-full opacity-10 animation-float" style="animation-delay: 2s;"></div>
+            <div class="absolute bottom-20 right-1/3 w-2 h-2 bg-vvv-gold rounded-full opacity-25 animation-float" style="animation-delay: 0.5s;"></div>
+        </div>
+        
+        <!-- Header -->
+        <header class="bg-vvv-deep text-white shadow-lg sticky top-0 z-50 relative">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center relative">
+                <div class="flex items-center space-x-2 relative">
+                    <div class="shiny-container">
+                        <div class="bg-gradient-to-br from-vvv-indigo to-purple-600 h-10 w-10 rounded-full flex items-center justify-center text-white shadow-md">
+                            <i class="fas fa-crown text-lg"></i>
+                        </div>
+                        <div class="shiny-effect"></div>
+                    </div>
+                    <span class="text-xl font-bold flex items-center">
+                        <span class="gradient-text">VVV Premium</span>
+                        <span class="ml-1 bg-gradient-to-r from-vvv-gold to-yellow-300 text-transparent bg-clip-text text-sm">GOLD</span>
+                    </span>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="hidden md:flex items-center space-x-2 bg-gradient-to-r from-vvv-deep to-indigo-900 px-3 py-1 rounded-full glow border border-indigo-500/30">
+                        <i class="fas fa-wallet text-vvv-gold"></i>
+                        <span class="font-medium">$1,245.67</span>
+                    </div>
+                    
+                    <div class="relative group">
+                        <div class="shiny-container">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="h-10 w-10 rounded-full cursor-pointer border-2 border-vvv-gold">
+                            <div class="shiny-effect"></div>
+                        </div>
+                        <div class="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-vvv-lg py-2 z-50 hidden group-hover:block origin-top-right transform transition-all duration-200 scale-95 group-hover:scale-100">
+                            <div class="px-4 py-3 border-b border-gray-100">
+                                <div class="font-medium">John Doe</div>
+                                <div class="text-xs text-gray-500">Gold Member</div>
+                            </div>
+                            <a href="Dashboard.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-50 flex items-center space-x-2">
+                                <i class="fas fa-user-circle text-vvv-indigo"></i>
+                                <span>Profile</span>
+                            </a>
+                            <a href="accountsettings.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-50 flex items-center space-x-2">
+                                <i class="fas fa-cog text-vvv-indigo"></i>
+                                <span>Settings</span>
+                            </a>
+                            <a href="Signup.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-50 flex items-center space-x-2">
+                                <i class="fas fa-sign-out-alt text-red-500"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8 z-10">
+            <!-- Left Panel - User Info and Quick Contacts -->
+            <div class="w-full md:w-1/3 lg:w-1/4 space-y-6">
+                <!-- User Profile Card -->
+                <div class="gradient-border floating-card hover:shadow-vvv-lg">
+                    <div class="bg-white rounded-xl p-6 overflow-hidden">
+                        <div class="flex flex-col items-center">
+                            <div class="relative mb-4 rounded-full pulse-glow">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="h-24 w-24 rounded-full border-4 border-indigo-500 object-cover">
+                                <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-vvv-gold to-yellow-300 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center shadow">
+                                    <i class="fas fa-crown mr-1 text-xs"></i>
+                                    <span>Gold</span>
+                                </div>
+                            </div>
+                            
+                            <h2 class="text-xl font-bold text-center">John D.</h2>
+                            <p class="text-gray-600 mb-3 text-center">@johndoe</p>
+                            
+                            <div class="w-full h-3 bg-gray-200 rounded-full mb-4 overflow-hidden">
+                                <div class="h-full rounded-full bg-gradient-to-r from-indigo-500 to-vvv-indigo relative">
+                                    <span class="absolute inset-0 flex items-center justify-center text-xs text-white font-bold">75%</span>
+                                </div>
+                            </div>
+                            
+                            <p class="text-sm text-gray-600 flex items-center">
+                                <i class="fas fa-exchange-alt text-vvv-indigo mr-1"></i>
+                                <span>Transfers this month: 1/3</span>
+                            </p>
+                        </div>
+                        
+                        <div class="mt-6 pt-5 border-t">
+                            <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-3">Account Summary</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-wallet text-vvv-indigo"></i>
+                                        <span class="text-gray-600">Wallet Balance</span>
+                                    </div>
+                                    <span class="font-bold text-gray-800">$1,245.67</span>
+                                </div>
+                                <div class="flex justify-between items-start">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-lock text-vvv-indigo"></i>
+                                        <span class="text-gray-600">Locked Funds</span>
+                                    </div>
+                                    <span class="font-bold text-gray-800">$0.00</span>
+                                </div>
+                                <div class="flex justify-between items-start">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-coins text-vvv-indigo"></i>
+                                        <span class="text-gray-600">Monthly Limit</span>
+                                    </div>
+                                    <span class="font-bold text-gray-800">$9,400 left</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Contacts -->
+                <div class="gradient-border floating-card hover:shadow-vvv-lg">
+                    <div class="bg-white rounded-xl overflow-hidden">
+                        <div class="p-4 border-b">
+                            <h3 class="font-bold flex items-center text-vvv-indigo">
+                                <i class="fas fa-users mr-2"></i>
+                                Quick Contacts
+                                <span class="ml-auto text-xs font-normal bg-gray-100 text-gray-600 px-2 py-1 rounded-full">3 max</span>
+                            </h3>
+                        </div>
+                        
+                        <div class="divide-y divide-gray-100">
+                            <!-- Verified Contact -->
+                            <div class="p-4 flex items-center justify-between hover:bg-gray-50 cursor-pointer transition-all duration-200 group">
+                                <div class="flex items-center space-x-3">
+                                    <div class="relative">
+                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="h-10 w-10 rounded-full border-2 border-blue-500 object-cover group-hover:scale-105 transition-transform duration-200">
+                                        <span class="absolute bottom-0 right-0 bg-blue-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center shadow">
+                                            <i class="fas fa-check text-xs"></i>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">Sarah K.</h4>
+                                        <p class="text-xs text-gray-500">Last: $150</p>
+                                    </div>
+                                </div>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium">VVV ID</span>
+                            </div>
+                            
+                            <!-- Premium Contact -->
+                            <div class="p-4 flex items-center justify-between hover:bg-gray-50 cursor-pointer transition-all duration-200 group">
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User" class="h-10 w-10 rounded-full border-2 border-vvv-gold object-cover group-hover:scale-105 transition-transform duration-200">
+                                    <div>
+                                        <div class="flex items-center space-x-1">
+                                            <h4 class="font-medium">Mike T.</h4>
+                                            <span class="bg-gradient-to-r from-vvv-gold to-yellow-300 text-white text-xs px-1.5 py-0.5 rounded-full shadow">Gold</span>
+                                        </div>
+                                        <p class="text-xs text-gray-500">Last: $2k</p>
+                                    </div>
+                                </div>
+                                <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full font-medium">Verified</span>
+                            </div>
+                            
+                            <!-- Basic Contact -->
+                            <div class="p-4 flex items-center justify-between hover:bg-gray-50 cursor-pointer transition-all duration-200 group">
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="User" class="h-10 w-10 rounded-full border-2 border-gray-300 object-cover group-hover:scale-105 transition-transform duration-200">
+                                    <div>
+                                        <h4 class="font-medium">Alex J.</h4>
+                                        <p class="text-xs text-gray-500">Last: $75</p>
+                                    </div>
+                                </div>
+                                <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full font-medium">New</span>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 bg-gradient-to-r from-gray-50 to-gray-100 border-t border-gray-200">
+                            <button class="w-full bg-white hover:bg-gray-100 text-vvv-indigo py-2 rounded-lg font-medium flex items-center justify-center space-x-2 border border-gray-200 transition-all duration-200 hover:shadow-md">
+                                <i class="fas fa-plus-circle"></i>
+                                <span>Add New Contact</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Account Helper -->
+                <div class="gradient-border floating-card hover:shadow-vvv-lg">
+                    <div class="bg-gradient-to-br from-vvv-deep to-vvv-indigo text-white rounded-xl p-4 overflow-hidden">
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-white/20 p-3 rounded-xl">
+                                <i class="fas fa-headset text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">Premium Support</h3>
+                                <p class="text-xs opacity-80 mb-3">24/7 dedicated support for Gold members</p>
+                                <button class="text-xs bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full flex items-center space-x-1 transition">
+                                    <span>Contact Us</span>
+                                    <i class="fas fa-chevron-right text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Transfer Form and Recent Transactions -->
+            <div class="w-full md:w-2/3 lg:w-3/4 space-y-6">
+                <!-- Transfer Info Card -->
+                <div class="gradient-border floating-card hover:shadow-vvv-lg">
+                    <div class="bg-white rounded-xl overflow-hidden">
+                        <!-- Card Header -->
+                        <div class="p-6 border-b relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-r from-vvv-indigo/5 to-transparent opacity-30"></div>
+                            <div class="relative flex items-center justify-between">
+                                <div>
+                                    <h2 class="text-2xl font-bold flex items-center">
+                                        <div class="bg-gradient-to-br from-vvv-indigo to-purple-600 text-white p-2 rounded-lg mr-3">
+                                            <i class="fas fa-exchange-alt text-sm"></i>
+                                        </div>
+                                        <span class="gradient-text">Store Transfer Funds</span>
+                                    </h2>
+                                    <p class="text-sm text-gray-600 mt-1">Send funds directly to store accounts of friends and family</p>
+                                </div>
+                                
+                                <div class="hidden md:block">
+                                    <div class="bg-vvv-gold/10 text-vvv-gold px-3 py-1.5 rounded-full text-xs font-bold flex items-center">
+                                        <i class="fas fa-bolt mr-1"></i>
+                                        <span>FAST TRANSFER</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Card Content -->
+                        <div class="p-6 space-y-8">
+                            <!-- Recipient Section -->
+                            <div class="space-y-6">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-gradient-to-br from-vvv-indigo to-purple-600 text-white p-2 rounded-lg">
+                                        <i class="fas fa-user-friends text-sm"></i>
+                                    </div>
+                                    <h3 class="text-lg font-bold">Recipient Details</h3>
+                                </div>
+                                
+                                <!-- Recipient Search -->
+                                <div class="bg-gradient-to-r from-vvv-indigo/5 to-transparent p-4 rounded-xl border border-indigo-100">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Find Recipient</label>
+                                    <div class="relative">
+                                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                        <input type="text" placeholder="Enter VVV ID, email or phone" class="w-full p-3 pl-10 border border-gray-200 rounded-lg focus:ring-2 focus:ring-vvv-indigo focus:border-vvv-indigo fancy-input">
+                                    </div>
+                                    <p class="mt-2 text-xs text-gray-500 flex items-center">
+                                        <i class="fas fa-info-circle mr-1 text-vvv-indigo"></i>
+                                        Only verified VVV ID users can receive funds
+                                    </p>
+                                </div>
+                                
+                                <!-- Recipient Profile -->
+                                <div data-aos="fade-in" class="bg-gradient-to-r from-vvv-indigo/5 to-transparent rounded-xl p-4 border border-indigo-200 feature-highlight">
+                                    <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                                        <div class="relative">
+                                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Recipient" class="h-14 w-14 rounded-full border-2 border-white shadow-lg object-cover">
+                                            <span class="absolute bottom-0 right-0 bg-blue-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center shadow">
+                                                <i class="fas fa-check text-xs"></i>
+                                            </span>
+                                            <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-vvv-gold to-yellow-300 text-white text-xs px-2 py-0.5 rounded-full whitespace-nowrap">
+                                                <i class="fas fa-crown text-xs mr-1"></i>
+                                                <span>Gold</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex-grow">
+                                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                                                <div>
+                                                    <h4 class="font-bold flex flex-wrap items-center gap-2">Jennifer L.</h4>
+                                                    <p class="text-sm text-gray-600">@jenl â€¢ VVV ID: 900212001</p>
+                                                </div>
+                                                
+                                                <div class="mt-2 sm:mt-0">
+                                                    <div class="flex items-center space-x-2">
+                                                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium">Active</span>
+                                                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium">Trusted</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mt-2 flex items-center text-xs text-vvv-indigo">
+                                                <i class="fas fa-history mr-1"></i>
+                                                <span>Last transfer: $400 on May 15</span>
+                                                <i class="fas fa-check-circle text-green-500 ml-2"></i>
+                                                <span class="text-green-600">Completed</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-4 flex items-start text-sm text-gray-600">
+                                        <i class="fas fa-info-circle mt-1 mr-2 text-vvv-indigo"></i>
+                                        <div>
+                                            <p>This recipient is verified and has made 12 purchases on VVV Stores.</p>
+                                            <p class="mt-1">Average spending: $350 per transaction.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Transfer Details Section -->
+                            <div class="space-y-6">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-gradient-to-br from-vvv-indigo to-purple-600 text-white p-2 rounded-lg">
+                                        <i class="fas fa-money-bill-wave text-sm"></i>
+                                    </div>
+                                    <h3 class="text-lg font-bold">Transfer Details</h3>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <!-- Amount -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Amount (USD)</label>
+                                        <div class="relative">
+                                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold">$</span>
+                                            <input type="number" placeholder="0.00" min="0" step="0.01" class="w-full p-3 border border-gray-200 rounded-lg pl-10 focus:ring-2 focus:ring-vvv-indigo focus:border-vvv-indigo fancy-input" value="125.00">
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Select Store -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Select VVV Store</label>
+                                        <div class="relative">
+                                            <select class="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-vvv-indigo focus:border-vvv-indigo appearance-none fancy-input">
+                                                <option disabled selected>Where will funds be used?</option>
+                                                <option>Amazon</option>
+                                                <option>Apple Store</option>
+                                                <option selected>Ebay</option>
+                                                <option>Best Buy</option>
+                                                <option>Walmart</option>
+                                                <option>Target</option>
+                                                <option>Nike</option>
+                                                <option>Other...</option>
+                                            </select>
+                                            <i class="fas fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Reason -->
+                                    <div class="md:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Reason (required)</label>
+                                        <input type="text" placeholder="e.g., Birthday gift, Payment for services" class="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-vvv-indigo focus:border-vvv-indigo fancy-input" value="Birthday gift for Jenny">
+                                    </div>
+                                    
+                                    <!-- Priority Transfer -->
+                                    <div class="md:col-span-2">
+                                        <label class="fancy-checkbox block cursor-pointer select-none">
+                                            <input type="checkbox" checked="checked">
+                                            <span class="checkmark"></span>
+                                            <span class="ml-2 text-gray-700 flex items-center">
+                                                <span class="font-medium">Priority Transfer</span>
+                                                <span class="ml-2 bg-gradient-to-r from-vvv-gold to-yellow-300 text-white text-xs px-2 py-0.5 rounded-full">Instant Processing</span>
+                                                <span class="ml-2 bg-gray-100 text-gray-800 text-xs px-2 py-0.5 rounded-full">+ $2.00 fee</span>
+                                            </span>
+                                        </label>
+                                        <p class="text-xs text-gray-500 mt-1 ml-6">Transaction will be processed immediately (usually within minutes)</p>
+                                    </div>
+                                    
+                                    <!-- Expiry Notice -->
+                                    <div class="md:col-span-2 bg-gradient-to-r from-yellow-50 to-amber-50 border border-yellow-200 rounded-xl p-4">
+                                        <div class="flex items-start">
+                                            <div class="bg-yellow-100 text-yellow-600 p-2 rounded-lg mr-3 flex-shrink-0">
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-medium text-yellow-800">Funds Expiry Notice</h4>
+                                                <p class="text-sm text-yellow-700 mt-1">
+                                                    Transferred funds must be spent at the selected store within 48 hours. 
+                                                    Unused funds will be automatically returned to your wallet with a 1% service fee.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Limits Section -->
+                            <div class="space-y-6">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-gradient-to-br from-vvv-indigo to-purple-600 text-white p-2 rounded-lg">
+                                        <i class="fas fa-shield-alt text-sm"></i>
+                                    </div>
+                                    <h3 class="text-lg font-bold">Transfer Limits</h3>
+                                </div>
+                                
+                                <div class="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-4 border border-gray-200">
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                        <div class="border-r border-gray-200 pr-4 sm:pr-5">
+                                            <p class="text-sm text-gray-600 uppercase tracking-wider font-medium">Monthly transfers</p>
+                                            <div class="flex items-end mt-1">
+                                                <p class="text-2xl font-bold">2</p>
+                                                <span class="text-sm font-normal text-gray-500 ml-1 mb-0.5">/ 3</span>
+                                            </div>
+                                            <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                                <div class="bg-gradient-to-r from-blue-500 to-vvv-indigo h-2 rounded-full" style="width: 66%"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="border-r border-gray-200 pr-4 sm:pr-5">
+                                            <p class="text-sm text-gray-600 uppercase tracking-wider font-medium">Today's limit</p>
+                                            <p class="text-2xl font-bold mt-1">$1,800</p>
+                                            <p class="text-xs text-green-600 font-medium mt-2">83% remaining</p>
+                                        </div>
+                                        
+                                        <div>
+                                            <p class="text-sm text-gray-600 uppercase tracking-wider font-medium">Monthly limit</p>
+                                            <p class="text-2xl font-bold mt-1">$9,400</p>
+                                            <p class="text-xs text-green-600 font-medium mt-2">97% remaining</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Summary Section -->
+                            <div class="bg-gray-50 rounded-xl p-5 border border-gray-200">
+                                <h4 class="font-medium text-gray-700 mb-3">Transfer Summary</h4>
+                                
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Amount to send</span>
+                                        <span class="font-medium">$125.00</span>
+                                    </div>
+                                    
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Priority fee</span>
+                                        <span class="font-medium">$2.00</span>
+                                    </div>
+                                    
+                                    <div class="flex justify-between border-t border-gray-200 pt-3 mt-2">
+                                        <span class="text-gray-800 font-medium">Total</span>
+                                        <span class="text-vvv-indigo font-bold">$127.00</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center mt-4 text-sm text-gray-600">
+                                    <i class="fas fa-shield-alt mr-2 text-vvv-indigo"></i>
+                                    <span>Secured with Bank-level 256-bit encryption</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Submit Button -->
+                            <div class="flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-4">
+                                <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-lg transition duration-200">
+                                    <i class="fas fa-save mr-2"></i>
+                                    Save Draft
+                                </button>
+                                <button id="sendTransferBtn" class="bg-gradient-to-r from-vvv-indigo to-indigo-600 hover:from-vvv-indigo hover:to-indigo-700 text-white font-bold py-3 px-8 rounded-lg flex items-center justify-center space-x-2 transition-all duration-200 hover:shadow-lg glow">
+                                    <i class="fas fa-paper-plane"></i>
+                                    <span>Send Transfer</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Transactions -->
+                <div class="gradient-border floating-card hover:shadow-vvv-lg">
+                    <div class="bg-white rounded-xl overflow-hidden">
+                        <div class="p-4 border-b flex justify-between items-center">
+                            <h3 class="font-bold flex items-center text-lg">
+                                <div class="bg-gradient-to-br from-vvv-indigo to-purple-600 text-white p-2 rounded-lg mr-2">
+                                    <i class="fas fa-history text-sm"></i>
+                                </div>
+                                <span class="gradient-text">Recent Transactions</span>
+                            </h3>
+                            <button class="text-sm text-vvv-indigo hover:text-indigo-800 font-medium flex items-center space-x-1">
+                                <span>View All</span>
+                                <i class="fas fa-external-link-alt text-xs"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="divide-y divide-gray-100">
+                            <!-- Transaction 1 -->
+                            <div class="p-4 hover:bg-gray-50 flex items-center justify-between cursor-pointer group">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-gradient-to-br from-green-100 to-green-50 text-green-800 p-3 rounded-lg group-hover:shadow-md transition">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">To Sarah K.</h4>
+                                        <div class="flex flex-wrap items-center gap-1 mt-1">
+                                            <span class="text-xs text-gray-500">May 15</span>
+                                            <span class="text-xs text-gray-500">â€¢</span>
+                                            <span class="text-xs px-2 py-0.5 bg-blue-100 text-blue-800 rounded-full">Amazon</span>
+                                            <span class="text-xs px-2 py-0.5 bg-green-100 text-green-800 rounded-full">Completed</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="flex items-center justify-end space-x-1">
+                                        <p class="font-bold">-$400.00</p>
+                                        <div class="h-4 w-4 bg-green-100 text-green-800 rounded-full flex items-center justify-center text-xs">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Transaction 2 -->
+                            <div class="p-4 hover:bg-gray-50 flex items-center justify-between cursor-pointer group">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-gradient-to-br from-blue-100 to-blue-50 text-blue-800 p-3 rounded-lg group-hover:shadow-md transition">
+                                        <i class="fas fa-store"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">Apple Store</h4>
+                                        <div class="flex flex-wrap items-center gap-1 mt-1">
+                                            <span class="text-xs text-gray-500">May 10</span>
+                                            <span class="text-xs text-gray-500">â€¢</span>
+                                            <span class="text-xs px-2 py-0.5 bg-gray-100 text-gray-800 rounded-full">Received $150</span>
+                                            <span class="text-xs px-2 py-0.5 bg-green-100 text-green-800 rounded-full">Spent</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="flex items-center justify-end space-x-1">
+                                        <p class="font-bold text-green-600">+$150.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Transaction 3 -->
+                            <div class="p-4 hover:bg-gray-50 flex items-center justify-between cursor-pointer group">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-gradient-to-br from-indigo-100 to-vvv-indigo/10 text-indigo-800 p-3 rounded-lg group-hover:shadow-md transition">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">To Mike T.</h4>
+                                        <div class="flex flex-wrap items-center gap-1 mt-1">
+                                            <span class="text-xs text-gray-500">May 8</span>
+                                            <span class="text-xs text-gray-500">â€¢</span>
+                                            <span class="text-xs px-2 py-0.5 bg-yellow-100 text-yellow-800 rounded-full">Best Buy</span>
+                                            <span class="text-xs px-2 py-0.5 bg-green-100 text-green-800 rounded-full">Completed</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="flex items-center justify-end space-x-1">
+                                        <p class="font-bold">-$75.00</p>
+                                        <div class="h-4 w-4 bg-green-100 text-green-800 rounded-full flex items-center justify-center text-xs">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        
+    </div>
+
+    <!-- Verification Modal (hidden by default) -->
+    <div id="verificationModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-all duration-300 ease-out">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 relative overflow-hidden transition-all duration-300 transform scale-95 opacity-0">
+            <div class="absolute -top-10 -right-10 bg-vvv-indigo/10 w-20 h-20 rounded-full"></div>
+            <div class="absolute -bottom-10 -left-10 bg-vvv-indigo/5 w-24 h-24 rounded-full"></div>
+            
+            <div class="flex justify-between items-center mb-6 relative z-10">
+                <h3 class="text-xl font-bold text-gray-900">Secure Verification</h3>
+                <button onclick="closeVerificationModal()" class="text-gray-500 hover:text-gray-700 transition">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="text-center mb-6 relative z-10">
+                <div class="bg-gradient-to-r from-vvv-indigo/5 to-purple-100 p-5 rounded-full inline-block mb-6 border border-indigo-100">
+                    <i class="fas fa-shield-alt text-vvv-indigo text-4xl"></i>
+                </div>
+                
+                <h4 class="font-bold text-lg text-gray-900 mb-2">Secure Your Transfer</h4>
+                <p class="text-gray-600 mb-6">
+                    For your security, please verify this transfer with 2-factor authentication.
+                    A verification code has been sent to your registered devices.
+                </p>
+                
+                <div class="flex justify-center space-x-4 mb-6 flex-wrap">
+                    <button class="bg-gradient-to-r from-vvv-indigo/5 to-indigo-50 text-vvv-indigo px-4 py-2.5 rounded-lg flex items-center space-x-2 transition hover:shadow-md mb-2 sm:mb-0">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>SMS Code</span>
+                    </button>
+                    <button class="bg-gradient-to-r from-vvv-indigo/5 to-indigo-50 text-vvv-indigo px-4 py-2.5 rounded-lg flex items-center space-x-2 transition hover:shadow-md">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email</span>
+                    </button>
+                </div>
+                
+                <div class="mb-6">
+                    <div class="flex justify-center space-x-3 mb-2">
+                        <input type="text" maxlength="1" class="w-12 h-12 text-center text-2xl font-bold border border-gray-200 rounded-lg focus:ring-2 focus:ring-vvv-indigo focus:border-vvv-indigo fancy-input">
+                        <input type="text" maxlength="1" class="w-12 h-12 text-center text-2xl font-bold border border-gray-200 rounded-lg focus:ring-2 focus:ring-vvv-indigo focus:border-vvv-indigo fancy-input">
+                        <input type="text" maxlength="1" class="w-12 h-12 text-center text-2xl font-bold border border-gray-200 rounded-lg focus:ring-2 focus:ring-vvv-indigo focus:border-vvv-indigo fancy-input">
+                        <span class="flex items-center justify-center text-gray-400">-</span>
+                        <input type="text" maxlength="1" class="w-12 h-12 text-center text-2xl font-bold border border-gray-200 rounded-lg focus:ring-2 focus:ring-vvv-indigo focus:border-vvv-indigo fancy-input">
+                        <input type="text" maxlength="1" class="w-12 h-12 text-center text-2xl font-bold border border-gray-200 rounded-lg focus:ring-2 focus:ring-vvv-indigo focus:border-vvv-indigo fancy-input">
+                        <input type="text" maxlength="1" class="w-12 h-12 text-center text-2xl font-bold border border-gray-200 rounded-lg focus:ring-2 focus:ring-vvv-indigo focus:border-vvv-indigo fancy-input">
+                    </div>
+                    
+                    <div class="text-sm text-gray-500 mb-4 flex items-center justify-center space-x-2">
+                        <p>Code sent to â€¢â€¢â€¢â€¢â€¢â€¢7890</p>
+                        <a href="#" class="text-vvv-indigo hover:underline">Resend code</a>
+                    </div>
+                    
+                    <button id="verifyBtn" class="w-full bg-gradient-to-r from-vvv-indigo to-indigo-600 hover:from-vvv-indigo hover:to-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 hover:shadow-lg flex items-center justify-center space-x-2">
+                        <span>Verify & Complete Transfer</span>
+                        <i class="fas fa-lock"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-all duration-300 ease-out">
+        <div class="bg-white rounded-2xl max-w-md w-full p-8 relative overflow-hidden text-center transition-all duration-300 transform scale-95 opacity-0">
+            <div class="absolute inset-0 bg-gradient-to-br from-green-50 to-green-100 opacity-30"></div>
+            
+            <div class="relative">
+                <div class="bg-gradient-to-br from-green-400 to-green-600 text-white p-5 rounded-full inline-flex items-center justify-center mb-6 w-20 h-20 mx-auto">
+                    <i class="fas fa-check text-3xl"></i>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Transfer Successful!</h3>
+                <p class="text-gray-600 mb-6">
+                    Your transfer of <span class="font-bold">$127.00</span> to <span class="font-bold">Jennifer L.</span> for <span class="font-bold">Ebay</span> has been completed successfully.
+                </p>
+                
+                <div class="bg-green-50 rounded-xl p-4 border border-green-200 mb-6">
+                    <div class="flex items-center justify-center space-x-2">
+                        <i class="fas fa-bolt text-yellow-500"></i>
+                        <span class="font-medium text-green-800">Transaction ID: TXN874562398</span>
+                    </div>
+                    <p class="text-sm text-green-700 mt-1">
+                        The recipient has been notified and funds are ready for use.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <button onclick="closeSuccessModal()" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2.5 rounded-lg transition">
+                        View Receipt
+                    </button>
+                    <button onclick="closeSuccessModal()" class="bg-gradient-to-r from-vvv-indigo to-indigo-600 hover:from-vvv-indigo hover:to-indigo-700 text-white font-bold py-2.5 rounded-lg transition hover:shadow-md">
+                        Done
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functions
+        function openVerificationModal() {
+            const modal = document.getElementById('verificationModal');
+            modal.classList.remove('hidden');
+            
+            // Trigger animation
+            setTimeout(() => {
+                modal.querySelector('.scale-95').classList.remove('scale-95');
+                modal.querySelector('.opacity-0').classList.remove('opacity-0');
+            }, 10);
+            
+            // Focus first input
+            setTimeout(() => {
+                modal.querySelector('input').focus();
+            }, 100);
+        }
+        
+        function closeVerificationModal() {
+            const modal = document.getElementById('verificationModal');
+            modal.querySelector('.scale-95').classList.add('scale-95');
+            modal.querySelector('.opacity-0').classList.add('opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+        
+        function closeSuccessModal() {
+            const modal = document.getElementById('successModal');
+            modal.querySelector('.scale-95').classList.add('scale-95');
+            modal.querySelector('.opacity-0').classList.add('opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                closeVerificationModal();
+            }, 300);
+        }
+        
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Send Transfer Button
+            const sendButton = document.getElementById('sendTransferBtn');
+            const verifyBtn = document.getElementById('verifyBtn');
+            
+            if (sendButton) {
+                sendButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openVerificationModal();
+                });
+            }
+            
+            if (verifyBtn) {
+                verifyBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    closeVerificationModal();
+                    
+                    // Show success modal after verification
+                    setTimeout(() => {
+                        const successModal = document.getElementById('successModal');
+                        successModal.classList.remove('hidden');
+                        
+                        setTimeout(() => {
+                            successModal.querySelector('.scale-95').classList.remove('scale-95');
+                            successModal.querySelector('.opacity-0').classList.remove('opacity-0');
+                        }, 10);
+                    }, 300);
+                });
+            }
+            
+            // Close modals when clicking outside
+            document.getElementById('verificationModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeVerificationModal();
+                }
+            });
+            
+            document.getElementById('successModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeSuccessModal();
+                }
+            });
+            
+            // OTP inputs navigation
+            const otpInputs = document.querySelectorAll('#verificationModal input[type="text"]');
+            if (otpInputs) {
+                otpInputs.forEach((input, index) => {
+                    input.addEventListener('input', function() {
+                        if (this.value.length === 1) {
+                            if (index < otpInputs.length - 1) {
+                                otpInputs[index + 1].focus();
+                            }
+                        }
+                    });
+                    
+                    input.addEventListener('keydown', function(e) {
+                        if (e.key === 'Backspace' && this.value.length === 0) {
+                            if (index > 0) {
+                                otpInputs[index - 1].focus();
+                            }
+                        }
+                    });
+                });
+            }
+            
+            // Auto-focus amount input on page load
+            const amountInput = document.querySelector('input[placeholder="0.00"]');
+            if (amountInput) {
+                setTimeout(() => {
+                    amountInput.focus();
+                }, 300);
+            }
+        });
+        
+        // Hotkey for quick sending (Ctrl+Enter)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                const sendBtn = document.getElementById('sendTransferBtn');
+                if (sendBtn) sendBtn.click();
+            }
+        });
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
+

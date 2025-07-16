@@ -1,0 +1,404 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVV - Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            transition: all 0.3s ease;
+        }
+        
+        .dark body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #3b82f6, #ef4444);
+        }
+        
+        .input-field {
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        
+        .dark .input-field:focus {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+        }
+        
+        .toggle-checkbox:checked {
+            right: 0;
+            background-color: #ef4444;
+        }
+        
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #1e293b;
+        }
+        
+        .page-transition {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .otp-input {
+            width: 3rem;
+            height: 3rem;
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 0 0.5rem;
+        }
+        
+        .resend-timer {
+            display: inline-flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="dark:bg-gray-900 dark:text-gray-100">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#home" class="text-2xl font-bold gradient-text">VVV</a>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="relative inline-block w-12 mr-2 align-middle select-none">
+                        <input type="checkbox" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-2 appearance-none cursor-pointer"/>
+                        <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                    </div>
+                    <span class="text-sm font-medium hidden sm:inline">Dark Mode</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="app" class="pt-16">
+        <!-- Email Verification -->
+        <section id="email-verification" class="min-h-screen flex items-center justify-center py-16 page-transition">
+            <div class="max-w-md w-full px-4">
+                <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-500 to-red-500 p-6 text-white text-center">
+                        <h2 class="text-2xl font-bold">Verify Your Email</h2>
+                        <p class="opacity-90">Enter the 6-digit code sent to your email</p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex justify-center mb-8">
+                            <div class="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-3xl">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mb-6">
+                            <p class="text-gray-600 dark:text-gray-300">
+                                We've sent a verification code to <span class="font-medium">user@example.com</span>
+                            </p>
+                            <button class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline mt-2">
+                                Change email address
+                            </button>
+                        </div>
+                        
+                        <form class="space-y-6">
+                            <div class="flex justify-center">
+                                <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700">
+                                <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700">
+                                <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700">
+                                <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700">
+                                <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700">
+                                <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700">
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="button" id="resend-email" class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">
+                                    <span id="email-timer" class="resend-timer hidden">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        <span id="email-countdown">60</span>s
+                                    </span>
+                                    <span id="email-resend-text">Resend code</span>
+                                </button>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
+                                Verify Email
+                            </button>
+                        </form>
+                        
+                        <div class="mt-6 text-center text-sm text-gray-600 dark:text-gray-300">
+                            Didn't receive the code? Check your spam folder or 
+                            <button class="text-blue-600 dark:text-blue-400 font-medium hover:underline">
+                                contact support
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phone Verification -->
+        <section id="phone-verification" class="min-h-screen flex items-center justify-center py-16 hidden page-transition">
+            <div class="max-w-md w-full px-4">
+                <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-500 to-red-500 p-6 text-white text-center">
+                        <h2 class="text-2xl font-bold">Verify Your Phone</h2>
+                        <p class="opacity-90">Enter the 6-digit code sent via SMS</p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex justify-center mb-8">
+                            <div class="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-3xl">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mb-6">
+                            <p class="text-gray-600 dark:text-gray-300">
+                                We've sent an SMS to <span class="font-medium">+1 (555) 123-4567</span>
+                            </p>
+                            <button class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline mt-2">
+                                Change phone number
+                            </button>
+                        </div>
+                        
+                        <form class="space-y-6">
+                            <div class="flex justify-center">
+                                <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700">
+                                <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700">
+                                <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700">
+                                <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700">
+                                <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700">
+                                <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700">
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="button" id="resend-sms" class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">
+                                    <span id="sms-timer" class="resend-timer hidden">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        <span id="sms-countdown">60</span>s
+                                    </span>
+                                    <span id="sms-resend-text">Resend SMS</span>
+                                </button>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
+                                Verify Phone
+                            </button>
+                        </form>
+                        
+                        <div class="mt-6 text-center text-sm text-gray-600 dark:text-gray-300">
+                            Didn't receive the SMS? 
+                            <button class="text-blue-600 dark:text-blue-400 font-medium hover:underline">
+                                Try voice call instead
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Verification Success -->
+        <section id="verification-success" class="min-h-screen flex items-center justify-center py-16 hidden page-transition">
+            <div class="max-w-md w-full px-4 text-center">
+                <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg overflow-hidden p-8">
+                    <div class="w-24 h-24 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-600 dark:text-green-400 text-4xl mx-auto mb-6">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    
+                    <h2 class="text-2xl font-bold mb-4">Verification Successful!</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-8">
+                        Your account has been successfully verified. You can now access all features of VVV.
+                    </p>
+                    
+                    <a href="#dashboard" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition">
+                        Continue to Dashboard
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Dark mode toggle
+        const toggle = document.getElementById('toggle');
+        const html = document.querySelector('html');
+        
+        if (localStorage.getItem('dark-mode') === 'true') {
+            html.classList.add('dark');
+            toggle.checked = true;
+        }
+        
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                html.classList.add('dark');
+                localStorage.setItem('dark-mode', true);
+            } else {
+                html.classList.remove('dark');
+                localStorage.setItem('dark-mode', false);
+            }
+        });
+
+        // OTP input auto-focus
+        const otpInputs = document.querySelectorAll('.otp-input');
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                if (input.value.length === 1 && index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
+            });
+            
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && input.value.length === 0 && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+        });
+
+        // Resend timer functionality
+        function startTimer(elementId, resendButtonId, resendTextId, duration) {
+            const timerElement = document.getElementById(elementId);
+            const countdownElement = document.getElementById(elementId.replace('-timer', '-countdown'));
+            const resendButton = document.getElementById(resendButtonId);
+            const resendText = document.getElementById(resendTextId);
+            
+            timerElement.classList.remove('hidden');
+            resendText.classList.add('hidden');
+            resendButton.disabled = true;
+            
+            let timeLeft = duration;
+            countdownElement.textContent = timeLeft;
+            
+            const timer = setInterval(() => {
+                timeLeft--;
+                countdownElement.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    timerElement.classList.add('hidden');
+                    resendText.classList.remove('hidden');
+                    resendButton.disabled = false;
+                }
+            }, 1000);
+        }
+
+        // Email resend
+        document.getElementById('resend-email').addEventListener('click', function() {
+            startTimer('email-timer', 'resend-email', 'email-resend-text', 60);
+            // Here you would typically trigger an API call to resend the email verification code
+            console.log('Resending email verification code...');
+        });
+
+        // SMS resend
+        document.getElementById('resend-sms').addEventListener('click', function() {
+            startTimer('sms-timer', 'resend-sms', 'sms-resend-text', 60);
+            // Here you would typically trigger an API call to resend the SMS verification code
+            console.log('Resending SMS verification code...');
+        });
+
+        // Form submission
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Hide current verification page
+                if (form.closest('#email-verification')) {
+                    document.getElementById('email-verification').classList.add('hidden');
+                } else if (form.closest('#phone-verification')) {
+                    document.getElementById('phone-verification').classList.add('hidden');
+                }
+                
+                // Show success message
+                document.getElementById('verification-success').classList.remove('hidden');
+                
+                // Here you would typically validate the OTP and submit to your backend
+                console.log('Verification code submitted');
+            });
+        });
+
+        // Start timers on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            startTimer('email-timer', 'resend-email', 'email-resend-text', 60);
+        });
+    </script>
+    <footer class="bg-gray-900 text-white py-10 mt-10">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h4 class="font-bold mb-4">Quick Links</h4>
+                <ul>
+                    <li><a href='Dashboard.html'>Dashboard</a></li>
+                    <li><a href='Store.html'>Store</a></li>
+                    <li><a href='Order.html'>Order History</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Support</h4>
+                <ul>
+                    <li><a href="AiSupport.html" class="hover:text-yellow-500">AI Support</a></li>
+                    <li><a href='Faq.html'>FAQ</a></li>
+                    <li><a href='Contactus.html'>Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Legal</h4>
+                <ul>
+                    <li><a href="privacy.html" class="hover:text-yellow-500">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="hover:text-yellow-500">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Community</h4>
+                <ul>
+                    <li><a href="referal.html" class="hover:text-yellow-500">Referral Program</a></li>
+                    <li><a href='rewards.html'>Rewards</a></li>
+                    <li><a href='community.html'>Community</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

@@ -1,0 +1,857 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVV Premium Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .comment-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        .topic-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .badge-premium {
+            background: linear-gradient(45deg, #8B5CF6, #EC4899);
+            color: white;
+        }
+        .animate-pulse-slow {
+            animation: pulse 3s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-indigo-700 text-white shadow-lg">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-users text-3xl"></i>
+                        <h1 class="text-2xl font-bold">VVV Premium Community</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="hidden md:flex items-center space-x-2 bg-indigo-600 px-4 py-2 rounded-full">
+                            <span class="font-medium">Premium Member</span>
+                            <i class="fas fa-crown text-yellow-400"></i>
+                        </div>
+                        <div class="relative">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-10 h-10 rounded-full border-2 border-white">
+                            <div class="absolute -bottom-1 -right-1 bg-yellow-400 text-yellow-800 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                                <i class="fas fa-check text-[10px]"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Left Column - Main Content -->
+                <div class="lg:col-span-3 space-y-6">
+                    <!-- Welcome Banner -->
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-6 rounded-xl shadow-md">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                            <div class="flex items-start space-x-4 mb-4 md:mb-0">
+                                <div class="bg-white bg-opacity-20 p-3 rounded-full">
+                                    <i class="fas fa-handshake text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-xl font-bold">Welcome to the VVV Premium Lounge</h2>
+                                    <p class="opacity-90">Connect with fellow premium members and share insights</p>
+                                </div>
+                            </div>
+                            <div class="bg-white text-purple-700 px-4 py-2 rounded-full font-bold flex items-center">
+                                <i class="fas fa-users mr-2"></i>
+                                <span>1,284 members online</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Featured Topics -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-xl font-bold text-gray-800">Featured Discussions</h2>
+                            <button onclick="showNewTopicModal()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center">
+                                <i class="fas fa-plus mr-2"></i>
+                                New Topic
+                            </button>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Topic Card 1 -->
+                            <div class="topic-card bg-white border border-gray-200 rounded-lg p-5 transition duration-200 cursor-pointer">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div>
+                                        <h3 class="font-bold text-gray-800 text-lg">Best strategies for maximizing VVV benefits</h3>
+                                        <div class="flex items-center space-x-3 mt-1">
+                                            <div class="flex items-center space-x-1 text-sm text-gray-500">
+                                                <i class="fas fa-user"></i>
+                                                <span>JohnDoe</span>
+                                            </div>
+                                            <div class="flex items-center space-x-1 text-sm text-gray-500">
+                                                <i class="fas fa-clock"></i>
+                                                <span>2 hours ago</span>
+                                            </div>
+                                            <div class="flex items-center space-x-1 text-sm text-gray-500">
+                                                <i class="fas fa-comment"></i>
+                                                <span>24 replies</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">TRENDING</span>
+                                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-1 rounded-full">PREMIUM</span>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600 mb-4">I've been using VVV Premium for 6 months now and wanted to share some of my favorite tips for getting the most value from your membership...</p>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex space-x-2">
+                                        <div class="flex -space-x-2">
+                                            <img class="w-8 h-8 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
+                                            <img class="w-8 h-8 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                                            <img class="w-8 h-8 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/women/68.jpg" alt="User">
+                                        </div>
+                                        <span class="text-xs text-gray-500 self-center">+21 more engaged</span>
+                                    </div>
+                                    <button onclick="viewTopic('1')" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+                                        View Discussion <i class="fas fa-arrow-right ml-1"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Topic Card 2 -->
+                            <div class="topic-card bg-white border border-gray-200 rounded-lg p-5 transition duration-200 cursor-pointer">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div>
+                                        <h3 class="font-bold text-gray-800 text-lg">Exclusive feature requests for VVV team</h3>
+                                        <div class="flex items-center space-x-3 mt-1">
+                                            <div class="flex items-center space-x-1 text-sm text-gray-500">
+                                                <i class="fas fa-user"></i>
+                                                <span>SarahMiller</span>
+                                            </div>
+                                            <div class="flex items-center space-x-1 text-sm text-gray-500">
+                                                <i class="fas fa-clock"></i>
+                                                <span>1 day ago</span>
+                                            </div>
+                                            <div class="flex items-center space-x-1 text-sm text-gray-500">
+                                                <i class="fas fa-comment"></i>
+                                                <span>42 replies</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full">OFFICIAL</span>
+                                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-1 rounded-full">PREMIUM</span>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600 mb-4">The VVV team is monitoring this thread for premium member feature requests. What would you like to see added or improved in the premium experience?</p>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-check-circle text-green-500"></i>
+                                        <span class="text-xs text-gray-500">VVV Team is responding</span>
+                                    </div>
+                                    <button onclick="viewTopic('2')" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+                                        View Discussion <i class="fas fa-arrow-right ml-1"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Topic Card 3 -->
+                            <div class="topic-card bg-white border border-gray-200 rounded-lg p-5 transition duration-200 cursor-pointer">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div>
+                                        <h3 class="font-bold text-gray-800 text-lg">How are you using your referral bonuses?</h3>
+                                        <div class="flex items-center space-x-3 mt-1">
+                                            <div class="flex items-center space-x-1 text-sm text-gray-500">
+                                                <i class="fas fa-user"></i>
+                                                <span>TravelGuru</span>
+                                            </div>
+                                            <div class="flex items-center space-x-1 text-sm text-gray-500">
+                                                <i class="fas fa-clock"></i>
+                                                <span>3 days ago</span>
+                                            </div>
+                                            <div class="flex items-center space-x-1 text-sm text-gray-500">
+                                                <i class="fas fa-comment"></i>
+                                                <span>18 replies</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-1 rounded-full">POPULAR</span>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600 mb-4">I've earned over $200 in referral bonuses this month alone! Curious how other premium members are maximizing their referral programs...</p>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex -space-x-2">
+                                        <img class="w-8 h-8 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/men/75.jpg" alt="User">
+                                        <img class="w-8 h-8 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/women/63.jpg" alt="User">
+                                        <img class="w-8 h-8 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/men/22.jpg" alt="User">
+                                    </div>
+                                    <button onclick="viewTopic('3')" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+                                        View Discussion <i class="fas fa-arrow-right ml-1"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex justify-center">
+                            <button class="bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-200">
+                                View All Discussions
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6">Recent Community Activity</h2>
+                        
+                        <div class="space-y-4">
+                            <!-- Activity Item 1 -->
+                            <div class="comment-card bg-gray-50 border border-gray-200 rounded-lg p-4 transition duration-200">
+                                <div class="flex items-start space-x-3">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-10 h-10 rounded-full">
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <span class="font-medium text-gray-800">JaneSmith</span>
+                                                <span class="text-xs text-gray-500 ml-2">replied to</span>
+                                                <span class="text-xs text-indigo-600">Best strategies for maximizing VVV benefits</span>
+                                            </div>
+                                            <span class="text-xs text-gray-500">15 min ago</span>
+                                        </div>
+                                        <p class="text-gray-600 mt-1">Great tips! I'd also recommend scheduling your larger transfers during the 50% fee discount periods. Saved me over $100 last month!</p>
+                                        <div class="mt-2 flex space-x-4">
+                                            <button class="text-gray-500 hover:text-indigo-600 text-sm flex items-center">
+                                                <i class="far fa-thumbs-up mr-1"></i> 8
+                                            </button>
+                                            <button class="text-gray-500 hover:text-indigo-600 text-sm flex items-center">
+                                                <i class="far fa-comment mr-1"></i> Reply
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Activity Item 2 -->
+                            <div class="comment-card bg-gray-50 border border-gray-200 rounded-lg p-4 transition duration-200">
+                                <div class="flex items-start space-x-3">
+                                    <div class="relative">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-10 h-10 rounded-full">
+                                        <div class="absolute -bottom-1 -right-1 bg-yellow-400 text-yellow-800 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                                            <i class="fas fa-check text-[10px]"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <span class="font-medium text-gray-800">VVV_Team</span>
+                                                <span class="text-xs text-gray-500 ml-2">posted in</span>
+                                                <span class="text-xs text-indigo-600">Exclusive feature requests for VVV team</span>
+                                            </div>
+                                            <span class="text-xs text-gray-500">1 hour ago</span>
+                                        </div>
+                                        <p class="text-gray-600 mt-1">Thanks for all the great suggestions! We're currently working on implementing a new dashboard for premium members based on your feedback. Stay tuned for updates!</p>
+                                        <div class="mt-2 flex space-x-4">
+                                            <button class="text-gray-500 hover:text-indigo-600 text-sm flex items-center">
+                                                <i class="far fa-thumbs-up mr-1"></i> 24
+                                            </button>
+                                            <button class="text-gray-500 hover:text-indigo-600 text-sm flex items-center">
+                                                <i class="far fa-comment mr-1"></i> Reply
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Activity Item 3 -->
+                            <div class="comment-card bg-gray-50 border border-gray-200 rounded-lg p-4 transition duration-200">
+                                <div class="flex items-start space-x-3">
+                                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="User" class="w-10 h-10 rounded-full">
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <span class="font-medium text-gray-800">FinancePro</span>
+                                                <span class="text-xs text-gray-500 ml-2">started a new topic</span>
+                                                <span class="text-xs text-indigo-600">Tax implications of referral bonuses</span>
+                                            </div>
+                                            <span class="text-xs text-gray-500">3 hours ago</span>
+                                        </div>
+                                        <p class="text-gray-600 mt-1">Has anyone consulted with a tax professional about how to report referral bonuses? I'm curious if these count as taxable income in different jurisdictions.</p>
+                                        <div class="mt-2 flex space-x-4">
+                                            <button class="text-gray-500 hover:text-indigo-600 text-sm flex items-center">
+                                                <i class="far fa-thumbs-up mr-1"></i> 5
+                                            </button>
+                                            <button class="text-gray-500 hover:text-indigo-600 text-sm flex items-center">
+                                                <i class="far fa-comment mr-1"></i> Reply
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex justify-center">
+                            <button class="bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-200">
+                                Load More Activity
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Sidebar -->
+                <div class="space-y-6">
+                    <!-- Premium Benefits -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-4">Premium Community Perks</h2>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Exclusive discussion forums</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Direct access to VVV team</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Early feature previews</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Member-only events</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Premium badge on your profile</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Top Contributors -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-4">Top Contributors</h2>
+                        
+                        <div class="space-y-4">
+                            <!-- Contributor 1 -->
+                            <div class="flex items-center space-x-3">
+                                <div class="relative">
+                                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="w-10 h-10 rounded-full">
+                                    <div class="absolute -bottom-1 -right-1 bg-yellow-400 text-yellow-800 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                                        <i class="fas fa-crown text-[10px]"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-medium">MoneySaver</span>
+                                        <span class="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-full">1,240 pts</span>
+                                    </div>
+                                    <div class="text-xs text-gray-500">Helped 84 members</div>
+                                </div>
+                            </div>
+
+                            <!-- Contributor 2 -->
+                            <div class="flex items-center space-x-3">
+                                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User" class="w-10 h-10 rounded-full">
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-medium">TravelExpert</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">980 pts</span>
+                                    </div>
+                                    <div class="text-xs text-gray-500">Started 32 discussions</div>
+                                </div>
+                            </div>
+
+                            <!-- Contributor 3 -->
+                            <div class="flex items-center space-x-3">
+                                <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="User" class="w-10 h-10 rounded-full">
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-medium">FinanceGuru</span>
+                                        <span class="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full">750 pts</span>
+                                    </div>
+                                    <div class="text-xs text-gray-500">Best answers: 56</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="w-full mt-4 text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+                            View Leaderboard
+                        </button>
+                    </div>
+
+                    <!-- Upcoming Events -->
+                    <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-6">
+                        <h2 class="text-lg font-bold text-indigo-800 mb-3">Upcoming Events</h2>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="bg-white p-2 rounded-lg mr-3">
+                                    <div class="text-indigo-700 font-bold text-center leading-tight">JUN<br>15</div>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-indigo-800">Premium Member Q&A</h3>
+                                    <p class="text-sm text-indigo-600">Live session with VVV founders</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-white p-2 rounded-lg mr-3">
+                                    <div class="text-indigo-700 font-bold text-center leading-tight">JUN<br>22</div>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-indigo-800">Feature Preview</h3>
+                                    <p class="text-sm text-indigo-600">New dashboard walkthrough</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-white p-2 rounded-lg mr-3">
+                                    <div class="text-indigo-700 font-bold text-center leading-tight">JUL<br>5</div>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-indigo-800">Referral Masterclass</h3>
+                                    <p class="text-sm text-indigo-600">Maximize your earnings</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <button class="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200">
+                            RSVP for Events
+                        </button>
+                    </div>
+
+                    <!-- Community Guidelines -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-3">Community Guidelines</h2>
+                        <ul class="space-y-3 text-sm text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-500 mt-0.5 mr-2"></i>
+                                <span>Be respectful to all members</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-500 mt-0.5 mr-2"></i>
+                                <span>Keep discussions relevant to VVV</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-500 mt-0.5 mr-2"></i>
+                                <span>No spam or self-promotion</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-500 mt-0.5 mr-2"></i>
+                                <span>Keep financial advice general</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- New Topic Modal -->
+    <div id="newTopicModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4 overflow-hidden">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-gray-800">Start New Discussion</h3>
+                    <button onclick="closeNewTopicModal()" class="text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="py-4">
+                    <div class="mb-4">
+                        <label for="topicTitle" class="block text-sm font-medium text-gray-700 mb-1">Topic Title</label>
+                        <input type="text" id="topicTitle" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500" placeholder="What's your discussion about?">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="topicCategory" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                        <select id="topicCategory" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
+                            <option value="tips">Tips & Strategies</option>
+                            <option value="features">Feature Requests</option>
+                            <option value="questions">Questions</option>
+                            <option value="feedback">Product Feedback</option>
+                            <option value="general">General Discussion</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="topicContent" class="block text-sm font-medium text-gray-700 mb-1">Discussion Content</label>
+                        <textarea id="topicContent" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500" placeholder="Share your thoughts..."></textarea>
+                    </div>
+                    
+                    <div class="flex items-center mb-4">
+                        <input id="premiumOnly" type="checkbox" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                        <label for="premiumOnly" class="ml-2 block text-sm text-gray-700">
+                            Premium Members Only
+                        </label>
+                    </div>
+                    
+                    <div id="topicError" class="hidden bg-red-50 text-red-600 p-3 rounded-lg text-sm mb-4">
+                        <i class="fas fa-exclamation-circle mr-2"></i>
+                        <span id="topicErrorMessage">Please fill in all fields</span>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-200 pt-4 flex justify-between">
+                    <button onclick="closeNewTopicModal()" class="bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-200">
+                        Cancel
+                    </button>
+                    <button onclick="postNewTopic()" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200">
+                        Post Discussion
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Topic View Modal -->
+    <div id="topicViewModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden overflow-y-auto">
+        <div class="bg-white rounded-xl shadow-xl max-w-4xl w-full mx-4 my-8 overflow-hidden">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-gray-800" id="topicViewTitle">Discussion Title</h3>
+                    <button onclick="closeTopicViewModal()" class="text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="py-4">
+                    <!-- Original Post -->
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 mb-6">
+                        <div class="flex items-start space-x-4">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-12 h-12 rounded-full">
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <span class="font-bold text-gray-800">OriginalPoster</span>
+                                        <span class="text-xs text-gray-500 ml-2">Started this discussion</span>
+                                    </div>
+                                    <span class="text-xs text-gray-500">2 days ago</span>
+                                </div>
+                                <p class="text-gray-700" id="topicViewContent">Discussion content goes here...</p>
+                                <div class="mt-4 flex space-x-4">
+                                    <button class="text-gray-500 hover:text-indigo-600 text-sm flex items-center">
+                                        <i class="far fa-thumbs-up mr-1"></i> 42
+                                    </button>
+                                    <button class="text-gray-500 hover:text-indigo-600 text-sm flex items-center">
+                                        <i class="far fa-comment mr-1"></i> 18 replies
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Replies -->
+                    <h4 class="font-bold text-gray-800 mb-4">Replies</h4>
+                    <div class="space-y-4" id="topicRepliesContainer">
+                        <!-- Replies will be inserted here -->
+                    </div>
+                    
+                    <!-- Reply Form -->
+                    <div class="mt-8">
+                        <h4 class="font-bold text-gray-800 mb-3">Your Reply</h4>
+                        <textarea id="replyContent" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 mb-3" placeholder="Share your thoughts..."></textarea>
+                        <div class="flex justify-end">
+                            <button onclick="postReply()" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200">
+                                Post Reply
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for topics and replies
+        const topics = {
+            "1": {
+                title: "Best strategies for maximizing VVV benefits",
+                content: "I've been using VVV Premium for 6 months now and wanted to share some of my favorite tips for getting the most value from your membership. First, always check the promo codes section before making transfers. Second, schedule larger transfers during discount periods. Third, take advantage of the referral program - it's been my biggest money saver! What strategies are working for you all?",
+                author: "JohnDoe",
+                authorImg: "https://randomuser.me/api/portraits/men/32.jpg",
+                date: "2 days ago",
+                likes: 42,
+                replies: 18,
+                repliesList: [
+                    {
+                        author: "JaneSmith",
+                        authorImg: "https://randomuser.me/api/portraits/women/44.jpg",
+                        content: "Great tips! I'd also recommend scheduling your larger transfers during the 50% fee discount periods. Saved me over $100 last month!",
+                        date: "1 day ago",
+                        likes: 8
+                    },
+                    {
+                        author: "TravelGuru",
+                        authorImg: "https://randomuser.me/api/portraits/men/75.jpg",
+                        content: "Another strategy is to combine multiple smaller transfers into one larger transfer during discount windows. The percentage savings really add up!",
+                        date: "1 day ago",
+                        likes: 12
+                    },
+                    {
+                        author: "FinancePro",
+                        authorImg: "https://randomuser.me/api/portraits/men/22.jpg",
+                        content: "Has anyone compared the savings between using the flat fee discounts versus the percentage discounts? I'm curious which works better for different transfer amounts.",
+                        date: "5 hours ago",
+                        likes: 3
+                    }
+                ]
+            },
+            "2": {
+                title: "Exclusive feature requests for VVV team",
+                content: "The VVV team is monitoring this thread for premium member feature requests. What would you like to see added or improved in the premium experience? We're particularly interested in hearing about features that would make your financial management easier and more rewarding.",
+                author: "VVV_Team",
+                authorImg: "https://randomuser.me/api/portraits/men/32.jpg",
+                date: "1 day ago",
+                likes: 24,
+                replies: 42,
+                repliesList: [
+                    {
+                        author: "MoneySaver",
+                        authorImg: "https://randomuser.me/api/portraits/women/68.jpg",
+                        content: "I'd love to see a dashboard that shows my total savings from using VVV Premium, broken down by promo codes, referrals, etc.",
+                        date: "20 hours ago",
+                        likes: 15
+                    },
+                    {
+                        author: "VVV_Team",
+                        authorImg: "https://randomuser.me/api/portraits/men/32.jpg",
+                        content: "Great suggestion! We're actually working on a savings dashboard that will show exactly that. Expect to see it in the next update!",
+                        date: "18 hours ago",
+                        likes: 32
+                    },
+                    {
+                        author: "DigitalNomad",
+                        authorImg: "https://randomuser.me/api/portraits/women/63.jpg",
+                        content: "Could we get country-specific fee calculators? I transfer to multiple countries and the fees vary quite a bit.",
+                        date: "12 hours ago",
+                        likes: 9
+                    }
+                ]
+            },
+            "3": {
+                title: "How are you using your referral bonuses?",
+                content: "I've earned over $200 in referral bonuses this month alone! Curious how other premium members are maximizing their referral programs. Are you using social media, email lists, or other methods? What messaging is working best for you?",
+                author: "TravelGuru",
+                authorImg: "https://randomuser.me/api/portraits/men/75.jpg",
+                date: "3 days ago",
+                likes: 18,
+                replies: 12,
+                repliesList: [
+                    {
+                        author: "SocialMediaPro",
+                        authorImg: "https://randomuser.me/api/portraits/women/44.jpg",
+                        content: "I've had great success with Instagram stories showing actual savings screenshots. People respond well to real numbers!",
+                        date: "2 days ago",
+                        likes: 7
+                    },
+                    {
+                        author: "EmailMarketer",
+                        authorImg: "https://randomuser.me/api/portraits/men/22.jpg",
+                        content: "I maintain a small email list of colleagues and share my referral link whenever I have a particularly good savings story to share.",
+                        date: "1 day ago",
+                        likes: 4
+                    }
+                ]
+            }
+        };
+
+        // Show new topic modal
+        function showNewTopicModal() {
+            document.getElementById('newTopicModal').classList.remove('hidden');
+            document.getElementById('topicTitle').focus();
+        }
+
+        // Close new topic modal
+        function closeNewTopicModal() {
+            document.getElementById('newTopicModal').classList.add('hidden');
+            document.getElementById('topicError').classList.add('hidden');
+            document.getElementById('topicTitle').value = '';
+            document.getElementById('topicContent').value = '';
+        }
+
+        // Post new topic
+        function postNewTopic() {
+            const title = document.getElementById('topicTitle').value.trim();
+            const content = document.getElementById('topicContent').value.trim();
+            
+            document.getElementById('topicError').classList.add('hidden');
+            
+            if (!title || !content) {
+                document.getElementById('topicErrorMessage').textContent = "Please fill in all fields";
+                document.getElementById('topicError').classList.remove('hidden');
+                return;
+            }
+            
+            // In a real app, you would send this to your backend
+            alert(`New discussion posted: ${title}`);
+            closeNewTopicModal();
+        }
+
+        // View topic
+        function viewTopic(id) {
+            const topic = topics[id];
+            if (!topic) return;
+            
+            document.getElementById('topicViewTitle').textContent = topic.title;
+            document.getElementById('topicViewContent').textContent = topic.content;
+            
+            // Set original post details
+            const originalPoster = document.querySelector('#topicViewModal .bg-gray-50 .font-bold');
+            const originalPosterImg = document.querySelector('#topicViewModal .bg-gray-50 img');
+            const originalPostDate = document.querySelector('#topicViewModal .bg-gray-50 .text-xs.text-gray-500:last-child');
+            const likeCount = document.querySelector('#topicViewModal .bg-gray-50 .fa-thumbs-up').parentNode;
+            const replyCount = document.querySelector('#topicViewModal .bg-gray-50 .fa-comment').parentNode;
+            
+            originalPoster.textContent = topic.author;
+            originalPosterImg.src = topic.authorImg;
+            originalPostDate.textContent = topic.date;
+            likeCount.innerHTML = `<i class="far fa-thumbs-up mr-1"></i> ${topic.likes}`;
+            replyCount.innerHTML = `<i class="far fa-comment mr-1"></i> ${topic.replies} replies`;
+            
+            // Build replies
+            const repliesContainer = document.getElementById('topicRepliesContainer');
+            repliesContainer.innerHTML = '';
+            
+            topic.repliesList.forEach(reply => {
+                const replyDiv = document.createElement('div');
+                replyDiv.className = 'bg-gray-50 border border-gray-200 rounded-lg p-4';
+                replyDiv.innerHTML = `
+                    <div class="flex items-start space-x-4">
+                        <img src="${reply.authorImg}" alt="User" class="w-10 h-10 rounded-full">
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="font-medium text-gray-800">${reply.author}</span>
+                                <span class="text-xs text-gray-500">${reply.date}</span>
+                            </div>
+                            <p class="text-gray-700">${reply.content}</p>
+                            <div class="mt-3 flex space-x-4">
+                                <button class="text-gray-500 hover:text-indigo-600 text-sm flex items-center">
+                                    <i class="far fa-thumbs-up mr-1"></i> ${reply.likes}
+                                </button>
+                                <button class="text-gray-500 hover:text-indigo-600 text-sm flex items-center">
+                                    <i class="far fa-comment mr-1"></i> Reply
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                repliesContainer.appendChild(replyDiv);
+            });
+            
+            document.getElementById('topicViewModal').classList.remove('hidden');
+        }
+
+        // Close topic view modal
+        function closeTopicViewModal() {
+            document.getElementById('topicViewModal').classList.add('hidden');
+        }
+
+        // Post reply
+        function postReply() {
+            const content = document.getElementById('replyContent').value.trim();
+            
+            if (!content) {
+                alert("Please enter your reply");
+                return;
+            }
+            
+            // In a real app, you would send this to your backend
+            alert("Your reply has been posted!");
+            document.getElementById('replyContent').value = '';
+            
+            // Refresh the topic view to show new reply
+            // This would normally be done after the backend confirms the reply was saved
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any initialization code if needed
+        });
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+

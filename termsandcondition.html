@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVV - Terms & Conditions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            transition: all 0.3s ease;
+        }
+        
+        .dark body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #3b82f6, #ef4444);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .terms-section {
+            scroll-margin-top: 100px;
+        }
+        
+        .toc-link {
+            position: relative;
+            padding-left: 1rem;
+        }
+        
+        .toc-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+        }
+        
+        .toc-link:hover::before {
+            background-color: #ef4444;
+        }
+        
+        .highlight-box {
+            border-left: 4px solid #3b82f6;
+            background-color: rgba(59, 130, 246, 0.05);
+        }
+        
+        .dark .highlight-box {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        
+        .legal-list {
+            list-style-type: none;
+            counter-reset: legal-counter;
+        }
+        
+        .legal-list li {
+            counter-increment: legal-counter;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 2.5rem;
+        }
+        
+        .legal-list li::before {
+            content: counter(legal-counter) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+        
+        .sub-list {
+            list-style-type: lower-alpha;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .sub-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+        
+        .sub-list li::before {
+            content: none;
+        }
+    </style>
+</head>
+<body class="dark:bg-gray-900 dark:text-gray-100">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-2xl font-bold gradient-text">VVV</a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="store.html" class="nav-link">Stores</a>
+                    <a href='Dashboard.html'>Dashboard</a>
+                    <a href="myhubs.html" class="nav-link">Hubs</a>
+                    <a href="conquerors-club.html" class="nav-link">Conqueror's Club</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="relative inline-block w-12 mr-2 align-middle select-none">
+                        <input type="checkbox" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-2 appearance-none cursor-pointer"/>
+                        <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                    </div>
+                    <span class="text-sm font-medium hidden sm:inline">Dark Mode</span>
+                    
+                    <div class="flex items-center space-x-2">
+                        <span class="hidden md:inline font-medium">Welcome, User</span>
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-red-500 flex items-center justify-center text-white font-bold">
+                            U
+                        </div>
+                    </div>
+                    
+                    <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <div class="flex flex-col space-y-3 pb-4">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="store.html" class="nav-link">Stores</a>
+                    <a href='Dashboard.html'>Dashboard</a>
+                    <a href="myhubs.html" class="nav-link">Hubs</a>
+                    <a href="conquerors-club.html" class="nav-link">Conqueror's Club</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Table of Contents -->
+            <div class="lg:col-span-3">
+                <div class="sticky top-28">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <h2 class="text-xl font-bold mb-4">Table of Contents</h2>
+                        <nav class="space-y-2">
+                            <a href="#introduction" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Introduction</a>
+                            <a href="#account-terms" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Account Terms</a>
+                            <a href="#purchases" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Purchases & Payments</a>
+                            <a href="#hub-services" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Hub Services</a>
+                            <a href="#intellectual-property" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Intellectual Property</a>
+                            <a href="#user-content" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">User Content</a>
+                            <a href="#prohibited-conduct" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Prohibited Conduct</a>
+                            <a href="#termination" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Termination</a>
+                            <a href="#disclaimers" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Disclaimers</a>
+                            <a href="#limitation-liability" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Limitation of Liability</a>
+                            <a href="#disputes" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Disputes</a>
+                            <a href="#changes" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Changes to Terms</a>
+                            <a href='Contactus.html'>Contact Us</a>
+                        </nav>
+                    </div>
+                    
+                    <div class="mt-6 bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <h3 class="font-bold mb-2">Last Updated</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">June 15, 2023</p>
+                        <div class="mt-4">
+                            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition">
+                                Download PDF Version
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Terms & Conditions Content -->
+            <div class="lg:col-span-9">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+                    <!-- Header -->
+                    <div class="bg-gradient-to-r from-blue-600 to-red-500 p-8 text-white">
+                        <h1 class="text-3xl md:text-4xl font-bold mb-2">Terms & Conditions</h1>
+                        <p class="text-blue-100">Please read these terms carefully before using our services</p>
+                    </div>
+                    
+                    <!-- Content -->
+                    <div class="p-6 md:p-8 space-y-8">
+                        <!-- Introduction -->
+                        <section id="introduction" class="terms-section">
+                            <h2 class="text-2xl font-bold mb-4">1. Introduction</h2>
+                            <p class="mb-4">Welcome to VVV ("we," "our," or "us"). These Terms and Conditions ("Terms") govern your access to and use of our website, mobile applications, physical hubs, and related services (collectively, the "Services").</p>
+                            <p class="mb-4">By accessing or using our Services, you agree to be bound by these Terms and our Privacy Policy. If you do not agree to these Terms, you may not use our Services.</p>
+                            
+                            <div class="highlight-box p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Eligibility</h4>
+                                <p>You must be at least 18 years old to use our Services. By using our Services, you represent and warrant that you meet this age requirement and have the legal capacity to enter into these Terms.</p>
+                            </div>
+                        </section>
+                        
+                        <!-- Account Terms -->
+                        <section id="account-terms" class="terms-section">
+                            <h2 class="text-2xl font-bold mb-4">2. Account Terms</h2>
+                            
+                            <ol class="legal-list">
+                                <li>
+                                    <h3 class="font-semibold">Account Creation</h3>
+                                    <p>To access certain features of our Services, you must create an account. You agree to provide accurate, current, and complete information during registration and to update such information as necessary.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Account Security</h3>
+                                    <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You must immediately notify us of any unauthorized use of your account.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Account Restrictions</h3>
+                                    <p>You may not:</p>
+                                    <ul class="sub-list">
+                                        <li>Create more than one personal account</li>
+                                        <li>Create an account for anyone other than yourself</li>
+                                        <li>Transfer your account to another person</li>
+                                        <li>Use another user's account without permission</li>
+                                    </ul>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Account Suspension</h3>
+                                    <p>We reserve the right to suspend or terminate your account at any time for any reason, including if we suspect that you have violated these Terms.</p>
+                                </li>
+                            </ol>
+                        </section>
+                        
+                        <!-- Purchases & Payments -->
+                        <section id="purchases" class="terms-section">
+                            <h2 class="text-2xl font-bold mb-4">3. Purchases & Payments</h2>
+                            
+                            <ol class="legal-list">
+                                <li>
+                                    <h3 class="font-semibold">Product Availability</h3>
+                                    <p>All products are subject to availability. We reserve the right to limit quantities and to discontinue products at any time without notice.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Pricing</h3>
+                                    <p>Prices are shown in your local currency and are subject to change without notice. We are not responsible for typographical errors in pricing.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Payment Methods</h3>
+                                    <p>We accept various payment methods, including credit cards, debit cards, and digital wallets. By providing payment information, you represent that you are authorized to use the payment method.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Taxes</h3>
+                                    <p>You are responsible for all applicable taxes, duties, and other governmental charges related to your purchases.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Returns & Refunds</h3>
+                                    <p>Our return and refund policy is available on our website. Some products may have different return policies as specified at the time of purchase.</p>
+                                </li>
+                            </ol>
+                            
+                            <div class="highlight-box p-4 rounded-lg mt-6">
+                                <h4 class="font-semibold mb-2">Order Acceptance</h4>
+                                <p>Your receipt of an order confirmation does not constitute our acceptance of your order. We reserve the right to refuse or cancel any order for any reason, including errors in product descriptions or pricing.</p>
+                            </div>
+                        </section>
+                        
+                        <!-- Hub Services -->
+                        <section id="hub-services" class="terms-section">
+                            <h2 class="text-2xl font-bold mb-4">4. Hub Services</h2>
+                            
+                            <ol class="legal-list">
+                                <li>
+                                    <h3 class="font-semibold">Hub Locations</h3>
+                                    <p>Our hub locations, operating hours, and services may vary. We do not guarantee the availability of any specific hub or service.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Pickup Procedures</h3>
+                                    <p>You must follow our pickup procedures, including presenting valid identification when required. Failure to pick up items within the specified timeframe may result in additional charges or cancellation of your order.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Hub Conduct</h3>
+                                    <p>When visiting our hubs, you agree to comply with all posted rules and regulations. We reserve the right to refuse service to anyone for any reason at any time.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Hub Safety</h3>
+                                    <p>You assume all risks associated with visiting our hubs, including but not limited to risks related to health and safety. You agree to follow all safety guidelines and instructions from hub staff.</p>
+                                </li>
+                            </ol>
+                        </section>
+                        
+                        <!-- Intellectual Property -->
+                        <section id="intellectual-property" class="terms-section">
+                            <h2 class="text-2xl font-bold mb-4">5. Intellectual Property</h2>
+                            
+                            <ol class="legal-list">
+                                <li>
+                                    <h3 class="font-semibold">Ownership</h3>
+                                    <p>All content included in our Services, including text, graphics, logos, images, and software, is our property or the property of our licensors and is protected by intellectual property laws.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Limited License</h3>
+                                    <p>We grant you a limited, non-exclusive, non-transferable license to access and use our Services for personal, non-commercial purposes in accordance with these Terms.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Restrictions</h3>
+                                    <p>You may not:</p>
+                                    <ul class="sub-list">
+                                        <li>Modify, copy, or create derivative works based on our Services</li>
+                                        <li>Use our content for any commercial purpose without our express written consent</li>
+                                        <li>Attempt to decompile or reverse engineer any software</li>
+                                        <li>Remove any copyright or proprietary notices</li>
+                                    </ul>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Trademarks</h3>
+                                    <p>The VVV name and logos are our trademarks. You may not use these marks without our prior written permission.</p>
+                                </li>
+                            </ol>
+                        </section>
+                        
+                        <!-- User Content -->
+                        <section id="user-content" class="terms-section">
+                            <h2 class="text-2xl font-bold mb-4">6. User Content</h2>
+                            
+                            <ol class="legal-list">
+                                <li>
+                                    <h3 class="font-semibold">Definition</h3>
+                                    <p>"User Content" means any content you submit, post, or display on or through our Services, including reviews, comments, photos, and messages.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Your Responsibility</h3>
+                                    <p>You are solely responsible for your User Content and the consequences of posting it. You represent that you own or have the necessary rights to your User Content.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">License to Us</h3>
+                                    <p>By posting User Content, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, and display your User Content in connection with our Services.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Prohibited Content</h3>
+                                    <p>You may not post User Content that:</p>
+                                    <ul class="sub-list">
+                                        <li>Is unlawful, harmful, or fraudulent</li>
+                                        <li>Infringes intellectual property rights</li>
+                                        <li>Contains viruses or malicious code</li>
+                                        <li>Is false or misleading</li>
+                                        <li>Is obscene or offensive</li>
+                                    </ul>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Removal</h3>
+                                    <p>We may remove any User Content that violates these Terms or that we find objectionable in our sole discretion.</p>
+                                </li>
+                            </ol>
+                        </section>
+                        
+                        <!-- Prohibited Conduct -->
+                        <section id="prohibited-conduct" class="terms-section">
+                            <h2 class="text-2xl font-bold mb-4">7. Prohibited Conduct</h2>
+                            <p class="mb-4">You agree not to engage in any of the following prohibited activities:</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-4 mb-6">
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-red-600 dark:text-red-400 mt-1 mr-3">
+                                        <i class="fas fa-ban"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Illegal Activities</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Using our Services for any unlawful purpose</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-red-600 dark:text-red-400 mt-1 mr-3">
+                                        <i class="fas fa-user-secret"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Impersonation</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Impersonating any person or entity</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-red-600 dark:text-red-400 mt-1 mr-3">
+                                        <i class="fas fa-bug"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Security Violations</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Attempting to interfere with our systems</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-red-600 dark:text-red-400 mt-1 mr-3">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Automated Access</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Using bots, scrapers, or other automated means</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-red-600 dark:text-red-400 mt-1 mr-3">
+                                        <i class="fas fa-shopping-bag"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Commercial Use</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Using our Services for commercial purposes without authorization</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-red-600 dark:text-red-400 mt-1 mr-3">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Harmful Content</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Posting harmful or offensive content</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="highlight-box p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Consequences</h4>
+                                <p>Violation of these prohibitions may result in termination of your access to our Services and may subject you to civil and criminal penalties.</p>
+                            </div>
+                        </section>
+                        
+                        <!-- Termination -->
+                        <section id="termination" class="terms-section">
+                            <h2 class="text-2xl font-bold mb-4">8. Termination</h2>
+                            
+                            <ol class="legal-list">
+                                <li>
+                                    <h3 class="font-semibold">By You</h3>
+                                    <p>You may stop using our Services at any time. Certain provisions of these Terms will survive termination.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">By Us</h3>
+                                    <p>We may suspend or terminate your access to our Services at any time, with or without cause, and with or without notice.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Effect of Termination</h3>
+                                    <p>Upon termination, your right to use our Services will immediately cease. We may delete your account information and any User Content.</p>
+                                </li>
+                            </ol>
+                        </section>
+                        
+                        <!-- Disclaimers -->
+                        <section id="disclaimers" class="terms-section">
+                            <h2 class="text-2xl font-bold mb-4">9. Disclaimers</h2>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-1 mr-3">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">As-Is Basis</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Our Services are provided "as is" and "as available" without warranties of any kind, either express or implied.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-1 mr-3">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Service Interruptions</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">We do not guarantee that our Services will be uninterrupted, secure, or error-free.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-1 mr-3">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Accuracy</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">We do not warrant that product descriptions, pricing, or other content is accurate, complete, or current.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-1 mr-3">
+                                        <i class="fas fa-store"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Third-Party Services</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">We are not responsible for any third-party services linked to or from our Services.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <!-- Limitation of Liability -->
+                        <section id="limitation-liability" class="terms-section">
+                            <h2 class="text-2xl font-bold mb-4">10. Limitation of Liability</h2>
+                            
+                            <div class="highlight-box p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">General Limitation</h4>
+                                <p>To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses, resulting from:</p>
+                                <ul class="list-disc pl-6 mt-2 space-y-1">
+                                    <li>Your use or inability to use our Services</li>
+                                    <li>Any unauthorized access to or use of our servers</li>
+                                    <li>Any interruption or cessation of transmission to or from our Services</li>
+                                    <li>Any bugs, viruses, or other harmful code</li>
+                                    <li>Any errors or omissions in any content</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mt-6">
+                                <h3 class="font-semibold mb-2">Maximum Liability</h3>
+                                <p>Our total liability for any claims under these Terms shall not exceed the greater of $100 or the amount you paid us in the past six months for the Services giving rise to the claim.</p>
+                            </div>
+                        </section>
+                        
+                        <!-- Disputes -->
+                        <section id="disputes" class="terms-section">
+                            <h2 class="text-2xl font-bold mb-4">11. Disputes</h2>
+                            
+                            <ol class="legal-list">
+                                <li>
+                                    <h3 class="font-semibold">Governing Law</h3>
+                                    <p>These Terms shall be governed by the laws of the State of California, without regard to its conflict of law provisions.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Informal Resolution</h3>
+                                    <p>Before filing a claim, you agree to attempt to resolve the dispute informally by contacting us at disputes@vvv.com.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Binding Arbitration</h3>
+                                    <p>Any disputes that cannot be resolved informally shall be resolved through binding arbitration in San Francisco, California, rather than in court.</p>
+                                </li>
+                                
+                                <li>
+                                    <h3 class="font-semibold">Class Action Waiver</h3>
+                                    <p>You may only resolve disputes with us on an individual basis and may not bring a claim as a plaintiff or class member in a class, consolidated, or representative action.</p>
+                                </li>
+                            </ol>
+                        </section>
+                        
+                        <!-- Changes to Terms -->
+                        <section id="changes" class="terms-section">
+                            <h2 class="text-2xl font-bold mb-4">12. Changes to Terms</h2>
+                            
+                            <p class="mb-4">We may modify these Terms at any time. If we make material changes, we will notify you through our Services or by other means.</p>
+                            <p>Your continued use of our Services after the effective date of the revised Terms constitutes your acceptance of the changes. We encourage you to review the Terms periodically.</p>
+                        </section>
+                        
+                        <!-- Contact Us -->
+                        <section id="contact" class="terms-section">
+                            <h2 class="text-2xl font-bold mb-4">13. Contact Us</h2>
+                            <p class="mb-6">If you have any questions about these Terms, please contact us:</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-4">
+                                            <i class="fas fa-envelope"></i>
+                                        </div>
+                                        <h3 class="font-semibold">Email</h3>
+                                    </div>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">legal@vvv.com</p>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-4">
+                                            <i class="fas fa-phone-alt"></i>
+                                        </div>
+                                        <h3 class="font-semibold">Phone</h3>
+                                    </div>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">+1 (800) 555-0200</p>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-4">
+                                            <i class="fas fa-mail-bulk"></i>
+                                        </div>
+                                        <h3 class="font-semibold">Mail</h3>
+                                    </div>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                                        VVV Legal Department<br>
+                                        456 Legal Avenue<br>
+                                        San Francisco, CA 94103
+                                    </p>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-4">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                        <h3 class="font-semibold">Business Hours</h3>
+                                    </div>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                                        Monday - Friday<br>
+                                        9:00 AM - 5:00 PM PST
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    
+                    <!-- Footer -->
+                    <div class="bg-gray-50 dark:bg-gray-700 px-6 py-4 border-t border-gray-200 dark:border-gray-600">
+                        <div class="flex flex-col md:flex-row justify-between items-center">
+                            <p class="text-sm text-gray-600 dark:text-gray-300 mb-2 md:mb-0">Â© 2023 VVV. All rights reserved.</p>
+                            <div class="flex space-x-4">
+                                <a href="terms.html" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Terms of Service</a>
+                                <a href="privacy.html" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Privacy Policy</a>
+                                <a href="cookies.html" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Cookie Policy</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle dark mode
+        document.getElementById('toggle').addEventListener('change', function() {
+            document.documentElement.classList.toggle('dark', this.checked);
+            localStorage.setItem('darkMode', this.checked);
+        });
+
+        // Set initial dark mode state
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+            document.getElementById('toggle').checked = true;
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for table of contents links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update URL without page jump
+                    history.pushState(null, null, targetId);
+                }
+            });
+        });
+
+        // Highlight current section in table of contents
+        const sections = document.querySelectorAll('.terms-section');
+        const navLinks = document.querySelectorAll('.toc-link');
+        
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-600', 'dark:text-blue-400', 'font-medium');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-blue-600', 'dark:text-blue-400', 'font-medium');
+                }
+            });
+        });
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="termsandcondition.js"></script>
+</body>
+</html>

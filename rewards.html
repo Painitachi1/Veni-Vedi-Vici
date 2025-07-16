@@ -1,0 +1,608 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin & Win | Premium Rewards Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .premium-gradient {
+            background: linear-gradient(135deg, #f5d020 0%, #f53803 100%);
+        }
+        .wheel-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+        .wheel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 10px solid #2c3e50;
+            box-shadow: 0 0 0 5px #f1c40f, 0 0 0 10px #e67e22, 0 0 0 15px #e74c3c;
+            transition: transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+            transform: rotate(0deg);
+        }
+        .wheel-item {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: bottom right;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .wheel-pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 40px solid #e74c3c;
+            z-index: 10;
+        }
+        .reward-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .floating-coins {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23f1c40f"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.77-.45-2.34-.94-2.34-1.67 0-.84.79-1.43 2.1-1.43 1.38 0 1.9.66 1.94 1.64h1.71c-.05-1.34-.87-2.57-2.49-2.97V5H10.9v1.69c-1.51.32-2.72 1.3-2.72 2.81 0 1.79 1.49 2.69 3.66 3.21 1.95.46 2.34 1.15 2.34 1.87 0 .53-.39 1.39-2.1 1.39-1.6 0-2.23-.72-2.32-1.64H8.04c.1 1.7 1.36 2.66 2.86 2.97V19h2.34v-1.67c1.52-.29 2.72-1.16 2.73-2.77-.01-2.2-1.9-2.96-3.66-3.42z"/></svg>');
+            background-size: contain;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+            z-index: 9999;
+            animation: confetti 3s ease-in-out;
+        }
+        @keyframes confetti {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        .progress-bar {
+            height: 10px;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #f5d020 0%, #f53803 100%);
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Header -->
+    <header class="premium-gradient text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-crown text-3xl"></i>
+                    <span class="text-2xl font-bold">Premium Rewards</span>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href='Dashboard.html'>Dashboard</a>
+                    <a href="#" class="hover:text-gray-200 transition">Spin & Win</a>
+                    <a href="#" class="hover:text-gray-200 transition">My Rewards</a>
+                    <a href="tiers.html" class="hover:text-gray-200 transition">VIP Benefits</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <button class="md:hidden">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                    <div class="flex items-center space-x-2 bg-black bg-opacity-20 px-3 py-1 rounded-full">
+                        <i class="fas fa-coins text-yellow-400"></i>
+                        <span class="font-bold">2,450</span>
+                    </div>
+                    <div class="h-10 w-10 rounded-full bg-white flex items-center justify-center">
+                        <i class="fas fa-user text-orange-600"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Page Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">Premium Spin & Win</h1>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Spin the wheel daily to win exclusive rewards, discounts, and premium perks!
+                </p>
+            </div>
+
+            <!-- Spin Section -->
+            <div class="bg-white rounded-xl shadow-xl overflow-hidden mb-12">
+                <div class="premium-gradient px-6 py-4">
+                    <h2 class="text-xl font-semibold text-white">Your Daily Spin</h2>
+                </div>
+                <div class="p-8 text-center">
+                    <div class="mb-8">
+                        <div class="wheel-container">
+                            <div class="wheel-pointer"></div>
+                            <div class="wheel" id="wheel">
+                                <!-- Wheel segments will be added by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <button id="spinButton" class="px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold rounded-full shadow-lg hover:from-yellow-600 hover:to-orange-600 transition transform hover:scale-105">
+                            <span class="text-xl">SPIN NOW</span>
+                            <i class="fas fa-sync-alt ml-2"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="flex justify-center items-center mb-4">
+                        <div class="w-full max-w-md">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-700">Next free spin in:</span>
+                                <span class="text-sm font-medium text-gray-700" id="nextSpinTime">23:59:59</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="progress-bar h-2.5 rounded-full" style="width: 10%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-500 text-sm">
+                        Premium members get 1 free spin every 24 hours. Additional spins can be earned or purchased.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Rewards Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="premium-gradient px-6 py-4">
+                        <h2 class="text-xl font-semibold text-white">Today's Possible Rewards</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="reward-card bg-yellow-50 border border-yellow-200 p-4 rounded-lg text-center transition duration-300">
+                                <div class="bg-yellow-100 text-yellow-800 h-12 w-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-percentage text-xl"></i>
+                                </div>
+                                <h3 class="font-bold text-gray-800">15% OFF</h3>
+                                <p class="text-sm text-gray-600">Storewide discount</p>
+                            </div>
+                            <div class="reward-card bg-blue-50 border border-blue-200 p-4 rounded-lg text-center transition duration-300">
+                                <div class="bg-blue-100 text-blue-800 h-12 w-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-shipping-fast text-xl"></i>
+                                </div>
+                                <h3 class="font-bold text-gray-800">Free Shipping</h3>
+                                <p class="text-sm text-gray-600">Next 3 orders</p>
+                            </div>
+                            <div class="reward-card bg-purple-50 border border-purple-200 p-4 rounded-lg text-center transition duration-300">
+                                <div class="bg-purple-100 text-purple-800 h-12 w-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-coins text-xl"></i>
+                                </div>
+                                <h3 class="font-bold text-gray-800">500 Points</h3>
+                                <p class="text-sm text-gray-600">Loyalty rewards</p>
+                            </div>
+                            <div class="reward-card bg-green-50 border border-green-200 p-4 rounded-lg text-center transition duration-300">
+                                <div class="bg-green-100 text-green-800 h-12 w-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-gem text-xl"></i>
+                                </div>
+                                <h3 class="font-bold text-gray-800">VIP Day Pass</h3>
+                                <p class="text-sm text-gray-600">Exclusive access</p>
+                            </div>
+                            <div class="reward-card bg-red-50 border border-red-200 p-4 rounded-lg text-center transition duration-300">
+                                <div class="bg-red-100 text-red-800 h-12 w-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-gift text-xl"></i>
+                                </div>
+                                <h3 class="font-bold text-gray-800">Mystery Gift</h3>
+                                <p class="text-sm text-gray-600">Surprise reward</p>
+                            </div>
+                            <div class="reward-card bg-indigo-50 border border-indigo-200 p-4 rounded-lg text-center transition duration-300">
+                                <div class="bg-indigo-100 text-indigo-800 h-12 w-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-star text-xl"></i>
+                                </div>
+                                <h3 class="font-bold text-gray-800">2X Points</h3>
+                                <p class="text-sm text-gray-600">Next 24 hours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="premium-gradient px-6 py-4">
+                        <h2 class="text-xl font-semibold text-white">Your Reward History</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                <div class="bg-green-100 text-green-800 h-10 w-10 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-gray-800">15% OFF Coupon</h3>
+                                    <p class="text-sm text-gray-500">Yesterday - Expires in 2 days</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                <div class="bg-yellow-100 text-yellow-800 h-10 w-10 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-gray-800">250 Loyalty Points</h3>
+                                    <p class="text-sm text-gray-500">2 days ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                <div class="bg-blue-100 text-blue-800 h-10 w-10 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-shipping-fast"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-gray-800">Free Shipping</h3>
+                                    <p class="text-sm text-gray-500">3 days ago - Used</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                <div class="bg-purple-100 text-purple-800 h-10 w-10 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-gem"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-gray-800">VIP Hour Access</h3>
+                                    <p class="text-sm text-gray-500">5 days ago - Expired</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="mt-4 w-full py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 transition">
+                            View All Rewards
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Premium Benefits Section -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-12">
+                <div class="premium-gradient px-6 py-4">
+                    <h2 class="text-xl font-semibold text-white">Premium Member Benefits</h2>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 text-yellow-800 p-3 rounded-full mr-4">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-1">Daily Spins</h3>
+                                <p class="text-gray-600 text-sm">Get a free spin every 24 hours with better rewards</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 text-yellow-800 p-3 rounded-full mr-4">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-1">Higher Value Rewards</h3>
+                                <p class="text-gray-600 text-sm">Win more valuable prizes than standard members</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 text-yellow-800 p-3 rounded-full mr-4">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-1">Exclusive Prizes</h3>
+                                <p class="text-gray-600 text-sm">Access to premium-only rewards and perks</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 text-yellow-800 p-3 rounded-full mr-4">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-1">Bonus Entries</h3>
+                                <p class="text-gray-600 text-sm">Earn additional spins through activities</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 text-yellow-800 p-3 rounded-full mr-4">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-1">VIP Support</h3>
+                                <p class="text-gray-600 text-sm">Priority customer service for rewards issues</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 text-yellow-800 p-3 rounded-full mr-4">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-1">Instant Redemption</h3>
+                                <p class="text-gray-600 text-sm">No waiting period for reward claims</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earn More Spins Section -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="premium-gradient px-6 py-4">
+                    <h2 class="text-xl font-semibold text-white">Earn Additional Spins</h2>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="border border-gray-200 rounded-lg p-4 text-center">
+                            <div class="bg-blue-100 text-blue-800 h-12 w-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800 mb-1">Make a Purchase</h3>
+                            <p class="text-gray-600 text-sm mb-2">Get 1 spin for every $50 spent</p>
+                            <button class="text-sm text-blue-600 hover:text-blue-800">Shop Now</button>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4 text-center">
+                            <div class="bg-green-100 text-green-800 h-12 w-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800 mb-1">Refer a Friend</h3>
+                            <p class="text-gray-600 text-sm mb-2">Get 2 spins for each successful referral</p>
+                            <button class="text-sm text-green-600 hover:text-green-800">Invite Friends</button>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4 text-center">
+                            <div class="bg-purple-100 text-purple-800 h-12 w-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-comment-alt"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800 mb-1">Leave a Review</h3>
+                            <p class="text-gray-600 text-sm mb-2">Get 1 spin for a verified review</p>
+                            <button class="text-sm text-purple-600 hover:text-purple-800">Write Review</button>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4 text-center">
+                            <div class="bg-orange-100 text-orange-800 h-12 w-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800 mb-1">Buy Spins</h3>
+                            <p class="text-gray-600 text-sm mb-2">Purchase additional spins anytime</p>
+                            <button class="text-sm text-orange-600 hover:text-orange-800">Get More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    
+
+    <!-- Reward Modal -->
+    <div id="rewardModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4 relative">
+            <button id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="text-center">
+                <div class="bg-green-100 text-green-800 h-20 w-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-gift text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Congratulations!</h3>
+                <p class="text-gray-600 mb-6">You've won:</p>
+                <div class="bg-yellow-50 border border-yellow-200 px-6 py-4 rounded-lg mb-6">
+                    <h4 id="rewardTitle" class="text-xl font-bold text-yellow-800">15% OFF Coupon</h4>
+                    <p id="rewardDesc" class="text-gray-600">Valid for your next purchase</p>
+                </div>
+                <button class="w-full py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold rounded-lg hover:from-yellow-600 hover:to-orange-600 transition">
+                    Claim Your Reward
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create wheel segments
+            const wheel = document.getElementById('wheel');
+            const rewards = [
+                { color: '#FF5252', text: '15% OFF', icon: 'percentage', desc: '15% discount coupon' },
+                { color: '#4CAF50', text: 'Free Ship', icon: 'shipping-fast', desc: 'Free shipping on next order' },
+                { color: '#2196F3', text: '500 PTS', icon: 'coins', desc: '500 loyalty points' },
+                { color: '#9C27B0', text: 'VIP Pass', icon: 'gem', desc: '1-day VIP access' },
+                { color: '#FF9800', text: 'Mystery', icon: 'gift', desc: 'Mystery gift' },
+                { color: '#607D8B', text: '2X PTS', icon: 'star', desc: '2X points for 24 hours' },
+                { color: '#E91E63', text: '$10 OFF', icon: 'dollar-sign', desc: '$10 discount' },
+                { color: '#00BCD4', text: 'Try Again', icon: 'redo', desc: 'Spin again tomorrow' }
+            ];
+            
+            const segmentAngle = 360 / rewards.length;
+            
+            rewards.forEach((reward, index) => {
+                const segment = document.createElement('div');
+                segment.className = 'wheel-item';
+                segment.style.transform = `rotate(${index * segmentAngle}deg)`;
+                segment.style.backgroundColor = reward.color;
+                segment.style.clipPath = `polygon(0 0, 100% 0, 100% 100%, 0 100%)`;
+                segment.innerHTML = `<div style="transform: rotate(${segmentAngle/2}deg);">${reward.text}</div>`;
+                segment.dataset.reward = JSON.stringify(reward);
+                wheel.appendChild(segment);
+            });
+            
+            // Spin functionality
+            const spinButton = document.getElementById('spinButton');
+            let isSpinning = false;
+            
+            spinButton.addEventListener('click', function() {
+                if (isSpinning) return;
+                isSpinning = true;
+                
+                // Disable button during spin
+                spinButton.disabled = true;
+                spinButton.classList.remove('hover:from-yellow-600', 'hover:to-orange-600', 'hover:scale-105');
+                
+                // Random spin (with higher probability for better rewards)
+                const spinDegrees = 360 * 5 + (Math.floor(Math.random() * 360));
+                const winningSegment = Math.floor((360 - (spinDegrees % 360)) / segmentAngle) % rewards.length;
+                const winningReward = rewards[winningSegment];
+                
+                // Animate spin
+                wheel.style.transform = `rotate(${spinDegrees}deg)`;
+                
+                // Show coins animation
+                for (let i = 0; i < 20; i++) {
+                    const coin = document.createElement('div');
+                    coin.className = 'floating-coins';
+                    coin.style.left = `${Math.random() * 100}%`;
+                    coin.style.animationDelay = `${Math.random() * 0.5}s`;
+                    document.querySelector('.wheel-container').appendChild(coin);
+                    
+                    setTimeout(() => {
+                        coin.remove();
+                    }, 3000);
+                }
+                
+                // Show reward after spin completes
+                setTimeout(() => {
+                    isSpinning = false;
+                    spinButton.disabled = false;
+                    spinButton.classList.add('hover:from-yellow-600', 'hover:to-orange-600', 'hover:scale-105');
+                    
+                    // Show modal with reward
+                    document.getElementById('rewardTitle').textContent = winningReward.text;
+                    document.getElementById('rewardDesc').textContent = winningReward.desc;
+                    
+                    // Create confetti effect
+                    for (let i = 0; i < 100; i++) {
+                        const confetti = document.createElement('div');
+                        confetti.className = 'confetti';
+                        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                        confetti.style.left = `${Math.random() * 100}%`;
+                        confetti.style.width = `${Math.random() * 10 + 5}px`;
+                        confetti.style.height = `${Math.random() * 10 + 5}px`;
+                        document.body.appendChild(confetti);
+                        
+                        setTimeout(() => {
+                            confetti.remove();
+                        }, 3000);
+                    }
+                    
+                    document.getElementById('rewardModal').classList.remove('hidden');
+                }, 5000);
+            });
+            
+            // Close modal
+            document.getElementById('closeModal').addEventListener('click', function() {
+                document.getElementById('rewardModal').classList.add('hidden');
+            });
+            
+            // Timer for next spin
+            function updateTimer() {
+                const now = new Date();
+                const midnight = new Date();
+                midnight.setHours(24, 0, 0, 0);
+                
+                const diff = midnight - now;
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('nextSpinTime').textContent = 
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Update progress bar
+                const progress = 100 - (diff / (1000 * 60 * 60 * 24) * 100);
+                document.querySelector('.progress-bar').style.width = `${progress}%`;
+            }
+            
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        });
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
+

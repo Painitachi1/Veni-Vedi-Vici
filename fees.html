@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Breakdown | Platform Charges</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .premium-badge {
+            background: linear-gradient(135deg, #f5d020 0%, #f53803 100%);
+        }
+        .free-badge {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+        .highlight-premium {
+            position: relative;
+            overflow: hidden;
+        }
+        .highlight-premium::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(245, 216, 32, 0.1) 0%, rgba(245, 56, 3, 0.1) 100%);
+            z-index: -1;
+        }
+        .no-withdrawal {
+            position: relative;
+        }
+        .no-withdrawal::after {
+            content: "NO WITHDRAWAL";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #ef4444;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
+    
+    <!-- Universal Navigation -->
+    <nav aria-label="Main Navigation" class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Header -->
+    <header class="bg-white shadow-sm" role="banner">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-money-bill-wave text-2xl text-blue-600"></i>
+                    <span class="text-xl font-bold">Fee Breakdown</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-user text-blue-600"></i>
+                        </div>
+                        <span class="hidden md:inline font-medium">John Doe</span>
+                        <span class="premium-badge text-white text-xs px-2 py-1 rounded-full">
+                            <i class="fas fa-crown mr-1"></i> Premium (Gold)
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Important Notice -->
+    <section class="bg-red-50 border-l-4 border-red-500 p-4 mb-6" aria-label="Important Platform Notice">
+        <div class="container mx-auto">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-circle text-red-500"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-red-700">
+                        <strong>Important:</strong> All deposits are final. Once funds are deposited to the platform, 
+                        they cannot be withdrawn. Funds can only be used for purchases within our ecosystem.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="container mx-auto px-4 py-6">
+        <div class="max-w-4xl mx-auto">
+            <!-- Account Summary -->
+            <section class="bg-white rounded-xl shadow-md overflow-hidden mb-6" aria-labelledby="account-summary-title">
+                <header class="px-6 py-4 border-b border-gray-200">
+                    <h2 id="account-summary-title" class="text-lg font-semibold">Your Account Summary</h2>
+                    <p class="text-sm text-gray-500">View your current tier and benefits</p>
+                </header>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-500">Current Tier</span>
+                                <span class="premium-badge text-white text-xs px-2 py-1 rounded-full">
+                                    <i class="fas fa-crown mr-1"></i> Gold
+                                </span>
+                            </div>
+                            <div class="text-2xl font-bold">Gold Tier</div>
+                            <div class="text-xs text-green-600 mt-1">
+                                <i class="fas fa-check-circle mr-1"></i> Active
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="text-sm font-medium text-gray-500 mb-2">Lifetime Purchases</div>
+                            <div class="text-2xl font-bold">$1,250</div>
+                            <div class="text-xs text-gray-500 mt-1">
+                                <i class="fas fa-shopping-cart mr-1"></i> Total store purchases
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="text-sm font-medium text-gray-500 mb-2">Next Tier</div>
+                            <div class="text-2xl font-bold">Platinum</div>
+                            <div class="text-xs text-gray-500 mt-1">
+                                <i class="fas fa-coins mr-1"></i> $2,500+ purchases needed
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tier Benefits -->
+            <section class="bg-white rounded-xl shadow-md overflow-hidden mb-6" aria-labelledby="tier-benefits-title">
+                <header class="px-6 py-4 border-b border-gray-200">
+                    <h2 id="tier-benefits-title" class="text-lg font-semibold">Tier Benefits</h2>
+                    <p class="text-sm text-gray-500">Compare benefits across different tiers</p>
+                </header>
+                <div class="p-6">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Benefit</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bronze ($0+)</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Silver ($500+)</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gold ($1,000+)</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Platinum ($2,500+)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Store Discount</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">0%</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">5%</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">10%</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">15%</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Exclusive Items</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">No</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Limited</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">Yes</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">VIP Access</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Transfer Fees</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">3.0%</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2.5%</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">1.5%</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">0.5%</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Monthly Bonus</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">-</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$5</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">$10</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">$25</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Customer Support</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Standard</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Priority</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">24/7 Dedicated</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">Personal Manager</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Fee Structure -->
+            <section class="bg-white rounded-xl shadow-md overflow-hidden mb-6" aria-labelledby="fee-structure-title">
+                <header class="px-6 py-4 border-b border-gray-200">
+                    <h2 id="fee-structure-title" class="text-lg font-semibold">Fee Structure</h2>
+                    <p class="text-sm text-gray-500">All platform charges and fees</p>
+                </header>
+                <div class="p-6">
+                    <div class="space-y-6">
+                        <!-- Deposit Fees -->
+                        <div class="no-withdrawal">
+                            <h3 class="text-md font-semibold mb-3 flex items-center">
+                                <i class="fas fa-wallet text-blue-500 mr-2"></i>
+                                Deposit Fees
+                            </h3>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="border border-gray-200 rounded-lg p-3">
+                                        <div class="text-sm font-medium text-gray-500 mb-1">Bank Transfer</div>
+                                        <div class="text-lg font-bold">1.5%</div>
+                                        <div class="text-xs text-gray-500">Minimum $0.50</div>
+                                    </div>
+                                    <div class="border border-gray-200 rounded-lg p-3">
+                                        <div class="text-sm font-medium text-gray-500 mb-1">Credit/Debit Card</div>
+                                        <div class="text-lg font-bold">3.5%</div>
+                                        <div class="text-xs text-gray-500">Minimum $1.00</div>
+                                    </div>
+                                    <div class="border border-gray-200 rounded-lg p-3">
+                                        <div class="text-sm font-medium text-gray-500 mb-1">Cryptocurrency</div>
+                                        <div class="text-lg font-bold">0.5%</div>
+                                        <div class="text-xs text-gray-500">Network fees may apply</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Transfer Fees -->
+                        <div>
+                            <h3 class="text-md font-semibold mb-3 flex items-center">
+                                <i class="fas fa-exchange-alt text-blue-500 mr-2"></i>
+                                Internal Transfer Fees
+                            </h3>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Transfer Type</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bronze</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Silver</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gold</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Platinum</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">User to User</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">3.0%</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2.5%</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">1.5%</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">0.5%</td>
+                                        </tr>
+                                        <tr class="bg-gray-50">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">User to Merchant</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2.5%</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2.0%</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">1.0%</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">Free</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Currency Conversion</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">4.0%</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">3.5%</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">2.5%</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">1.5%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Other Fees -->
+                        <div>
+                            <h3 class="text-md font-semibold mb-3 flex items-center">
+                                <i class="fas fa-file-invoice-dollar text-blue-500 mr-2"></i>
+                                Other Fees
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-id-card text-blue-500 mr-2"></i>
+                                        <h4 class="font-medium">Account Verification</h4>
+                                    </div>
+                                    <p class="text-sm text-gray-600">One-time fee of $5.00 for identity verification (waived for Silver+ tiers)</p>
+                                </div>
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-file-alt text-blue-500 mr-2"></i>
+                                        <h4 class="font-medium">Monthly Maintenance</h4>
+                                    </div>
+                                    <p class="text-sm text-gray-600">$2.00/month for inactive accounts (no transactions for 6 months)</p>
+                                </div>
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-gift text-blue-500 mr-2"></i>
+                                        <h4 class="font-medium">Gift Card Purchase</h4>
+                                    </div>
+                                    <p class="text-sm text-gray-600">2.5% fee on gift card purchases (1.0% for Gold+, free for Platinum)</p>
+                                </div>
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-hand-holding-usd text-blue-500 mr-2"></i>
+                                        <h4 class="font-medium">Loan Processing</h4>
+                                    </div>
+                                    <p class="text-sm text-gray-600">5.0% of loan amount (3.0% for Silver+, 1.5% for Platinum)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tier Calculator -->
+            <section class="bg-white rounded-xl shadow-md overflow-hidden" aria-labelledby="tier-calculator-title">
+                <header class="px-6 py-4 border-b border-gray-200">
+                    <h2 id="tier-calculator-title" class="text-lg font-semibold">Tier Calculator</h2>
+                    <p class="text-sm text-gray-500">See how much you need to spend to reach the next tier</p>
+                </header>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Your Lifetime Purchases</label>
+                                <div class="relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">$</span>
+                                    </div>
+                                    <input type="text" name="purchases" id="purchases" class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-7 pr-12 py-2 sm:text-sm border-gray-300 rounded-md" placeholder="0.00" value="1250">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Average Monthly Spending</label>
+                                <div class="relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">$</span>
+                                    </div>
+                                    <input type="text" name="monthly" id="monthly" class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-7 pr-12 py-2 sm:text-sm border-gray-300 rounded-md" placeholder="0.00" value="200">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h3 class="font-medium mb-3">Tier Progress</h3>
+                                <div class="space-y-4">
+                                    <!-- Bronze -->
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span>Bronze ($0+)</span>
+                                            <span>Completed</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Silver -->
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span>Silver ($500+)</span>
+                                            <span>Completed</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Gold -->
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span>Gold ($1,000+)</span>
+                                            <span>$1,250/$1,000</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Platinum -->
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span>Platinum ($2,500+)</span>
+                                            <span>$1,250/$2,500</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 50%"></div>
+                                        </div>
+                                        <div class="text-xs text-gray-500 mt-1">
+                                            At your current spending rate, you'll reach Platinum in approximately 
+                                            <span class="font-medium">6 months</span>.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- FAQ Section -->
+    <section class="container mx-auto px-4 py-8 max-w-4xl" aria-labelledby="faq-title">
+        <h2 id="faq-title" class="text-xl font-bold mb-6">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                <button class="w-full px-4 py-3 text-left flex justify-between items-center bg-white hover:bg-gray-50 transition" onclick="toggleFAQ(this)">
+                    <span class="font-medium">How do I qualify for premium tiers?</span>
+                    <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                </button>
+                <div class="px-4 pb-4 hidden">
+                    <p class="text-sm text-gray-600">Premium tiers are based on your lifetime purchases in our store:
+                        <br>- Bronze: $0+ (default)
+                        <br>- Silver: $500+
+                        <br>- Gold: $1,000+
+                        <br>- Platinum: $2,500+
+                        <br><br>Your tier is automatically updated within 24 hours of reaching the required purchase amount.
+                    </p>
+                </div>
+            </div>
+            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                <button class="w-full px-4 py-3 text-left flex justify-between items-center bg-white hover:bg-gray-50 transition" onclick="toggleFAQ(this)">
+                    <span class="font-medium">Why can't I withdraw my funds?</span>
+                    <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                </button>
+                <div class="px-4 pb-4 hidden">
+                    <p class="text-sm text-gray-600">Our platform operates as a closed ecosystem where deposited funds can only be used for purchases within our store and services. This model allows us to offer lower fees and better benefits to our users. All deposits are final and cannot be withdrawn back to your bank account or payment method.</p>
+                </div>
+            </div>
+            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                <button class="w-full px-4 py-3 text-left flex justify-between items-center bg-white hover:bg-gray-50 transition" onclick="toggleFAQ(this)">
+                    <span class="font-medium">Do my tier benefits expire?</span>
+                    <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                </button>
+                <div class="px-4 pb-4 hidden">
+                    <p class="text-sm text-gray-600">No, your tier benefits are permanent once achieved. However, we may introduce higher tiers in the future with additional benefits. Your current tier will never be downgraded unless you violate our terms of service.</p>
+                </div>
+            </div>
+            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                <button class="w-full px-4 py-3 text-left flex justify-between items-center bg-white hover:bg-gray-50 transition" onclick="toggleFAQ(this)">
+                    <span class="font-medium">Can I transfer funds to another user?</span>
+                    <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                </button>
+                <div class="px-4 pb-4 hidden">
+                    <p class="text-sm text-gray-600">Yes, you can transfer funds to other registered users, but standard transfer fees apply based on your current tier. All transfers are final and cannot be reversed, so please ensure you're sending to the correct recipient.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                    <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                        <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                        <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                        <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-400">Subscribe to our newsletter</p>
+                        <div class="flex mt-2">
+                            <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                            <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="fees.js"></script>
+</body>
+</html>

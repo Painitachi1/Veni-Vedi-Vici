@@ -1,0 +1,587 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVV Premium | Notifications</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #3b82f6, #ef4444);
+        }
+        
+        .notification-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .unread {
+            position: relative;
+        }
+        
+        .unread::after {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: -8px;
+            width: 8px;
+            height: 8px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+        }
+        
+        .page-transition {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .dark .notification-card {
+            background-color: #1f2937;
+            border-color: #374151;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-2xl font-bold gradient-text">VVV</a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a>
+                    <a href="Store.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Stores</a>
+                    <a href='Dashboard.html'>Dashboard</a>
+                    <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Tracking</a>
+                    <a href="#" class="text-blue-600 dark:text-blue-400 font-medium">Premium</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <a href="#notifications" class="relative block p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">5</span>
+                        </a>
+                    </div>
+                    <span class="hidden md:inline font-medium">Welcome, User</span>
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-red-500 flex items-center justify-center text-white font-bold">
+                        U
+                    </div>
+                    
+                    <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <div class="flex flex-col space-y-3 pb-4">
+                    <a href="index.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a>
+                    <a href="Store.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Stores</a>
+                    <a href='Dashboard.html'>Dashboard</a>
+                    <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Tracking</a>
+                    <a href="#" class="text-blue-600 dark:text-blue-400 font-medium">Premium</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="app" class="pt-16">
+        <!-- Notifications Header -->
+        <section class="py-8 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                    <div>
+                        <h1 class="text-3xl font-bold mb-2">Notifications</h1>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Stay updated with your orders, rewards, and exclusive offers
+                        </p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex space-x-3">
+                        <button id="mark-all-read" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                            <i class="fas fa-check-circle mr-2"></i>Mark all as read
+                        </button>
+                        <button id="notification-settings" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-cog mr-2"></i>Settings
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notifications Content -->
+        <section class="py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <!-- Main Notifications Area -->
+                    <div class="w-full md:w-2/3">
+                        <!-- Filter Tabs -->
+                        <div class="flex border-b border-gray-200 dark:border-gray-700 mb-6">
+                            <button class="notification-tab px-4 py-3 font-medium text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400" data-filter="all">
+                                All Notifications
+                            </button>
+                            <button class="notification-tab px-4 py-3 font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400" data-filter="unread">
+                                Unread
+                            </button>
+                            <button class="notification-tab px-4 py-3 font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400" data-filter="orders">
+                                Orders
+                            </button>
+                            <button class="notification-tab px-4 py-3 font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400" data-filter="rewards">
+                                Rewards
+                            </button>
+                        </div>
+                        
+                        <!-- Notifications List -->
+                        <div class="space-y-4">
+                            <!-- Today's Notifications -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300">Today</h3>
+                                
+                                <!-- Notification 1 -->
+                                <div class="notification-card bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 transition unread" data-type="rewards" data-read="false">
+                                    <div class="flex items-start">
+                                        <div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center text-purple-600 dark:text-purple-400 mr-4 mt-1">
+                                            <i class="fas fa-gift"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-start">
+                                                <h4 class="font-bold">Double Points Activated!</h4>
+                                                <span class="text-xs text-gray-500">10:42 AM</span>
+                                            </div>
+                                            <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">
+                                                Your account has been credited with double points for your recent purchase. 250 points added!
+                                            </p>
+                                            <div class="mt-3 flex space-x-2">
+                                                <button class="notification-action px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/50 transition">
+                                                    View Points
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Notification 2 -->
+                                <div class="notification-card bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 transition unread" data-type="orders" data-read="false">
+                                    <div class="flex items-start">
+                                        <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center text-green-600 dark:text-green-400 mr-4 mt-1">
+                                            <i class="fas fa-truck"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-start">
+                                                <h4 class="font-bold">Order Shipped!</h4>
+                                                <span class="text-xs text-gray-500">09:15 AM</span>
+                                            </div>
+                                            <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">
+                                                Your order #VVV-2023-5874 has been shipped and will arrive in 2-3 business days.
+                                            </p>
+                                            <div class="mt-3 flex space-x-2">
+                                                <button class="notification-action px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/50 transition">
+                                                    Track Order
+                                                </button>
+                                                <button class="notification-action px-3 py-1 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded-full hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+                                                    View Details
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Yesterday's Notifications -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300">Yesterday</h3>
+                                
+                                <!-- Notification 3 -->
+                                <div class="notification-card bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 transition" data-type="rewards" data-read="true">
+                                    <div class="flex items-start">
+                                        <div class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center text-yellow-600 dark:text-yellow-400 mr-4 mt-1">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-start">
+                                                <h4 class="font-bold">New Tier Unlocked!</h4>
+                                                <span class="text-xs text-gray-500">5:30 PM</span>
+                                            </div>
+                                            <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">
+                                                Congratulations! You've reached Gold Tier status with 2,150 points. Enjoy your new benefits.
+                                            </p>
+                                            <div class="mt-3 flex space-x-2">
+                                                <button class="notification-action px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/50 transition">
+                                                    View Benefits
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Notification 4 -->
+                                <div class="notification-card bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 transition" data-type="orders" data-read="true">
+                                    <div class="flex items-start">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-4 mt-1">
+                                            <i class="fas fa-shopping-bag"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-start">
+                                                <h4 class="font-bold">Order Confirmed</h4>
+                                                <span class="text-xs text-gray-500">2:15 PM</span>
+                                            </div>
+                                            <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">
+                                                Your order #VVV-2023-5874 has been confirmed and is being processed. Expected ship date: Tomorrow.
+                                            </p>
+                                            <div class="mt-3 flex space-x-2">
+                                                <button class="notification-action px-3 py-1 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded-full hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+                                                    View Order
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Older Notifications -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300">This Week</h3>
+                                
+                                <!-- Notification 5 -->
+                                <div class="notification-card bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 transition" data-type="rewards" data-read="true">
+                                    <div class="flex items-start">
+                                        <div class="w-10 h-10 rounded-full bg-pink-100 dark:bg-pink-900 flex items-center justify-center text-pink-600 dark:text-pink-400 mr-4 mt-1">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-start">
+                                                <h4 class="font-bold">VIP Event Invitation</h4>
+                                                <span class="text-xs text-gray-500">Tue, 10:30 AM</span>
+                                            </div>
+                                            <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">
+                                                You're invited to our exclusive Gold Tier shopping event on November 15th. 20% off all purchases!
+                                            </p>
+                                            <div class="mt-3 flex space-x-2">
+                                                <button class="notification-action px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/50 transition">
+                                                    RSVP Now
+                                                </button>
+                                                <button class="notification-action px-3 py-1 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded-full hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+                                                    More Details
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Notification 6 -->
+                                <div class="notification-card bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 transition" data-type="rewards" data-read="true">
+                                    <div class="flex items-start">
+                                        <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center text-red-600 dark:text-red-400 mr-4 mt-1">
+                                            <i class="fas fa-birthday-cake"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-start">
+                                                <h4 class="font-bold">Birthday Reward!</h4>
+                                                <span class="text-xs text-gray-500">Mon, 9:00 AM</span>
+                                            </div>
+                                            <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">
+                                                Happy Birthday! Here's a special 15% off coupon just for you: BDAY15. Expires in 7 days.
+                                            </p>
+                                            <div class="mt-3 flex space-x-2">
+                                                <button class="notification-action px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/50 transition">
+                                                    Shop Now
+                                                </button>
+                                                <button class="notification-action px-3 py-1 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded-full hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+                                                    Copy Code
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notification Sidebar -->
+                    <div class="w-full md:w-1/3">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 sticky top-24">
+                            <h3 class="font-bold text-lg mb-4">Notification Preferences</h3>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="font-medium">Order Updates</h4>
+                                        <p class="text-gray-600 dark:text-gray-300 text-sm">Shipping, delivery, returns</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" value="" class="sr-only peer" checked>
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="font-medium">Rewards & Points</h4>
+                                        <p class="text-gray-600 dark:text-gray-300 text-sm">Earnings, redemptions</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" value="" class="sr-only peer" checked>
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="font-medium">VIP Events</h4>
+                                        <p class="text-gray-600 dark:text-gray-300 text-sm">Exclusive shopping events</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" value="" class="sr-only peer" checked>
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="font-medium">Promotions</h4>
+                                        <p class="text-gray-600 dark:text-gray-300 text-sm">Special offers, discounts</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" value="" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="pt-4 border-t border-gray-200 dark:border-gray-700 mt-4">
+                                    <h4 class="font-medium mb-2">Delivery Method</h4>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center">
+                                            <input id="push-notifications" name="delivery-method" type="radio" checked class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
+                                            <label for="push-notifications" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                                                Push Notifications
+                                            </label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input id="email-notifications" name="delivery-method" type="radio" class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
+                                            <label for="email-notifications" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                                                Email Notifications
+                                            </label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input id="both-methods" name="delivery-method" type="radio" class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
+                                            <label for="both-methods" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                                                Both
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Mark all as read
+        document.getElementById('mark-all-read').addEventListener('click', function() {
+            const unreadNotifications = document.querySelectorAll('.unread');
+            const notificationBadge = document.querySelector('.fa-bell').nextElementSibling;
+            
+            unreadNotifications.forEach(notification => {
+                notification.classList.remove('unread');
+                notification.setAttribute('data-read', 'true');
+            });
+            
+            // Update badge count
+            notificationBadge.textContent = '0';
+            notificationBadge.classList.remove('bg-red-500');
+            notificationBadge.classList.add('bg-gray-500');
+            
+            // Show confirmation
+            alert('All notifications marked as read');
+        });
+
+        // Notification settings
+        document.getElementById('notification-settings').addEventListener('click', function() {
+            alert('Redirecting to notification settings page...');
+        });
+
+        // Filter notifications
+        const tabs = document.querySelectorAll('.notification-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('text-blue-600', 'dark:text-blue-400', 'border-blue-600', 'dark:border-blue-400'));
+                tabs.forEach(t => t.classList.add('text-gray-600', 'dark:text-gray-400', 'hover:text-blue-600', 'dark:hover:text-blue-400'));
+                this.classList.remove('text-gray-600', 'dark:text-gray-400', 'hover:text-blue-600', 'dark:hover:text-blue-400');
+                this.classList.add('text-blue-600', 'dark:text-blue-400', 'border-blue-600', 'dark:border-blue-400');
+                
+                // Filter notifications
+                const filter = this.getAttribute('data-filter');
+                const notifications = document.querySelectorAll('.notification-card');
+                
+                notifications.forEach(notification => {
+                    if (filter === 'all') {
+                        notification.style.display = 'block';
+                    } else if (filter === 'unread') {
+                        if (notification.getAttribute('data-read') === 'false') {
+                            notification.style.display = 'block';
+                        } else {
+                            notification.style.display = 'none';
+                        }
+                    } else {
+                        if (notification.getAttribute('data-type') === filter) {
+                            notification.style.display = 'block';
+                        } else {
+                            notification.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // Mark as read when clicked
+        const notificationCards = document.querySelectorAll('.notification-card');
+        notificationCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Don't mark as read if clicking an action button
+                if (!e.target.classList.contains('notification-action')) {
+                    this.classList.remove('unread');
+                    this.setAttribute('data-read', 'true');
+                    
+                    // Update badge count
+                    const notificationBadge = document.querySelector('.fa-bell').nextElementSibling;
+                    const currentCount = parseInt(notificationBadge.textContent);
+                    if (currentCount > 0) {
+                        notificationBadge.textContent = currentCount - 1;
+                        
+                        if (currentCount - 1 === 0) {
+                            notificationBadge.classList.remove('bg-red-500');
+                            notificationBadge.classList.add('bg-gray-500');
+                        }
+                    }
+                }
+            });
+        });
+
+        // Dark mode toggle (simplified for this example)
+        const darkModeToggle = document.createElement('div');
+        darkModeToggle.innerHTML = `
+            <div class="fixed bottom-4 right-4">
+                <button id="dark-mode-toggle" class="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 shadow-lg flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+            </div>
+        `;
+        document.body.appendChild(darkModeToggle);
+        
+        document.getElementById('dark-mode-toggle').addEventListener('click', function() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark') ? 'enabled' : 'disabled');
+        });
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
+

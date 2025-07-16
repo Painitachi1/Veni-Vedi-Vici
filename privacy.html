@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVV - Privacy Policy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            transition: all 0.3s ease;
+        }
+        
+        .dark body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #3b82f6, #ef4444);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .policy-section {
+            scroll-margin-top: 100px;
+        }
+        
+        .toc-link {
+            position: relative;
+            padding-left: 1rem;
+        }
+        
+        .toc-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+        }
+        
+        .toc-link:hover::before {
+            background-color: #ef4444;
+        }
+        
+        .highlight-box {
+            border-left: 4px solid #3b82f6;
+            background-color: rgba(59, 130, 246, 0.05);
+        }
+        
+        .dark .highlight-box {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="dark:bg-gray-900 dark:text-gray-100">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-2xl font-bold gradient-text">VVV</a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="stores.html" class="nav-link">Stores</a>
+                    <a href='Dashboard.html'>Dashboard</a>
+                    <a href="hubs.html" class="nav-link">Hubs</a>
+                    <a href="conquerors-club.html" class="nav-link">Conqueror's Club</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="relative inline-block w-12 mr-2 align-middle select-none">
+                        <input type="checkbox" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-2 appearance-none cursor-pointer"/>
+                        <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                    </div>
+                    <span class="text-sm font-medium hidden sm:inline">Dark Mode</span>
+                    
+                    <div class="flex items-center space-x-2">
+                        <span class="hidden md:inline font-medium">Welcome, User</span>
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-red-500 flex items-center justify-center text-white font-bold">
+                            U
+                        </div>
+                    </div>
+                    
+                    <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <div class="flex flex-col space-y-3 pb-4">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="stores.html" class="nav-link">Stores</a>
+                    <a href='Dashboard.html'>Dashboard</a>
+                    <a href="hubs.html" class="nav-link">Hubs</a>
+                    <a href="conquerors-club.html" class="nav-link">Conqueror's Club</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Table of Contents -->
+            <div class="lg:col-span-3">
+                <div class="sticky top-28">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <h2 class="text-xl font-bold mb-4">Table of Contents</h2>
+                        <nav class="space-y-2">
+                            <a href="#introduction" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Introduction</a>
+                            <a href="#data-collection" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Data We Collect</a>
+                            <a href="#data-use" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">How We Use Data</a>
+                            <a href="#data-sharing" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Data Sharing</a>
+                            <a href="#data-security" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Data Security</a>
+                            <a href="#user-rights" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Your Rights</a>
+                            <a href="#cookies" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Cookies</a>
+                            <a href="#changes" class="block toc-link hover:text-blue-600 dark:hover:text-blue-400 transition">Policy Changes</a>
+                            <a href='Contactus.html'>Contact Us</a>
+                        </nav>
+                    </div>
+                    
+                    <div class="mt-6 bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <h3 class="font-bold mb-2">Last Updated</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">June 15, 2023</p>
+                        <div class="mt-4">
+                            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition">
+                                Download PDF Version
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Privacy Policy Content -->
+            <div class="lg:col-span-9">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+                    <!-- Header -->
+                    <div class="bg-gradient-to-r from-blue-600 to-red-500 p-8 text-white">
+                        <h1 class="text-3xl md:text-4xl font-bold mb-2">Privacy Policy</h1>
+                        <p class="text-blue-100">Your privacy is important to us at VVV</p>
+                    </div>
+                    
+                    <!-- Content -->
+                    <div class="p-6 md:p-8 space-y-8">
+                        <!-- Introduction -->
+                        <section id="introduction" class="policy-section">
+                            <h2 class="text-2xl font-bold mb-4">1. Introduction</h2>
+                            <p class="mb-4">Welcome to VVV ("we," "our," or "us"). We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our services, including our website, mobile applications, and physical hubs (collectively, the "Services").</p>
+                            <p>By accessing or using our Services, you agree to the collection and use of information in accordance with this policy. If you do not agree with our policies and practices, please do not use our Services.</p>
+                        </section>
+                        
+                        <!-- Data We Collect -->
+                        <section id="data-collection" class="policy-section">
+                            <h2 class="text-2xl font-bold mb-4">2. Data We Collect</h2>
+                            <p class="mb-4">We collect several types of information from and about users of our Services, including:</p>
+                            
+                            <div class="mb-6">
+                                <h3 class="text-lg font-semibold mb-2">Personal Information</h3>
+                                <ul class="list-disc pl-6 space-y-2">
+                                    <li>Contact details (name, email, phone number, shipping/billing address)</li>
+                                    <li>Account information (username, password, profile picture)</li>
+                                    <li>Payment information (credit card details, billing address)</li>
+                                    <li>Government-issued ID (for identity verification in certain transactions)</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h3 class="text-lg font-semibold mb-2">Transaction Information</h3>
+                                <ul class="list-disc pl-6 space-y-2">
+                                    <li>Purchase history and transaction details</li>
+                                    <li>Product preferences and wish lists</li>
+                                    <li>Hub pickup locations and times</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h3 class="text-lg font-semibold mb-2">Technical Information</h3>
+                                <ul class="list-disc pl-6 space-y-2">
+                                    <li>IP address, browser type, and operating system</li>
+                                    <li>Device information (model, unique identifiers)</li>
+                                    <li>Usage data (pages visited, features used, time spent)</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="highlight-box p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Location Data</h4>
+                                <p>With your permission, we may collect precise location data to help you find nearby VVV Hubs and provide location-based services. You can enable or disable location services through your device or browser settings.</p>
+                            </div>
+                        </section>
+                        
+                        <!-- How We Use Data -->
+                        <section id="data-use" class="policy-section">
+                            <h2 class="text-2xl font-bold mb-4">3. How We Use Data</h2>
+                            <p class="mb-4">We use the information we collect for various purposes, including:</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 mb-3">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <h3 class="font-semibold">Service Delivery</h3>
+                                    <p class="text-sm">Process transactions, fulfill orders, and facilitate hub pickups</p>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 mb-3">
+                                        <i class="fas fa-user-shield"></i>
+                                    </div>
+                                    <h3 class="font-semibold">Account Management</h3>
+                                    <p class="text-sm">Create and manage your account, verify identity, and provide customer support</p>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 mb-3">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <h3 class="font-semibold">Improvements</h3>
+                                    <p class="text-sm">Analyze usage to improve our Services and develop new features</p>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 mb-3">
+                                        <i class="fas fa-bullhorn"></i>
+                                    </div>
+                                    <h3 class="font-semibold">Communication</h3>
+                                    <p class="text-sm">Send service notifications, promotions, and personalized recommendations</p>
+                                </div>
+                            </div>
+                            
+                            <div class="highlight-box p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Legal Compliance</h4>
+                                <p>We may use your information to comply with applicable laws, regulations, legal processes, or governmental requests, as well as to protect the rights, property, or safety of VVV, our users, or the public.</p>
+                            </div>
+                        </section>
+                        
+                        <!-- Data Sharing -->
+                        <section id="data-sharing" class="policy-section">
+                            <h2 class="text-2xl font-bold mb-4">4. Data Sharing</h2>
+                            <p class="mb-4">We may share your information in the following circumstances:</p>
+                            
+                            <div class="space-y-4 mb-6">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-blue-600 dark:text-blue-400 mt-1 mr-3">
+                                        <i class="fas fa-store"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">With Vendors and Partners</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">To fulfill your orders, we share necessary information with product vendors, payment processors, and delivery partners.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-blue-600 dark:text-blue-400 mt-1 mr-3">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">With Service Providers</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">We engage third parties to perform functions like hosting, analytics, marketing, and customer support.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-blue-600 dark:text-blue-400 mt-1 mr-3">
+                                        <i class="fas fa-gavel"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">For Legal Reasons</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">We may disclose information if required by law or in response to valid legal requests.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-blue-600 dark:text-blue-400 mt-1 mr-3">
+                                        <i class="fas fa-handshake"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Business Transfers</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">In case of merger, acquisition, or asset sale, user information may be transferred.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="highlight-box p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Aggregated Data</h4>
+                                <p>We may share aggregated, anonymized data that does not identify any individual for research, analytics, or marketing purposes.</p>
+                            </div>
+                        </section>
+                        
+                        <!-- Data Security -->
+                        <section id="data-security" class="policy-section">
+                            <h2 class="text-2xl font-bold mb-4">5. Data Security</h2>
+                            <p class="mb-4">We implement appropriate technical and organizational measures to protect your personal information:</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-4 mb-6">
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-green-600 dark:text-green-400 mt-1 mr-3">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Encryption</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Data in transit is protected by SSL/TLS encryption</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-green-600 dark:text-green-400 mt-1 mr-3">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Access Controls</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Strict access controls limit who can view user data</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-green-600 dark:text-green-400 mt-1 mr-3">
+                                        <i class="fas fa-database"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Secure Storage</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Data is stored in secure facilities with multiple safeguards</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-green-600 dark:text-green-400 mt-1 mr-3">
+                                        <i class="fas fa-user-check"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Authentication</h3>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Multi-factor authentication for sensitive operations</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="highlight-box p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Your Responsibility</h4>
+                                <p>While we strive to protect your information, no security system is impenetrable. We cannot guarantee the absolute security of your data. You are responsible for maintaining the confidentiality of your account credentials.</p>
+                            </div>
+                        </section>
+                        
+                        <!-- Your Rights -->
+                        <section id="user-rights" class="policy-section">
+                            <h2 class="text-2xl font-bold mb-4">6. Your Rights</h2>
+                            <p class="mb-4">Depending on your location, you may have certain rights regarding your personal information:</p>
+                            
+                            <div class="overflow-x-auto mb-6">
+                                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                    <thead class="bg-gray-50 dark:bg-gray-700">
+                                        <tr>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Right</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                        <tr>
+                                            <td class="px-4 py-3 whitespace-nowrap font-medium">Access</td>
+                                            <td class="px-4 py-3">Request a copy of your personal data</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 whitespace-nowrap font-medium">Correction</td>
+                                            <td class="px-4 py-3">Request correction of inaccurate data</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 whitespace-nowrap font-medium">Deletion</td>
+                                            <td class="px-4 py-3">Request deletion of your personal data</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 whitespace-nowrap font-medium">Restriction</td>
+                                            <td class="px-4 py-3">Request restriction of processing</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 whitespace-nowrap font-medium">Portability</td>
+                                            <td class="px-4 py-3">Request transfer of your data to another service</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 whitespace-nowrap font-medium">Objection</td>
+                                            <td class="px-4 py-3">Object to certain processing activities</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="highlight-box p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Exercising Your Rights</h4>
+                                <p>To exercise any of these rights, please contact us using the information in the "Contact Us" section below. We may need to verify your identity before processing your request. We will respond to your request within 30 days.</p>
+                            </div>
+                        </section>
+                        
+                        <!-- Cookies -->
+                        <section id="cookies" class="policy-section">
+                            <h2 class="text-2xl font-bold mb-4">7. Cookies and Tracking Technologies</h2>
+                            <p class="mb-4">We use cookies and similar tracking technologies to enhance your experience:</p>
+                            
+                            <div class="mb-6">
+                                <h3 class="text-lg font-semibold mb-2">Essential Cookies</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Necessary for the website to function (e.g., authentication, security)</p>
+                                
+                                <h3 class="text-lg font-semibold mb-2">Performance Cookies</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Help us understand how visitors interact with our Services (e.g., analytics)</p>
+                                
+                                <h3 class="text-lg font-semibold mb-2">Functional Cookies</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Enable enhanced functionality (e.g., preferences, personalization)</p>
+                                
+                                <h3 class="text-lg font-semibold mb-2">Advertising Cookies</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Used to deliver relevant ads and measure ad performance</p>
+                            </div>
+                            
+                            <div class="highlight-box p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Cookie Management</h4>
+                                <p>You can control cookies through your browser settings. However, disabling certain cookies may affect the functionality of our Services. Our Cookie Preference Center allows you to manage your preferences for non-essential cookies.</p>
+                            </div>
+                        </section>
+                        
+                        <!-- Policy Changes -->
+                        <section id="changes" class="policy-section">
+                            <h2 class="text-2xl font-bold mb-4">8. Policy Changes</h2>
+                            <p class="mb-4">We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last Updated" date.</p>
+                            <p>Your continued use of our Services after any changes constitutes acceptance of the updated policy. We encourage you to review this Privacy Policy periodically.</p>
+                        </section>
+                        
+                        <!-- Contact Us -->
+                        <section id="contact" class="policy-section">
+                            <h2 class="text-2xl font-bold mb-4">9. Contact Us</h2>
+                            <p class="mb-4">If you have any questions about this Privacy Policy or our privacy practices, please contact us:</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-4">
+                                            <i class="fas fa-envelope"></i>
+                                        </div>
+                                        <h3 class="font-semibold">Email</h3>
+                                    </div>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">privacy@vvv.com</p>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-4">
+                                            <i class="fas fa-phone-alt"></i>
+                                        </div>
+                                        <h3 class="font-semibold">Phone</h3>
+                                    </div>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">+1 (800) 555-0199</p>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-4">
+                                            <i class="fas fa-mail-bulk"></i>
+                                        </div>
+                                        <h3 class="font-semibold">Mail</h3>
+                                    </div>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                                        VVV Privacy Office<br>
+                                        123 Privacy Lane<br>
+                                        San Francisco, CA 94103
+                                    </p>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-4">
+                                            <i class="fas fa-user-tie"></i>
+                                        </div>
+                                        <h3 class="font-semibold">Data Protection Officer</h3>
+                                    </div>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">dpo@vvv.com</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    
+                    <!-- Footer -->
+                    <div class="bg-gray-50 dark:bg-gray-700 px-6 py-4 border-t border-gray-200 dark:border-gray-600">
+                        <div class="flex flex-col md:flex-row justify-between items-center">
+                            <p class="text-sm text-gray-600 dark:text-gray-300 mb-2 md:mb-0">Â© 2023 VVV. All rights reserved.</p>
+                            <div class="flex space-x-4">
+                                <a href="terms.html" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Terms of Service</a>
+                                <a href="privacy.html" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Privacy Policy</a>
+                                <a href="cookies.html" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Cookie Policy</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle dark mode
+        document.getElementById('toggle').addEventListener('change', function() {
+            document.documentElement.classList.toggle('dark', this.checked);
+            localStorage.setItem('darkMode', this.checked);
+        });
+
+        // Set initial dark mode state
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+            document.getElementById('toggle').checked = true;
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for table of contents links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update URL without page jump
+                    history.pushState(null, null, targetId);
+                }
+            });
+        });
+
+        // Highlight current section in table of contents
+        const sections = document.querySelectorAll('.policy-section');
+        const navLinks = document.querySelectorAll('.toc-link');
+        
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-600', 'dark:text-blue-400', 'font-medium');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-blue-600', 'dark:text-blue-400', 'font-medium');
+                }
+            });
+        });
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+    <!-- Added JavaScript -->
+    <script src="privacy.js"></script>
+</body>
+</html>

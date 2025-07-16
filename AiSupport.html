@@ -1,0 +1,552 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVV Platform | AI Support Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .chat-bubble {
+            border-radius: 1.25rem;
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .user-bubble {
+            background-color: #4f46e5;
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 0.25rem;
+        }
+        .bot-bubble {
+            background-color: #f3f4f6;
+            color: #111827;
+            margin-right: auto;
+            border-bottom-left-radius: 0.25rem;
+        }
+        .typing-indicator {
+            display: flex;
+            padding: 0.5rem;
+        }
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #9ca3af;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+        .suggestion-chip {
+            transition: all 0.2s ease;
+        }
+        .suggestion-chip:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="gradient-bg h-8 w-8 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-robot text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-800">VVV Support</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-indigo-600 font-medium">Home</a>
+                    <a href='Faq.html'>FAQ</a>
+                    <a href="Contactus.html" class="text-gray-600 hover:text-indigo-600 font-medium">Contact</a>
+                    <a href="Vipdispute.html" class="flex items-center space-x-1 bg-indigo-600 text-white px-3 py-1 rounded-full text-sm">
+                        <span>VIP Support</span>
+                        <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="gradient-bg text-white">
+        <div class="container mx-auto px-4 py-16">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">VVV AI Support Assistant</h1>
+                <p class="text-xl mb-8">Get instant answers to your questions about the VVV platform from our intelligent bot</p>
+                <div class="flex justify-center">
+                    <div class="relative w-full max-w-xl">
+                        <input type="text" id="heroSearch" placeholder="Ask me anything about VVV..." 
+                               class="w-full px-5 py-3 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-indigo-700 text-white p-2 rounded-full hover:bg-indigo-800 transition">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <!-- Chat Header -->
+                <div class="gradient-bg text-white px-6 py-4 flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center mr-3">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-bold">VVV Support Bot</h2>
+                            <p class="text-xs opacity-80">AI-powered assistant</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button class="text-white/80 hover:text-white">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Chat Container -->
+                <div class="h-96 overflow-y-auto p-4 bg-gray-50" id="chatContainer">
+                    <!-- Welcome Message -->
+                    <div class="bot-bubble chat-bubble">
+                        <p>Hello! I'm your VVV support assistant. I can help you with:</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>Account setup and verification</li>
+                            <li>Transaction issues</li>
+                            <li>Platform features</li>
+                            <li>Security questions</li>
+                            <li>And much more!</li>
+                        </ul>
+                        <p class="mt-2">What would you like to know today?</p>
+                    </div>
+
+                    <!-- Sample Conversation -->
+                    <div class="user-bubble chat-bubble">
+                        <p>How do I verify my account?</p>
+                    </div>
+
+                    <div class="bot-bubble chat-bubble">
+                        <p>Account verification on VVV involves these steps:</p>
+                        <ol class="list-decimal pl-5 mt-1 space-y-1">
+                            <li>Go to Settings â†’ Account Verification</li>
+                            <li>Upload a clear photo of your government-issued ID</li>
+                            <li>Take a selfie for facial recognition</li>
+                            <li>Wait for approval (usually within 24 hours)</li>
+                        </ol>
+                        <div class="mt-3 text-sm text-indigo-600">
+                            <a href="Verification.html" class="font-medium hover:underline">View detailed verification guide â†’</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Suggestions -->
+                <div class="px-4 py-3 border-t border-gray-200 bg-white">
+                    <div class="flex flex-wrap gap-2 mb-2">
+                        <button onclick="askQuestion(this)" class="suggestion-chip bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-sm">
+                            How to deposit funds?
+                        </button>
+                        <button onclick="askQuestion(this)" class="suggestion-chip bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-sm">
+                            Transaction fees
+                        </button>
+                        <button onclick="askQuestion(this)" class="suggestion-chip bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-sm">
+                            Security features
+                        </button>
+                        <button onclick="askQuestion(this)" class="suggestion-chip bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-sm">
+                            Withdrawal limits
+                        </button>
+                    </div>
+                    <div class="relative">
+                        <input type="text" id="userInput" placeholder="Type your question here..." 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 pr-12">
+                        <button onclick="sendMessage()" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700 transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="mt-2 text-xs text-gray-500 text-center">
+                        Can't find your answer? <a href="Faq.html" class="text-indigo-600 hover:underline">Browse our full FAQ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Preview Section -->
+    <div class="bg-gray-50 py-12 border-t border-gray-200">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Frequently Asked Questions</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Quick answers to common questions about the VVV platform</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="flex items-start mb-3">
+                        <div class="bg-indigo-100 p-2 rounded-lg mr-4">
+                            <i class="fas fa-user-shield text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Account Security</h3>
+                            <p class="text-sm text-gray-600">Learn how to keep your VVV account secure</p>
+                        </div>
+                    </div>
+                    <a href="Faq.html" class="text-indigo-600 text-sm font-medium hover:underline inline-flex items-center">
+                        View questions <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="flex items-start mb-3">
+                        <div class="bg-indigo-100 p-2 rounded-lg mr-4">
+                            <i class="fas fa-exchange-alt text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Transactions</h3>
+                            <p class="text-sm text-gray-600">Understand deposits, withdrawals and transfers</p>
+                        </div>
+                    </div>
+                    <a href="Faq.html" class="text-indigo-600 text-sm font-medium hover:underline inline-flex items-center">
+                        View questions <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="flex items-start mb-3">
+                        <div class="bg-indigo-100 p-2 rounded-lg mr-4">
+                            <i class="fas fa-percentage text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Fees & Limits</h3>
+                            <p class="text-sm text-gray-600">All about VVV pricing and account limits</p>
+                        </div>
+                    </div>
+                    <a href="Contactus.html" class="text-indigo-600 text-sm font-medium hover:underline inline-flex items-center">
+                        View questions <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="flex items-start mb-3">
+                        <div class="bg-indigo-100 p-2 rounded-lg mr-4">
+                            <i class="fas fa-mobile-alt text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Mobile App</h3>
+                            <p class="text-sm text-gray-600">Using VVV on iOS and Android devices</p>
+                        </div>
+                    </div>
+                    <a href="Faq.html" class="text-indigo-600 text-sm font-medium hover:underline inline-flex items-center">
+                        View questions <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="flex items-start mb-3">
+                        <div class="bg-indigo-100 p-2 rounded-lg mr-4">
+                            <i class="fas fa-lock text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Verification</h3>
+                            <p class="text-sm text-gray-600">Complete your KYC to unlock all features</p>
+                        </div>
+                    </div>
+                    <a href="Verification.html" class="text-indigo-600 text-sm font-medium hover:underline inline-flex items-center">
+                        View questions <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+                
+                <!-- FAQ Item 6 -->
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="flex items-start mb-3">
+                        <div class="bg-indigo-100 p-2 rounded-lg mr-4">
+                            <i class="fas fa-gem text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">VIP Benefits</h3>
+                            <p class="text-sm text-gray-600">Exclusive features for premium members</p>
+                        </div>
+                    </div>
+                    <a href="tiers.html" class="text-indigo-600 text-sm font-medium hover:underline inline-flex items-center">
+                        View questions <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="Faq.html" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                    Browse Full FAQ Center
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    
+
+    <!-- Floating Help Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button class="gradient-bg text-white h-14 w-14 rounded-full shadow-xl flex items-center justify-center text-xl hover:scale-110 transition-transform">
+            <i class="fas fa-question"></i>
+        </button>
+    </div>
+
+    <script>
+        // Sample Q&A database
+        const qaDatabase = {
+            "how do i verify my account": {
+                answer: "Account verification on VVV involves these steps:\n1. Go to Settings â†’ Account Verification\n2. Upload a clear photo of your government-issued ID\n3. Take a selfie for facial recognition\n4. Wait for approval (usually within 24 hours)",
+                link: "#"
+            },
+            "how to deposit funds": {
+                answer: "You can deposit funds to your VVV account using these methods:\n1. Bank transfer (1-3 business days)\n2. Credit/debit card (instant)\n3. Cryptocurrency transfer (network confirmation times vary)\n\nMinimum deposit is $10 or equivalent.",
+                link: "#"
+            },
+            "transaction fees": {
+                answer: "VVV charges the following fees:\n- Deposits: Free for bank transfers, 2.9% for cards\n- Withdrawals: 1% (min $5)\n- Trades: 0.25% per transaction\n\nVIP members enjoy reduced fees based on their tier.",
+                link: "#"
+            },
+            "security features": {
+                answer: "VVV employs multiple security measures:\n- Two-factor authentication (2FA)\n- Biometric login\n- Cold storage for digital assets\n- Regular security audits\n- Email/SMS confirmation for sensitive actions",
+                link: "#"
+            },
+            "withdrawal limits": {
+                answer: "Standard withdrawal limits:\n- Unverified: $1,000/day\n- Verified Level 1: $10,000/day\n- Verified Level 2: $50,000/day\n\nHigher limits available for institutional accounts.",
+                link: "#"
+            },
+            "default": {
+                answer: "I couldn't find a specific answer to your question. Would you like me to connect you with a human support agent or would you prefer to browse our FAQ section?",
+                link: "#"
+            }
+        };
+
+        // Function to send a message
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                // Add user message to chat
+                addMessage(message, 'user');
+                input.value = '';
+                
+                // Show typing indicator
+                showTyping();
+                
+                // Simulate bot response after delay
+                setTimeout(() => {
+                    respondToMessage(message);
+                }, 1000 + Math.random() * 2000); // Random delay between 1-3 seconds
+            }
+        }
+
+        // Function to add a message to the chat
+        function addMessage(text, sender) {
+            const chatContainer = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            
+            messageDiv.classList.add('chat-bubble');
+            messageDiv.classList.add(sender === 'user' ? 'user-bubble' : 'bot-bubble');
+            messageDiv.innerHTML = `<p>${text.replace(/\n/g, '<br>')}</p>`;
+            
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Function to show typing indicator
+        function showTyping() {
+            const chatContainer = document.getElementById('chatContainer');
+            const typingDiv = document.createElement('div');
+            typingDiv.classList.add('bot-bubble', 'chat-bubble');
+            typingDiv.innerHTML = `
+                <div class="typing-indicator">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            
+            chatContainer.appendChild(typingDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            return typingDiv;
+        }
+
+        // Function to remove typing indicator
+        function removeTyping(typingElement) {
+            if (typingElement && typingElement.parentNode) {
+                typingElement.parentNode.removeChild(typingElement);
+            }
+        }
+
+        // Function to respond to a message
+        function respondToMessage(message) {
+            const chatContainer = document.getElementById('chatContainer');
+            const typingElements = document.querySelectorAll('.typing-indicator');
+            
+            // Remove all typing indicators
+            typingElements.forEach(el => {
+                el.parentNode.parentNode.removeChild(el.parentNode);
+            });
+            
+            // Find the best matching answer
+            const lowerMessage = message.toLowerCase();
+            let response = qaDatabase.default;
+            
+            for (const [key, value] of Object.entries(qaDatabase)) {
+                if (lowerMessage.includes(key)) {
+                    response = value;
+                    break;
+                }
+            }
+            
+            // Add bot response
+            addMessage(response.answer, 'bot');
+            
+            // Add link if available
+            if (response.link) {
+                const linkDiv = document.createElement('div');
+                linkDiv.classList.add('bot-bubble', 'chat-bubble');
+                linkDiv.innerHTML = `
+                    <div class="mt-3 text-sm text-indigo-600">
+                        <a href="${response.link}" class="font-medium hover:underline">Learn more â†’</a>
+                    </div>
+                `;
+                chatContainer.appendChild(linkDiv);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+        }
+
+        // Function to ask a question from a suggestion chip
+        function askQuestion(element) {
+            const question = element.textContent.trim();
+            document.getElementById('userInput').value = question;
+            sendMessage();
+        }
+
+        // Allow pressing Enter to send message
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Sample initial questions
+        const sampleQuestions = [
+            "How do I verify my account?",
+            "What are the deposit methods?",
+            "How long do withdrawals take?",
+            "Is there a mobile app available?"
+        ];
+
+        // Initialize with sample questions if chat is empty
+        window.onload = function() {
+            // You could add some initial suggested questions here
+        };
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
+

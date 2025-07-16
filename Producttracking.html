@@ -1,0 +1,867 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking | VVV - Visual Victory Vault</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #3b82f6, #ef4444);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e2e8f0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #3b82f6, #ef4444);
+            transition: width 0.5s ease-in-out;
+        }
+        
+        .dark .progress-bar {
+            background-color: #1e293b;
+        }
+        
+        .timeline-item.active .timeline-dot {
+            background: linear-gradient(135deg, #3b82f6, #ef4444);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+        }
+        
+        .timeline-item.completed .timeline-dot {
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+        }
+        
+        .page-transition {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .order-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-container {
+            height: 300px;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen">
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Universal Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-800 text-white z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="logo">
+                <a href="Dashboard.html" class="flex items-center">
+                    <span class="ml-2 font-bold text-xl">VVV Platform</span>
+                </a>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href='Store.html'>Store</a></li>
+                <li><a href='Dashboard.html'>Dashboard</a></li>
+                <li><a href='walletrechargepage.html'>Wallet</a></li>
+                <li><a href='Order.html'>Orders</a></li>
+                <li><a href='accountsettings.html'>Account</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="Checkout.html" class="mr-4">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </a>
+                <a href="Signup.html" class="bg-yellow-500 text-black px-4 py-2 rounded">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto mt-20 p-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-2 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-6">Product Tracking</h2>
+                <!-- Existing product tracking content -->
+                <div class="mt-6">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <a href="Order.html" class="text-blue-600 hover:underline">View Full Order Details</a>
+                        <a href="HubPickupPage.html" class="text-blue-600 hover:underline">Pickup Locations</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold mb-4">Quick Actions</h3>
+                <ul class="space-y-3">
+                    <li><a href='Order.html'>Order History</a></li>
+                    <li><a href="Checkout.html" class="text-blue-600 hover:underline">Continue Shopping</a></li>
+                    <li><a href="Vipdispute.html" class="text-blue-600 hover:underline">Dispute Shipment</a></li>
+                    <li><a href="missedpickup.html" class="text-blue-600 hover:underline">Missed Pickup</a></li>
+                </ul>
+
+                <div class="mt-6">
+                    <h3 class="text-xl font-bold mb-4">Support</h3>
+                    <ul class="space-y-3">
+                        <li><a href="AiSupport.html" class="text-blue-600 hover:underline">AI Customer Support</a></li>
+                        <li><a href="Faq.html" class="text-blue-600 hover:underline">Shipping FAQs</a></li>
+                        <li><a href='Contactus.html'>Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-10 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-6">Additional Resources</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <h3 class="font-semibold mb-4">Account</h3>
+                    <ul class="space-y-2">
+                        <li><a href='Dashboard.html'>Dashboard</a></li>
+                        <li><a href='accountsettings.html'>Account Settings</a></li>
+                        <li><a href="Userbadge.html" class="text-blue-600 hover:underline">User Badges</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Shipping</h3>
+                    <ul class="space-y-2">
+                        <li><a href="HubPickupPage.html" class="text-blue-600 hover:underline">Pickup Locations</a></li>
+                        <li><a href="missedpickup.html" class="text-blue-600 hover:underline">Missed Pickups</a></li>
+                        <li><a href="myhubs.html" class="text-blue-600 hover:underline">My Hubs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="AiSupport.html" class="text-blue-600 hover:underline">AI Support</a></li>
+                        <li><a href='Contactus.html'>Contact Us</a></li>
+                        <li><a href="disputes.html" class="text-blue-600 hover:underline">Dispute Resolution</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    
+
+    <!-- Main Content -->
+    <div id="app" class="pt-16">
+        <!-- Order Tracking Section -->
+        <section id="tracking" class="py-12 page-transition">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4">Order <span class="gradient-text">Tracking</span></h1>
+                    <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                        Track all your VVV orders in one place. Get real-time updates on your purchases across all stores.
+                    </p>
+                </div>
+                
+                <!-- Search Order -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
+                    <div class="max-w-2xl mx-auto">
+                        <h3 class="text-lg font-semibold mb-4">Track Another Order</h3>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <div class="flex-1">
+                                <input type="text" placeholder="Enter Order ID (e.g. VVV-2023-001)" 
+                                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700">
+                            </div>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition whitespace-nowrap">
+                                <i class="fas fa-search mr-2"></i> Track Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Order Status Overview -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mr-4">
+                                <i class="fas fa-shopping-bag text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Total Orders</p>
+                                <h3 class="text-2xl font-bold">12</h3>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 mr-4">
+                                <i class="fas fa-check-circle text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Completed</p>
+                                <h3 class="text-2xl font-bold">8</h3>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 mr-4">
+                                <i class="fas fa-truck text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">In Transit</p>
+                                <h3 class="text-2xl font-bold">2</h3>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 mr-4">
+                                <i class="fas fa-times-circle text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Cancelled</p>
+                                <h3 class="text-2xl font-bold">2</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Active Orders -->
+                <div class="mb-12">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold">Active Orders</h2>
+                        <div class="flex items-center">
+                            <span class="text-sm text-gray-600 dark:text-gray-300 mr-3">Filter:</span>
+                            <select class="border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 focus:outline-none">
+                                <option>All Orders</option>
+                                <option>Processing</option>
+                                <option>In Transit</option>
+                                <option>Ready for Pickup</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <!-- Order Card 1 -->
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden order-card transition duration-300">
+                            <div class="p-6">
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                    <div class="mb-4 md:mb-0">
+                                        <div class="flex items-center mb-2">
+                                            <h3 class="text-lg font-bold mr-3">Order #VVV-2023-015</h3>
+                                            <span class="px-2 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 text-xs font-semibold rounded-full">
+                                                In Transit
+                                            </span>
+                                        </div>
+                                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                            Placed on Oct 18, 2023 â€¢ 3 items â€¢ Total: $1,299.92
+                                        </p>
+                                    </div>
+                                    <button class="text-blue-600 dark:text-blue-400 font-medium hover:underline whitespace-nowrap">
+                                        View Details
+                                    </button>
+                                </div>
+                                
+                                <!-- Order Timeline -->
+                                <div class="mt-6">
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-sm font-medium">Estimated pickup: Oct 21, 2023</span>
+                                        <span class="text-sm text-gray-600 dark:text-gray-300">2 of 4 steps completed</span>
+                                    </div>
+                                    <div class="progress-bar mb-6">
+                                        <div class="progress-fill" style="width: 50%"></div>
+                                    </div>
+                                    
+                                    <div class="relative">
+                                        <!-- Timeline line -->
+                                        <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700"></div>
+                                        
+                                        <div class="space-y-8">
+                                            <!-- Timeline Item 1 (Completed) -->
+                                            <div class="timeline-item completed relative pl-10">
+                                                <div class="timeline-dot absolute left-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white">
+                                                    <i class="fas fa-check text-sm"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">Order Confirmed</h4>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300">Oct 18, 2023 â€¢ 10:24 AM</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Timeline Item 2 (Completed) -->
+                                            <div class="timeline-item completed relative pl-10">
+                                                <div class="timeline-dot absolute left-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white">
+                                                    <i class="fas fa-check text-sm"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">Processing Order</h4>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300">Oct 18, 2023 â€¢ 2:15 PM</p>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Your order is being prepared by the store</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Timeline Item 3 (Active) -->
+                                            <div class="timeline-item active relative pl-10">
+                                                <div class="timeline-dot absolute left-0 w-8 h-8 rounded-full flex items-center justify-center text-white">
+                                                    <i class="fas fa-truck text-sm"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">In Transit to VVV Hub</h4>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300">Expected: Oct 20, 2023</p>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Your order is on its way to VVV Hub - San Francisco</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Timeline Item 4 (Pending) -->
+                                            <div class="timeline-item relative pl-10">
+                                                <div class="timeline-dot absolute left-0 w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300">
+                                                    <i class="fas fa-store text-sm"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">Ready for Pickup</h4>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300">Expected: Oct 21, 2023</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Order Card 2 -->
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden order-card transition duration-300">
+                            <div class="p-6">
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                    <div class="mb-4 md:mb-0">
+                                        <div class="flex items-center mb-2">
+                                            <h3 class="text-lg font-bold mr-3">Order #VVV-2023-014</h3>
+                                            <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-xs font-semibold rounded-full">
+                                                Processing
+                                            </span>
+                                        </div>
+                                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                            Placed on Oct 16, 2023 â€¢ 2 items â€¢ Total: $349.99
+                                        </p>
+                                    </div>
+                                    <button class="text-blue-600 dark:text-blue-400 font-medium hover:underline whitespace-nowrap">
+                                        View Details
+                                    </button>
+                                </div>
+                                
+                                <!-- Order Timeline -->
+                                <div class="mt-6">
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-sm font-medium">Estimated pickup: Oct 19, 2023</span>
+                                        <span class="text-sm text-gray-600 dark:text-gray-300">1 of 4 steps completed</span>
+                                    </div>
+                                    <div class="progress-bar mb-6">
+                                        <div class="progress-fill" style="width: 25%"></div>
+                                    </div>
+                                    
+                                    <div class="relative">
+                                        <!-- Timeline line -->
+                                        <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700"></div>
+                                        
+                                        <div class="space-y-8">
+                                            <!-- Timeline Item 1 (Completed) -->
+                                            <div class="timeline-item completed relative pl-10">
+                                                <div class="timeline-dot absolute left-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white">
+                                                    <i class="fas fa-check text-sm"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">Order Confirmed</h4>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300">Oct 16, 2023 â€¢ 4:32 PM</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Timeline Item 2 (Active) -->
+                                            <div class="timeline-item active relative pl-10">
+                                                <div class="timeline-dot absolute left-0 w-8 h-8 rounded-full flex items-center justify-center text-white">
+                                                    <i class="fas fa-box-open text-sm"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">Processing Order</h4>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300">Expected: Oct 18, 2023</p>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Your order is being prepared by the store</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Timeline Item 3 (Pending) -->
+                                            <div class="timeline-item relative pl-10">
+                                                <div class="timeline-dot absolute left-0 w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300">
+                                                    <i class="fas fa-truck text-sm"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">In Transit to VVV Hub</h4>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300">Expected: Oct 19, 2023</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Timeline Item 4 (Pending) -->
+                                            <div class="timeline-item relative pl-10">
+                                                <div class="timeline-dot absolute left-0 w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300">
+                                                    <i class="fas fa-store text-sm"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">Ready for Pickup</h4>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300">Expected: Oct 20, 2023</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Completed Orders -->
+                <div>
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold">Completed Orders</h2>
+                        <button class="text-blue-600 dark:text-blue-400 font-medium hover:underline">
+                            View All Orders
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Completed Order 1 -->
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden order-card transition duration-300">
+                            <div class="p-6">
+                                <div class="flex items-center mb-4">
+                                    <h3 class="text-lg font-bold mr-3">Order #VVV-2023-010</h3>
+                                    <span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 text-xs font-semibold rounded-full">
+                                        Completed
+                                    </span>
+                                </div>
+                                <div class="flex items-center mb-4">
+                                    <div class="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden mr-4">
+                                        <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1693009279096" 
+                                             alt="iPhone 15 Pro" 
+                                             class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <p class="font-medium">iPhone 15 Pro Max</p>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Titanium Blue â€¢ 256GB</p>
+                                        <p class="text-sm font-medium">$1,199.00</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-700">
+                                    <div>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Picked up on</p>
+                                        <p class="text-sm font-medium">Oct 15, 2023</p>
+                                    </div>
+                                    <button class="text-blue-600 dark:text-blue-400 font-medium hover:underline text-sm">
+                                        View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Completed Order 2 -->
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden order-card transition duration-300">
+                            <div class="p-6">
+                                <div class="flex items-center mb-4">
+                                    <h3 class="text-lg font-bold mr-3">Order #VVV-2023-009</h3>
+                                    <span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 text-xs font-semibold rounded-full">
+                                        Completed
+                                    </span>
+                                </div>
+                                <div class="flex items-center mb-4">
+                                    <div class="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden mr-4">
+                                        <img src="https://m.media-amazon.com/images/I/71pC69I3lzL._AC_SL1500_.jpg" 
+                                             alt="AirPods Pro" 
+                                             class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <p class="font-medium">AirPods Pro (2nd Gen)</p>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">White</p>
+                                        <p class="text-sm font-medium">$249.00</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-700">
+                                    <div>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Picked up on</p>
+                                        <p class="text-sm font-medium">Oct 10, 2023</p>
+                                    </div>
+                                    <button class="text-blue-600 dark:text-blue-400 font-medium hover:underline text-sm">
+                                        View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Completed Order 3 -->
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden order-card transition duration-300">
+                            <div class="p-6">
+                                <div class="flex items-center mb-4">
+                                    <h3 class="text-lg font-bold mr-3">Order #VVV-2023-008</h3>
+                                    <span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 text-xs font-semibold rounded-full">
+                                        Completed
+                                    </span>
+                                </div>
+                                <div class="flex items-center mb-4">
+                                    <div class="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden mr-4">
+                                        <img src="https://m.media-amazon.com/images/I/61L5QgPvgxL._AC_SL1500_.jpg" 
+                                             alt="Apple Watch" 
+                                             class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <p class="font-medium">Apple Watch Series 9</p>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">45mm GPS â€¢ Midnight</p>
+                                        <p class="text-sm font-medium">$429.00</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-700">
+                                    <div>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300">Picked up on</p>
+                                        <p class="text-sm font-medium">Oct 5, 2023</p>
+                                    </div>
+                                    <button class="text-blue-600 dark:text-blue-400 font-medium hover:underline text-sm">
+                                        View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Order Details Modal -->
+        <div id="order-details-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+            <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                    <div class="absolute inset-0 bg-gray-500 dark:bg-gray-900 opacity-75"></div>
+                </div>
+                
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                
+                <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+                    <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold">Order Details - #VVV-2023-015</h3>
+                            <button id="close-modal" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="px-6 py-4">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <!-- Order Summary -->
+                            <div>
+                                <h4 class="font-bold mb-4">Order Summary</h4>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+                                    <div class="flex items-start mb-4">
+                                        <div class="w-20 h-20 bg-gray-200 dark:bg-gray-600 rounded-lg mr-4 overflow-hidden">
+                                            <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1693009279096" 
+                                                 alt="iPhone 15 Pro" 
+                                                 class="w-full h-full object-contain">
+                                        </div>
+                                        <div>
+                                            <h5 class="font-medium">iPhone 15 Pro Max (256GB)</h5>
+                                            <p class="text-sm text-gray-600 dark:text-gray-300">Titanium Blue</p>
+                                            <p class="text-sm font-medium mt-1">$1,199.00</p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Qty: 1</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="space-y-3 pt-4 border-t border-gray-200 dark:border-gray-600">
+                                        <div class="flex justify-between">
+                                            <span class="text-gray-600 dark:text-gray-300">Subtotal</span>
+                                            <span>$1,199.00</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-gray-600 dark:text-gray-300">VVV Service Fee</span>
+                                            <span>$5.00</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-gray-600 dark:text-gray-300">Tax</span>
+                                            <span>$95.92</span>
+                                        </div>
+                                        <div class="flex justify-between font-bold pt-2 border-t border-gray-200 dark:border-gray-600">
+                                            <span>Total</span>
+                                            <span>$1,299.92</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <h4 class="font-bold mb-4">Pickup Information</h4>
+                                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                    <div class="flex items-center mb-3">
+                                        <i class="fas fa-map-marker-alt text-blue-500 mr-3"></i>
+                                        <div>
+                                            <h5 class="font-medium">VVV Hub - San Francisco</h5>
+                                            <p class="text-sm text-gray-600 dark:text-gray-300">123 Market St, San Francisco, CA 94103</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-clock text-blue-500 mr-3"></i>
+                                        <div>
+                                            <h5 class="font-medium">Estimated Pickup</h5>
+                                            <p class="text-sm text-gray-600 dark:text-gray-300">Oct 21, 2023 (10AM - 8PM)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Order Timeline -->
+                            <div>
+                                <h4 class="font-bold mb-4">Order Status</h4>
+                                
+                                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+                                    <div class="flex justify-between mb-3">
+                                        <span class="font-medium">In Transit to VVV Hub</span>
+                                        <span class="text-sm text-gray-600 dark:text-gray-300">2 of 4 steps completed</span>
+                                    </div>
+                                    <div class="progress-bar mb-6">
+                                        <div class="progress-fill" style="width: 50%"></div>
+                                    </div>
+                                    
+                                    <div class="relative">
+                                        <!-- Timeline line -->
+                                        <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700"></div>
+                                        
+                                        <div class="space-y-8">
+                                            <!-- Timeline Item 1 (Completed) -->
+                                            <div class="timeline-item completed relative pl-10">
+                                                <div class="timeline-dot absolute left-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white">
+                                                    <i class="fas fa-check text-sm"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">Order Confirmed</h4>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300">Oct 18, 2023 â€¢ 10:24 AM</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Timeline Item 2 (Completed) -->
+                                            <div class="timeline-item completed relative pl-10">
+                                                <div class="timeline-dot absolute left-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white">
+                                                    <i class="fas fa-check text-sm"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">Processing Order</h4>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300">Oct 18, 2023 â€¢ 2:15 PM</p>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Your order is being prepared by the store</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Timeline Item 3 (Active) -->
+                                            <div class="timeline-item active relative pl-10">
+                                                <div class="timeline-dot absolute left-0 w-8 h-8 rounded-full flex items-center justify-center text-white">
+                                                    <i class="fas fa-truck text-sm"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">In Transit to VVV Hub</h4>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300">Expected: Oct 20, 2023</p>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Your order is on its way to VVV Hub - San Francisco</p>
+                                                    
+                                                    <!-- Map Container -->
+                                                    <div class="map-container mt-4 bg-gray-200 dark:bg-gray-600">
+                                                        <!-- Map would be rendered here in a real implementation -->
+                                                        <div class="w-full h-full flex items-center justify-center">
+                                                            <i class="fas fa-map-marked-alt text-4xl text-gray-500 dark:text-gray-400"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Timeline Item 4 (Pending) -->
+                                            <div class="timeline-item relative pl-10">
+                                                <div class="timeline-dot absolute left-0 w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300">
+                                                    <i class="fas fa-store text-sm"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">Ready for Pickup</h4>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300">Expected: Oct 21, 2023</p>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">You'll receive a notification when your order arrives</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex space-x-3">
+                                    <button class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition">
+                                        <i class="fas fa-headset mr-2"></i> Contact Support
+                                    </button>
+                                    <button class="flex-1 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg font-medium transition hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <i class="fas fa-print mr-2"></i> Print Receipt
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Dark mode toggle
+        document.getElementById('toggle').addEventListener('change', function() {
+            if (this.checked) {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.documentElement.classList.add('dark');
+            document.getElementById('toggle').checked = true;
+        }
+
+        // Order details modal
+        const modal = document.getElementById('order-details-modal');
+        const closeModal = document.getElementById('close-modal');
+        
+        // Show modal when "View Details" is clicked (this would be implemented for each button)
+        document.querySelectorAll('[data-modal-toggle="order-details-modal"]').forEach(button => {
+            button.addEventListener('click', function() {
+                modal.classList.remove('hidden');
+            });
+        });
+        
+        closeModal.addEventListener('click', function() {
+            modal.classList.add('hidden');
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+
+        // Tab switching for login/signup (if included on page)
+        const loginTab = document.getElementById('login-tab');
+        const signupTab = document.getElementById('signup-tab');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        
+        if (loginTab && signupTab) {
+            loginTab.addEventListener('click', function() {
+                loginTab.classList.add('border-blue-500', 'text-blue-600', 'dark:text-blue-400');
+                loginTab.classList.remove('text-gray-600', 'dark:text-gray-300', 'border-transparent');
+                signupTab.classList.remove('border-blue-500', 'text-blue-600', 'dark:text-blue-400');
+                signupTab.classList.add('text-gray-600', 'dark:text-gray-300', 'border-transparent');
+                loginForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+            });
+            
+            signupTab.addEventListener('click', function() {
+                signupTab.classList.add('border-blue-500', 'text-blue-600', 'dark:text-blue-400');
+                signupTab.classList.remove('text-gray-600', 'dark:text-gray-300', 'border-transparent');
+                loginTab.classList.remove('border-blue-500', 'text-blue-600', 'dark:text-blue-400');
+                loginTab.classList.add('text-gray-600', 'dark:text-gray-300', 'border-transparent');
+                signupForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+            });
+        }
+    </script>
+    
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Premium Shopping</h3>
+                <p class="text-gray-400">Your exclusive gateway to the world's best shopping experiences.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="Store.html" class="text-gray-400 hover:text-white transition">Stores</a></li>
+                    <li><a href="Search.html" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                    <li><a href="accountsettings.html" class="text-gray-400 hover:text-white transition">My Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href='Faq.html' class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    <li><a href='Contactus.html' class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="termsandcondition.html" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-400">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-gray-800 rounded-l focus:outline-none w-full">
+                        <button class="bg-yellow-500 text-white px-4 rounded-r hover:bg-yellow-600 transition">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>&copy; 2023 Premium Shopping. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
+
